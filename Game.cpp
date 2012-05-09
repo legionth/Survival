@@ -46,7 +46,7 @@ sf::Texture* Game::loadImage(std::string fileName){
 }
 
 sf::Texture* Game::loadImage(std::string fileName,int position,int width,int height){
-    sf::Texture texture;
+    sf::Texture *texture = new sf::Texture();
     if(!texture->loadFromFile(fileName)){
         std::cout<<"No File was found with name: "<<fileName<<std::endl;
         return NULL;

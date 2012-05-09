@@ -16,10 +16,19 @@ public:
     virtual ~Tile();
     char getIdentifier();
     void setIdentifier(char id);
-    GameObject* getObject();
+    void setWalkAble(bool walkable);
+    void setDestroyAble(bool destroyable);
+    LivingObject* getLivingObject();
+    
+    bool getWalkAble();
+    bool getDestroyAble();
+    
 private:
     char identifier;
-    GameObject* object;
+    LivingObject* object;
+    
+    bool destroyAble;
+    bool walkAble;
 };
 
 #endif	/* TILE_H */
