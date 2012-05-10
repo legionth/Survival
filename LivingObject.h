@@ -17,12 +17,12 @@ public:
     LivingObject(const LivingObject& orig);
     virtual ~LivingObject();
     
-    void startAnimation();
-    void stopAnimation();
+  //  void startAnimation();
+  //  void stopAnimation();
     void move(int direction);
     
     int getCurrentDirection();
-    int getCurrentFrame();
+   // int getCurrentFrame();
     
     void setCurrentDirection(int direction);
     // getAttribute
