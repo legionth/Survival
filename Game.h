@@ -8,6 +8,7 @@
 #include <SFML/Window.hpp>
 #include "Player.h"
 #include "World.h"
+#include <iostream>
 #ifndef GAME_H
 #define	GAME_H
 
@@ -23,8 +24,8 @@ public:
     
     Player* getPlayer();
     TileMap* getCurrentTileMap();
-    sf::Texture* Game::loadImage(std::string);
-    sf::Texture* Game::loadImage(std::string,int position,int width,int height);
+    sf::Texture* loadImage(std::string);
+    sf::Texture* loadImage(std::string,int position,int width,int height);
 private:
     sf::RenderWindow *window;
     World *world;

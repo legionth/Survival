@@ -16,7 +16,8 @@ public:
     virtual ~World();
     TileMap* getTileMap(int x,int y);
 private:
-    
+    std::vector<std::vector<TileMap*> > tileMap;
+
 };
 
 #endif	/* WORLD_H */

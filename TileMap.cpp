@@ -12,6 +12,11 @@ TileMap::TileMap() {
     
 }
 
+TileMap::TileMap(int x,int y) {
+    this->xPos = x;
+    this->yPos = y;
+}
+
 TileMap::TileMap(const TileMap& orig) {
 }
 
@@ -21,7 +26,7 @@ TileMap::~TileMap() {
  void TileMap::loadTileMap(std::string fileName){
     std::ifstream file(fileName.c_str());
     if(!file.is_open()){
-        std::cout<<"Datei konnte nicht geöffnet werden"<<std::endl;
+//        std::cout<<"Datei konnte nicht geöffnet werden"<<std::endl;
     }
     std::string line;
     
@@ -32,9 +37,9 @@ TileMap::~TileMap() {
     while(!file.eof()){                                                         //quasi y
         std::getline(file,line);
         for (std::string::iterator i = line.begin(); i != line.end(); i++){     //quasi x
-           tileMap[y][x].setIdentifier(*i);
-           tileMap[y][x].getSprite().SetPosition(x*128,y*128);
-           tileMap[y][x].setFrameSize(64,64);
+           tileMap[y][x]->setIdentifier(*i);
+           tileMap[y][x]->getSprite()->setPosition(x*128,y*128);
+           tileMap[y][x]->setFrameSize(64,64);
             x++;
         }
         x=0;

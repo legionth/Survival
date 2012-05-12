@@ -1,5 +1,5 @@
 build/Debug/GNU-Linux-x86/Game.o: Game.cpp Game.h Player.h LivingObject.h \
- GameObject.h TileMap.h World.h
+ GameObject.h World.h TileMap.h Tile.h
 
 Game.h:
 
@@ -9,6 +9,8 @@ LivingObject.h:
 
 GameObject.h:
 
+World.h:
+
 TileMap.h:
 
-World.h:
+Tile.h:

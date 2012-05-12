@@ -4,13 +4,15 @@
  *
  * Created on 30. April 2012, 10:57
  */
-
+#include "Tile.h"
+#include <fstream>
 #ifndef TILEMAP_H
 #define	TILEMAP_H
 
 class TileMap {
 public:
     TileMap();
+    TileMap(int x, int y);
     TileMap(const TileMap& orig);
     
     void loadTileMap(std::string fileName);
@@ -22,7 +24,7 @@ public:
     void setIdentifierOnTile(int x, int y, char c);
     virtual ~TileMap();
 private:
-    std::vector<std::vector<Tile> > tileMap;
+    std::vector<std::vector<Tile*> > tileMap;
     int xPos;
     int yPos;
 };

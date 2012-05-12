@@ -7,7 +7,8 @@
 
 #ifndef TILE_H
 #define	TILE_H
-#include "GameObject.h"
+#include "LivingObject.h"
+class LivingObject;
 class Tile : public GameObject{
 public:
     Tile();

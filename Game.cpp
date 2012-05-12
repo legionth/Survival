@@ -10,6 +10,7 @@
 Game::Game() {
     player = new Player();
     window = new sf::RenderWindow(sf::VideoMode(800, 600), "Survival Game");
+    world = new World();
     images["player"] = this->loadImage("player.png");
     
 }
@@ -32,12 +33,12 @@ void Game::run(){
             }
         }
         window->clear();
-        window->draw(player->getSprite());
+       // window->draw(player->getSprite());
     }
 }
 
 sf::Texture* Game::loadImage(std::string fileName){
-    sf::Texture texture;
+    sf::Texture *texture = new sf::Texture();
     if(!texture->loadFromFile(fileName)){
         std::cout<<"No File was found with name: "<<fileName<<std::endl;
         return NULL;

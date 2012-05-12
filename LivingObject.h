@@ -8,7 +8,7 @@
 #ifndef LIVINGOBJECT_H
 #define	LIVINGOBJECT_H
 #include "GameObject.h"
-#include "TileMap.h"
+//#include "TileMap.h"
 
 class LivingObject : public GameObject{
 public:
@@ -29,13 +29,13 @@ public:
     int getSpeed();
     int getAttackPower();
     int getDefense();
-    TileMap* getTileMap();
+//    TileMap* getTileMap();
     
     // set Attributes
     void setSpeed(int speed);
     void setAttackPower(int atk);
     void setDefense(int def);
-    void setTileMap(TileMap* TileMap);
+    //void setTileMap(TileMap* tileMap);
     
 private:
     int currentDirection;
@@ -46,7 +46,7 @@ private:
     int defense;
     int agility;
     
-    TileMap* currentTileMap;
+    //TileMap* currentTileMap;
 };
 
 #endif	/* LIVINGOBJECT_H */

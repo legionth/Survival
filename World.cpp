@@ -8,6 +8,11 @@
 #include "World.h"
 
 World::World() {
+    for(int y = 0; y < 5; y++){
+        for(int x = 0; x < 5; x++){
+            tileMap[x][y] = new TileMap(x,y);
+        }
+    }
 }
 
 World::World(const World& orig) {

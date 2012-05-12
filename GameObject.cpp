@@ -82,7 +82,7 @@ void GameObject::stopAnimation(){
 void GameObject::updateAnimation(){
     if(isPlaying){
         int frameCount = getStopFrame() - getStartFrame();
- 	float timePosition = (clock.getElapsedTime() * fps);
+ 	float timePosition = (clock.getElapsedTime().asSeconds() * fps);
                 
 	setCurrentFrame(getStartFrame() + (int)timePosition % frameCount);
         getSprite()->setTextureRect(getFrameRect(this->getCurrentFrame()));
@@ -117,6 +117,14 @@ void GameObject::setStopFrame(int frame){
     this->stopFrame = frame;
 }
 
+void GameObject::setCurrentFrame(int frame){
+    this->currentFrame = frame;
+}
+
+void GameObject::setFrameRect(int frame){
+ //   this->getSprite()->setTextureRect(ge)
+}
+
 
 int GameObject::getStartFrame(){
     return startFrame;
@@ -136,3 +144,6 @@ void GameObject::setFrameSize(int width, int height){
     this->frameHeight = height;
 }
 
+sf::Sprite* GameObject::getSprite(){
+    return this->sprite;
+}
