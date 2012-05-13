@@ -6,11 +6,18 @@
  */
 
 #include "World.h"
-
+#include <iostream>
 World::World() {
+    // Must be done like this, not sure if there is another way
+    tileMap.resize(5);
+    for(int i = 0; i < 5;i++){
+        tileMap[i].resize(5);
+    }
+    
     for(int y = 0; y < 5; y++){
         for(int x = 0; x < 5; x++){
-            tileMap[x][y] = new TileMap(x,y);
+            tileMap[y][x] = new TileMap(x,y);
+            std::cout<<"here?"<<std::endl;
         }
     }
 }

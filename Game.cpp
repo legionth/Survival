@@ -10,9 +10,13 @@
 Game::Game() {
     player = new Player();
     window = new sf::RenderWindow(sf::VideoMode(800, 600), "Survival Game");
-    world = new World();
+   // world = new World();
     images["player"] = this->loadImage("player.png");
-    
+    std::cout<<"load"<<std::endl;
+    player->setImage(images["player"]);
+    //player->setImage("player.png");
+    std::cout<<"after load"<<std::endl;
+    player->getSprite()->setPosition(100,100);
 }
 
 Game::Game(const Game& orig) {
@@ -31,9 +35,11 @@ void Game::run(){
             if(event.type == sf::Event::Closed){
                 window->close();
             }
+            // Insert Events here
         }
         window->clear();
-       // window->draw(player->getSprite());
+        window->draw(*player->getSprite());
+        window->display();
     }
 }
 

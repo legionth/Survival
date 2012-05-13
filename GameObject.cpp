@@ -11,6 +11,7 @@
 #include "Game.h"
 
 GameObject::GameObject() {
+    this->sprite = new sf::Sprite();
     frameWidth = 64;
     frameHeight = 64;
 }
@@ -22,17 +23,20 @@ GameObject::~GameObject() {
 }
 
 void GameObject::setImage(std::string fileName){
-    sf::Texture* texture = new sf::Texture();
-    if(texture->loadFromFile(fileName)){
+    //sf::Texture* texture = new sf::Texture();
+    sf::Texture texture;
+    if(texture.loadFromFile(fileName)){
         return;
     }
     else{
-        sprite->setTexture(*texture);
+        sprite->setTexture(texture);
     }
 }
 
 void GameObject::setImage(sf::Texture* texture){
-    sprite->setTexture(*texture);
+    std::cout<<"setImage"<<std::endl;
+    getSprite()->setTexture(*texture);
+    std::cout<<"after"<<std::endl;
 }
 
 void GameObject::setLife(int l){
