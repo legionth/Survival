@@ -9,9 +9,10 @@
 #ifndef TILEMAP_H
 #define	TILEMAP_H
 
+class Tile;
 class TileMap {
 public:
-    TileMap();
+    TileMap(sf::Texture* img,int x, int y);
     TileMap(int x, int y);
     TileMap(const TileMap& orig);
     
@@ -21,12 +22,19 @@ public:
     
     void setXPos(int x);
     void setYPos(int y);
+    
+    int getXSize();
+    int getYSize();
     void setIdentifierOnTile(int x, int y, char c);
+    Tile* getTile(int x,int y);
     virtual ~TileMap();
 private:
     std::vector<std::vector<Tile*> > tileMap;
     int xPos;
     int yPos;
+    
+    int xSize;
+    int ySize;
 };
 
 #endif	/* TILEMAP_H */

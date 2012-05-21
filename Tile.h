@@ -8,10 +8,11 @@
 #ifndef TILE_H
 #define	TILE_H
 #include "LivingObject.h"
+
 class LivingObject;
 class Tile : public GameObject{
 public:
-    Tile();
+    Tile(sf::Texture* img, int x,int y);
     Tile(char c);
     Tile(const Tile& orig);
     virtual ~Tile();
@@ -25,11 +26,14 @@ public:
     bool getDestroyAble();
     
 private:
+    int xPos;
+    int yPos;
     char identifier;
     LivingObject* object;
     
     bool destroyAble;
     bool walkAble;
+    
 };
 
 #endif	/* TILE_H */

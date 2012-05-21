@@ -5,6 +5,7 @@
  * Created on 30. April 2012, 12:06
  */
 #include <SFML/Graphics.hpp>
+
 #ifndef GAMEOBJECT_H
 #define	GAMEOBJECT_H
 

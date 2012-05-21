@@ -19,11 +19,10 @@ public:
     virtual ~Game();
     void run();
     void generateRessoruces();
-    void changeTileMap(int map);
-    void getTileMap(int x, int y);
     
     Player* getPlayer();
     TileMap* getCurrentTileMap();
+    TileMap* getTileMap(int x, int y);
     sf::Texture* loadImage(std::string);
     sf::Texture* loadImage(std::string,int position,int width,int height);
 private:

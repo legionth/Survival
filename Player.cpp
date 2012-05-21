@@ -7,7 +7,10 @@
 
 #include "Player.h"
 
-Player::Player() {
+Player::Player(sf::Texture* img) {
+    this->setLife(3);
+    this->setImage(img);
+    this->setFrameRect(0);
 }
 
 Player::Player(const Player& orig) {

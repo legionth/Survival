@@ -11,12 +11,17 @@
 
 class World {
 public:
-    World();
+    World(sf::Texture* img);
     World(const World& orig);
     virtual ~World();
     TileMap* getTileMap(int x,int y);
+    
+    int getXSize();
+    int getYSize();
 private:
     std::vector<std::vector<TileMap*> > tileMap;
+    int xSize;
+    int ySize;
 
 };
 

@@ -11,7 +11,7 @@
 
 class Player : public LivingObject{
 public:
-    Player();
+    Player(sf::Texture* img);
     Player(const Player& orig);
     virtual ~Player();
     
@@ -20,6 +20,7 @@ public:
     
 private:
     int heat;
+    std::map<std::string,int> ressources;
 
 };
 

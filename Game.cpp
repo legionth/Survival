@@ -8,15 +8,15 @@
 #include "Game.h"
 
 Game::Game() {
-    player = new Player();
-    window = new sf::RenderWindow(sf::VideoMode(800, 600), "Survival Game");
-   // world = new World();
+    window = new sf::RenderWindow(sf::VideoMode(5*128, 5*128), "Survival Game");
     images["player"] = this->loadImage("player.png");
-    std::cout<<"load"<<std::endl;
-    player->setImage(images["player"]);
-    //player->setImage("player.png");
-    std::cout<<"after load"<<std::endl;
-    player->getSprite()->setPosition(100,100);
+    images["land"] = this->loadImage("land.png");
+
+    world = new World(images["land"]);
+    player = new Player(images["player"]);
+    player->getSprite()->setPosition(256,128);
+    player->setTileMap(getTileMap(0,0));
+    getTileMap(0,0)->loadTileMap("map0_0.map");
 }
 
 Game::Game(const Game& orig) {
@@ -26,6 +26,7 @@ Game::~Game() {
     delete world;
     delete player;
     delete window;
+    images.clear();
 }
 
 void Game::run(){
@@ -35,9 +36,15 @@ void Game::run(){
             if(event.type == sf::Event::Closed){
                 window->close();
             }
-            // Insert Events here
         }
         window->clear();
+        for(int y = 0; y < getCurrentTileMap()->getYSize(); y++){
+            for(int x = 0; x < getCurrentTileMap()->getXSize(); x++){
+                sf::Sprite *sprite = getCurrentTileMap()->getTile(x,y)->getSprite();
+                window->draw(*sprite);
+            }   
+        }
+        
         window->draw(*player->getSprite());
         window->display();
     }
@@ -59,4 +66,12 @@ sf::Texture* Game::loadImage(std::string fileName,int position,int width,int hei
         return NULL;
     }
     return texture;
+}
+
+TileMap* Game::getCurrentTileMap(){
+    return player->getTileMap();
+}
+
+TileMap* Game::getTileMap(int x, int y){
+    return world->getTileMap(x,y);
 }

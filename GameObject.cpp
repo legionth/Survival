@@ -12,14 +12,15 @@
 
 GameObject::GameObject() {
     this->sprite = new sf::Sprite();
-    frameWidth = 64;
-    frameHeight = 64;
+    frameWidth = 128;
+    frameHeight = 128;
 }
 
 GameObject::GameObject(const GameObject& orig) {
 }
 
 GameObject::~GameObject() {
+    delete sprite;
 }
 
 void GameObject::setImage(std::string fileName){
@@ -34,9 +35,7 @@ void GameObject::setImage(std::string fileName){
 }
 
 void GameObject::setImage(sf::Texture* texture){
-    std::cout<<"setImage"<<std::endl;
     getSprite()->setTexture(*texture);
-    std::cout<<"after"<<std::endl;
 }
 
 void GameObject::setLife(int l){
@@ -102,14 +101,14 @@ void GameObject::updateAnimation(){
 sf::IntRect GameObject::getFrameRect(int frame){
     unsigned int width = (getSprite()->getTexture()->getWidth() / getFrameWidth());
     unsigned int height = (getSprite()->getTexture()->getHeight() / getFrameHeight());
-    int tileY = frame / width;
-    int tileX = frame % width;
+    int tileX = (int)(frame % width);
+    int tileY = (int)(frame / width);
     
     sf::IntRect rect(tileX*getFrameWidth(),
        		     tileY*getFrameHeight(),
                      tileX*getFrameWidth() + getFrameWidth(),
                      tileY*getFrameHeight() + getFrameHeight());
-
+    
     return rect;
 }
 
@@ -126,7 +125,9 @@ void GameObject::setCurrentFrame(int frame){
 }
 
 void GameObject::setFrameRect(int frame){
- //   this->getSprite()->setTextureRect(ge)
+    setCurrentFrame(frame);
+    std::cout<<"frame"<<frame<<std::endl;
+    this->getSprite()->setTextureRect(getFrameRect(frame));
 }
 
 

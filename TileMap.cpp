@@ -6,10 +6,25 @@
  */
 
 #include "TileMap.h"
-#include "Tile.h"
+#include <iostream>
 
-TileMap::TileMap() {
+TileMap::TileMap(sf::Texture* img, int x, int y) {
+    std::cout<<"tileMap constr"<<std::endl;
+    this->xPos = x;
+    this->yPos = y;
+    this->xSize = 5;
+    this->ySize = 5;
     
+    tileMap.resize(getYSize());
+    for(int i = 0; i < getYSize();i++){
+        tileMap[i].resize(getXSize());
+    }
+    
+    for(int y = 0; y < getYSize(); y++){
+        for(int x = 0; x < getXSize(); x++){
+            tileMap[y][x] = new Tile(img,x,y);
+        }
+    }
 }
 
 TileMap::TileMap(int x,int y) {
@@ -21,6 +36,7 @@ TileMap::TileMap(const TileMap& orig) {
 }
 
 TileMap::~TileMap() {
+    tileMap.clear();
 }
 
  void TileMap::loadTileMap(std::string fileName){
@@ -66,4 +82,16 @@ TileMap::~TileMap() {
  
 void TileMap::setIdentifierOnTile(int x,int y, char c){
     tileMap[y][x]->setIdentifier(c);
+}
+
+int TileMap::getXSize(){
+    return this->xSize;
+}
+
+int TileMap::getYSize(){
+    return this->ySize;
+}
+
+Tile* TileMap::getTile(int x,int y){
+    return this->tileMap[y][x];
 }
