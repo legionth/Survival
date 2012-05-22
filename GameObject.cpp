@@ -157,18 +157,18 @@ sf::Sprite* GameObject::getSprite(){
 
 void GameObject::setXPos(int x){
     this->xPos = x;
-    getSprite()->setPosition(getXPos()*128,getYPos()*128);
+    getSprite()->setPosition(getXPos() * FRAME_WIDTH, getYPos() * FRAME_HEIGHT);
 }
 
 void GameObject::setYPos(int y){
     this->yPos = y;
-    getSprite()->setPosition(getXPos()*128,getYPos()*128);
+    getSprite()->setPosition(getXPos() * FRAME_WIDTH,getYPos() * FRAME_HEIGHT);
 }
 
 void GameObject::setPos(int x, int y){
     this->xPos = x;
     this->yPos = y;
-    getSprite()->setPosition(getXPos()*128,getYPos()*128);
+    getSprite()->setPosition(getXPos() * FRAME_WIDTH,getYPos() * FRAME_HEIGHT);
 }
 
 void GameObject::setPos(int x,int y,bool setSprite){
@@ -176,7 +176,7 @@ void GameObject::setPos(int x,int y,bool setSprite){
     this->yPos = y;
     
     if(setSprite){
-        getSprite()->setPosition(getXPos()*128,getYPos()*128);
+        getSprite()->setPosition(getXPos() * FRAME_WIDTH,getYPos() * FRAME_HEIGHT);
     }
 }
 

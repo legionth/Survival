@@ -20,17 +20,25 @@ void LivingObject::move(int direction){
     sf::Sprite *sprite = this->getSprite();
     
     if(direction == 0){
-        sprite->move(0,-128);
-        this->setPos(getXPos(),getYPos()-1,false);
+        if(getYPos()-1 >= 0 && getTileMap()->getTile(getXPos(),getYPos()-1)->getWalkAble()){
+                sprite->move(0,-FRAME_HEIGHT);
+                this->setPos(getXPos(),getYPos()-1,false);
+        }
     }else if(direction == 1){
-        sprite->move(128,0);
-        this->setPos(getXPos()+1,getYPos(),false);
+        if(getXPos()+1 <= 5 && getTileMap()->getTile(getXPos()+1,getYPos())->getWalkAble()){
+                sprite->move(FRAME_WIDTH,0);
+                this->setPos(getXPos()+1,getYPos(),false);
+        }
     }else if(direction == 2){
-        sprite->move(0,128);
-        this->setPos(getXPos(),getYPos()+1,false);
+        if(getYPos()+1 <= 5 && getTileMap()->getTile(getXPos(),getYPos()+1)->getWalkAble()){
+                sprite->move(0,FRAME_HEIGHT);
+                this->setPos(getXPos(),getYPos()+1,false);
+        }
     }else if(direction == 3){
-        sprite->move(-128,0);
-        this->setPos(getXPos()-1,getYPos(),false);
+        if(getXPos()-1 >= 0 && getTileMap()->getTile(getXPos()-1,getYPos())->getWalkAble()){
+                sprite->move(-FRAME_WIDTH,0);
+                this->setPos(getXPos()-1,getYPos(),false);
+        }
     }
 }
     

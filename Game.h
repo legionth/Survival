@@ -9,6 +9,8 @@
 #include "Player.h"
 #include "World.h"
 #include <iostream>
+#include "consts.h"
+
 #ifndef GAME_H
 #define	GAME_H
 
@@ -17,6 +19,7 @@ public:
     Game();
     Game(const Game& orig);
     virtual ~Game();
+    
     void run();
     void generateRessoruces();
     

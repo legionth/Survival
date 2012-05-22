@@ -5,7 +5,7 @@
  * Created on 30. April 2012, 12:06
  */
 #include <SFML/Graphics.hpp>
-
+#include "consts.h"
 #ifndef GAMEOBJECT_H
 #define	GAMEOBJECT_H
 
@@ -14,7 +14,7 @@ public:
     GameObject();
     GameObject(const GameObject& orig);
     virtual ~GameObject();
-    
+
     void setLife(int l);
     // Animation & Drawing
     void setFrameWidth(int width);

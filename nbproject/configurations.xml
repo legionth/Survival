@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="79">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <logicalFolder name="f3"
-                   displayName="GameObjects"
-                   projectFiles="true"
-                   kind="ROOT">
-      <logicalFolder name="f1"
-                     displayName="LivingObjects"
-                     projectFiles="true"
-                     kind="ROOT">
+    <logicalFolder name="f3" displayName="GameObjects" projectFiles="true">
+      <logicalFolder name="f1" displayName="LivingObjects" projectFiles="true">
         <itemPath>LivingObject.cpp</itemPath>
         <itemPath>LivingObject.h</itemPath>
         <itemPath>Player.cpp</itemPath>
         <itemPath>Player.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="f2" displayName="TileMap" projectFiles="true" kind="ROOT">
+      <logicalFolder name="f2" displayName="TileMap" projectFiles="true">
         <itemPath>Tile.cpp</itemPath>
         <itemPath>Tile.h</itemPath>
         <itemPath>TileMap.cpp</itemPath>
@@ -29,10 +23,7 @@
                    displayName="Header Files"
                    projectFiles="true">
     </logicalFolder>
-    <logicalFolder name="f1"
-                   displayName="LivingObjects"
-                   projectFiles="true"
-                   kind="ROOT">
+    <logicalFolder name="f1" displayName="LivingObjects" projectFiles="true">
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -43,9 +34,10 @@
                    projectFiles="true">
       <itemPath>Game.cpp</itemPath>
       <itemPath>Game.h</itemPath>
+      <itemPath>consts.h</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
-    <logicalFolder name="f2" displayName="TileMap" projectFiles="true" kind="ROOT">
+    <logicalFolder name="f2" displayName="TileMap" projectFiles="true">
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"

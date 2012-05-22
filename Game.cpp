@@ -63,18 +63,17 @@ void Game::run(){
                 window->close();
             }
             if(event.type == sf::Event::KeyPressed){
-                std::cout<<"pressed"<<std::endl;
                 if(event.key.code == sf::Keyboard::W){
-                    player->move(0);
+                    player->move(MOVE_UP);
                 }
                 else if(event.key.code == sf::Keyboard::D){
-                    player->move(1);
+                    player->move(MOVE_RIGHT);
                 }
                 else if(event.key.code == sf::Keyboard::S){
-                    player->move(2);
+                    player->move(MOVE_DOWN);
                 }
                 else if(event.key.code == sf::Keyboard::A){
-                    player->move(3);
+                    player->move(MOVE_LEFT);
                 }
                 
                 if(player->getXPos() > 5){
@@ -91,9 +90,6 @@ void Game::run(){
                 }
             }
         }
-        
-        
-        
         
         // Draw the things
         window->clear();
