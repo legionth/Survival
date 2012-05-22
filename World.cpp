@@ -9,7 +9,6 @@
 #include <iostream>
 World::World(sf::Texture* img) {
     // Must be done like this, not sure if there is another way
-    std::cout<<"wordl constr"<<std::endl;
     this->xSize = 5;
     this->ySize = 5;
     

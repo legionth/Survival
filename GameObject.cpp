@@ -14,6 +14,8 @@ GameObject::GameObject() {
     this->sprite = new sf::Sprite();
     frameWidth = 128;
     frameHeight = 128;
+    xPos = 0;
+    yPos = 0;
 }
 
 GameObject::GameObject(const GameObject& orig) {
@@ -152,3 +154,38 @@ void GameObject::setFrameSize(int width, int height){
 sf::Sprite* GameObject::getSprite(){
     return this->sprite;
 }
+
+void GameObject::setXPos(int x){
+    this->xPos = x;
+    getSprite()->setPosition(getXPos()*128,getYPos()*128);
+}
+
+void GameObject::setYPos(int y){
+    this->yPos = y;
+    getSprite()->setPosition(getXPos()*128,getYPos()*128);
+}
+
+void GameObject::setPos(int x, int y){
+    this->xPos = x;
+    this->yPos = y;
+    getSprite()->setPosition(getXPos()*128,getYPos()*128);
+}
+
+void GameObject::setPos(int x,int y,bool setSprite){
+    this->xPos = x;
+    this->yPos = y;
+    
+    if(setSprite){
+        getSprite()->setPosition(getXPos()*128,getYPos()*128);
+    }
+}
+
+int GameObject::getXPos(){
+    return xPos;
+}
+
+int GameObject::getYPos(){
+    return yPos;
+}
+
+

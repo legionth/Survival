@@ -40,10 +40,18 @@ public:
     
     int getLife();
     
+    int getXPos();
+    int getYPos();
     sf::Sprite* getSprite();
+    
     void setSprite(sf::Sprite* sprite);
     void setImage(std::string fileName);
     void setImage(sf::Texture* texture);
+    void setXPos(int x);
+    void setYPos(int y);
+    void setPos(int x,int y);
+    void setPos(int x,int y,bool setSprite);
+
 
 private:
     int life;
@@ -57,6 +65,9 @@ private:
     bool isPlaying;
     int fps;
     sf::Clock clock;
+    
+    int xPos;
+    int yPos;
 };
 
 #endif	/* GAMEOBJECT_H */

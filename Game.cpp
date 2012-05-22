@@ -14,9 +14,35 @@ Game::Game() {
 
     world = new World(images["land"]);
     player = new Player(images["player"]);
-    player->getSprite()->setPosition(256,128);
     player->setTileMap(getTileMap(0,0));
+    player->setPos(1,1);
     getTileMap(0,0)->loadTileMap("map0_0.map");
+   /* 
+    getTileMap(0,1)->loadTileMap("map0_1.map");
+    getTileMap(0,2)->loadTileMap("map0_2.map");
+    getTileMap(0,3)->loadTileMap("map0_3.map");
+    getTileMap(0,4)->loadTileMap("map0_4.map");
+    getTileMap(1,0)->loadTileMap("map1_0.map");
+    getTileMap(1,1)->loadTileMap("map1_1.map");
+    getTileMap(1,2)->loadTileMap("map1_2.map");
+    getTileMap(1,3)->loadTileMap("map1_3.map");
+    getTileMap(1,4)->loadTileMap("map1_4.map");
+    getTileMap(2,0)->loadTileMap("map2_0.map");
+    getTileMap(2,1)->loadTileMap("map2_1.map");
+    getTileMap(2,2)->loadTileMap("map2_2.map");
+    getTileMap(2,3)->loadTileMap("map2_3.map");
+    getTileMap(2,4)->loadTileMap("map2_4.map");
+    getTileMap(3,0)->loadTileMap("map3_0.map");
+    getTileMap(3,1)->loadTileMap("map3_1.map");
+    getTileMap(3,2)->loadTileMap("map3_2.map");
+    getTileMap(3,3)->loadTileMap("map3_3.map");
+    getTileMap(3,4)->loadTileMap("map3_4.map");
+    getTileMap(4,0)->loadTileMap("map4_0.map");
+    getTileMap(4,1)->loadTileMap("map4_1.map");
+    getTileMap(4,2)->loadTileMap("map4_2.map");
+    getTileMap(4,3)->loadTileMap("map4_3.map");
+    getTileMap(4,4)->loadTileMap("map4_4.map");
+    */
 }
 
 Game::Game(const Game& orig) {
@@ -36,7 +62,40 @@ void Game::run(){
             if(event.type == sf::Event::Closed){
                 window->close();
             }
+            if(event.type == sf::Event::KeyPressed){
+                std::cout<<"pressed"<<std::endl;
+                if(event.key.code == sf::Keyboard::W){
+                    player->move(0);
+                }
+                else if(event.key.code == sf::Keyboard::D){
+                    player->move(1);
+                }
+                else if(event.key.code == sf::Keyboard::S){
+                    player->move(2);
+                }
+                else if(event.key.code == sf::Keyboard::A){
+                    player->move(3);
+                }
+                
+                if(player->getXPos() > 5){
+                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos()+1,getCurrentTileMap()->getYPos()));
+                }
+                if(player->getYPos() > 5){
+                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos(),getCurrentTileMap()->getYPos()+1));
+                }
+                if(player->getXPos() < 0){
+                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos()-1,getCurrentTileMap()->getYPos()));
+                }
+                if(player->getYPos() < 0){
+                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos(),getCurrentTileMap()->getYPos()-1));
+                }
+            }
         }
+        
+        
+        
+        
+        // Draw the things
         window->clear();
         for(int y = 0; y < getCurrentTileMap()->getYSize(); y++){
             for(int x = 0; x < getCurrentTileMap()->getXSize(); x++){
