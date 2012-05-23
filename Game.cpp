@@ -17,7 +17,7 @@ Game::Game() {
     player->setTileMap(getTileMap(0,0));
     player->setPos(1,1);
     getTileMap(0,0)->loadTileMap("map0_0.map");
-   /* 
+    
     getTileMap(0,1)->loadTileMap("map0_1.map");
     getTileMap(0,2)->loadTileMap("map0_2.map");
     getTileMap(0,3)->loadTileMap("map0_3.map");
@@ -28,6 +28,7 @@ Game::Game() {
     getTileMap(1,3)->loadTileMap("map1_3.map");
     getTileMap(1,4)->loadTileMap("map1_4.map");
     getTileMap(2,0)->loadTileMap("map2_0.map");
+    /*
     getTileMap(2,1)->loadTileMap("map2_1.map");
     getTileMap(2,2)->loadTileMap("map2_2.map");
     getTileMap(2,3)->loadTileMap("map2_3.map");
@@ -64,30 +65,18 @@ void Game::run(){
             }
             if(event.type == sf::Event::KeyPressed){
                 if(event.key.code == sf::Keyboard::W){
-                    player->move(MOVE_UP);
+                    player->move(MOVE_UP,world);
                 }
                 else if(event.key.code == sf::Keyboard::D){
-                    player->move(MOVE_RIGHT);
+                    player->move(MOVE_RIGHT,world);
                 }
                 else if(event.key.code == sf::Keyboard::S){
-                    player->move(MOVE_DOWN);
+                    player->move(MOVE_DOWN,world);
                 }
                 else if(event.key.code == sf::Keyboard::A){
-                    player->move(MOVE_LEFT);
+                    player->move(MOVE_LEFT,world);
                 }
-                
-                if(player->getXPos() > 5){
-                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos()+1,getCurrentTileMap()->getYPos()));
-                }
-                if(player->getYPos() > 5){
-                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos(),getCurrentTileMap()->getYPos()+1));
-                }
-                if(player->getXPos() < 0){
-                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos()-1,getCurrentTileMap()->getYPos()));
-                }
-                if(player->getYPos() < 0){
-                    player->setTileMap(world->getTileMap(getCurrentTileMap()->getXPos(),getCurrentTileMap()->getYPos()-1));
-                }
+               
             }
         }
         

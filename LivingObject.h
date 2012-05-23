@@ -8,9 +8,11 @@
 #ifndef LIVINGOBJECT_H
 #define	LIVINGOBJECT_H
 #include "GameObject.h"
-
+#include "World.h"
 #include "TileMap.h"
+
 class TileMap;
+class World;
 class LivingObject : public GameObject{
 public:
     LivingObject();
@@ -20,7 +22,7 @@ public:
     
   //  void startAnimation();
   //  void stopAnimation();
-    void move(int direction);
+    void move(int direction,World *world);
     
     int getCurrentDirection();
    // int getCurrentFrame();

@@ -1,5 +1,5 @@
 build/Debug/GNU-Linux-x86/GameObject.o: GameObject.cpp GameObject.h \
- consts.h Game.h Player.h LivingObject.h TileMap.h Tile.h World.h
+ consts.h Game.h Player.h LivingObject.h World.h TileMap.h Tile.h
 
 GameObject.h:
 
@@ -11,8 +11,8 @@ Player.h:
 
 LivingObject.h:
 
+World.h:
+
 TileMap.h:
 
 Tile.h:
-
-World.h:

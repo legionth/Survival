@@ -128,7 +128,6 @@ void GameObject::setCurrentFrame(int frame){
 
 void GameObject::setFrameRect(int frame){
     setCurrentFrame(frame);
-    std::cout<<"frame"<<frame<<std::endl;
     this->getSprite()->setTextureRect(getFrameRect(frame));
 }
 
@@ -168,6 +167,7 @@ void GameObject::setYPos(int y){
 void GameObject::setPos(int x, int y){
     this->xPos = x;
     this->yPos = y;
+    std::cout<<"x="<<x<<"y="<<y<<std::endl;
     getSprite()->setPosition(getXPos() * FRAME_WIDTH,getYPos() * FRAME_HEIGHT);
 }
 

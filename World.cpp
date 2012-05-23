@@ -32,6 +32,7 @@ World::~World() {
 }
 
 TileMap* World::getTileMap(int x,int y){
+    std::cout<<"get Tilemap x"<<x<<"y"<<y<<std::endl;
     return tileMap[x][y];
 }
 
