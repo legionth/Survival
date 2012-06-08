@@ -91,9 +91,11 @@ void GameObject::updateAnimation(){
                 
 	setCurrentFrame(getStartFrame() + (int)timePosition % frameCount);
         getSprite()->setTextureRect(getFrameRect(this->getCurrentFrame()));
+        
         if(getCurrentFrame() == getStopFrame()){
             stopAnimation();
         }
+        //std::cout<<"updateAnimation"<<getFrameWidth()<<"bla"<<getFrameHeight()<<std::endl;
     }
     else{
         setFrameRect(getCurrentFrame());
@@ -103,13 +105,14 @@ void GameObject::updateAnimation(){
 sf::IntRect GameObject::getFrameRect(int frame){
     unsigned int width = (getSprite()->getTexture()->getWidth() / getFrameWidth());
     unsigned int height = (getSprite()->getTexture()->getHeight() / getFrameHeight());
-    int tileX = (int)(frame % width);
-    int tileY = (int)(frame / width);
+   // std::cout<<"width"<<width<<std::endl;
+    int tileX = frame % width;
+    int tileY = frame / width;
     
     sf::IntRect rect(tileX*getFrameWidth(),
        		     tileY*getFrameHeight(),
-                     tileX*getFrameWidth() + getFrameWidth(),
-                     tileY*getFrameHeight() + getFrameHeight());
+                     getFrameWidth(),
+                     getFrameHeight());                 // describes now the length and heigth not the end point see SFML docu
     
     return rect;
 }
@@ -127,6 +130,7 @@ void GameObject::setCurrentFrame(int frame){
 }
 
 void GameObject::setFrameRect(int frame){
+   // std::cout<<"framerect"<<getSprite()<<std::endl;
     setCurrentFrame(frame);
     this->getSprite()->setTextureRect(getFrameRect(frame));
 }
@@ -156,19 +160,18 @@ sf::Sprite* GameObject::getSprite(){
 
 void GameObject::setXPos(int x){
     this->xPos = x;
-    getSprite()->setPosition(getXPos() * FRAME_WIDTH, getYPos() * FRAME_HEIGHT);
+    getSprite()->setPosition(getXPos() * getFrameWidth(), getYPos() * getFrameHeight());
 }
 
 void GameObject::setYPos(int y){
     this->yPos = y;
-    getSprite()->setPosition(getXPos() * FRAME_WIDTH,getYPos() * FRAME_HEIGHT);
+    getSprite()->setPosition(getXPos() * getFrameWidth(),getYPos() * getFrameHeight());
 }
 
 void GameObject::setPos(int x, int y){
     this->xPos = x;
     this->yPos = y;
-    std::cout<<"x="<<x<<"y="<<y<<std::endl;
-    getSprite()->setPosition(getXPos() * FRAME_WIDTH,getYPos() * FRAME_HEIGHT);
+    getSprite()->setPosition(getXPos() * getFrameWidth(),getYPos() * getFrameHeight());
 }
 
 void GameObject::setPos(int x,int y,bool setSprite){
@@ -176,7 +179,7 @@ void GameObject::setPos(int x,int y,bool setSprite){
     this->yPos = y;
     
     if(setSprite){
-        getSprite()->setPosition(getXPos() * FRAME_WIDTH,getYPos() * FRAME_HEIGHT);
+        getSprite()->setPosition(getXPos() * getFrameWidth(),getYPos() * getFrameHeight());
     }
 }
 

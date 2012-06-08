@@ -54,8 +54,8 @@ TileMap::~TileMap() {
         std::getline(file,line);
         for (std::string::iterator i = line.begin(); i != line.end(); i++){     //quasi x
            tileMap[y][x]->setIdentifier(*i);
-           tileMap[y][x]->getSprite()->setPosition(x*128,y*128);
-           tileMap[y][x]->setFrameSize(64,64);
+           tileMap[y][x]->setPos(x,y,true);
+           tileMap[y][x]->setFrameSize(128,128);
             x++;
         }
         x=0;

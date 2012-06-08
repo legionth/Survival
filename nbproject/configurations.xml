@@ -18,6 +18,8 @@
       </logicalFolder>
       <itemPath>GameObject.cpp</itemPath>
       <itemPath>GameObject.h</itemPath>
+      <itemPath>Ressource.cpp</itemPath>
+      <itemPath>Ressource.h</itemPath>
     </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"

@@ -20,12 +20,10 @@ public:
     LivingObject(const LivingObject& orig);
     virtual ~LivingObject();
     
-  //  void startAnimation();
-  //  void stopAnimation();
     void move(int direction,World *world);
     
+    
     int getCurrentDirection();
-   // int getCurrentFrame();
     
     void setCurrentDirection(int direction);
     // getAttribute
@@ -39,7 +37,6 @@ public:
     void setAttackPower(int atk);
     void setDefense(int def);
     void setTileMap(TileMap* tileMap);
-    
 private:
     int currentDirection;
     int currentFrame;
@@ -50,6 +47,7 @@ private:
     int agility;
     
     TileMap* currentTileMap;
+    sf::Clock moveClock;
 };
 
 #endif	/* LIVINGOBJECT_H */

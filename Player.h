@@ -17,11 +17,10 @@ public:
     
     int getHeat();
     void setHeat(int i);
-    
+    void pickup(Tile* tile);
 private:
     int heat;
-    std::map<std::string,int> ressources;
-
+    std::map<int,int> ressources;
 };
 
 #endif	/* PLAYER_H */

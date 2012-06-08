@@ -18,6 +18,13 @@ enum Moves{
 const int FRAME_WIDTH = 128;
 const int FRAME_HEIGHT = 128;
 
- 
+enum Ressources{ 
+    RES_WOOD             = 0, 
+    RES_STONE            = 1,
+    RES_LEATHER          = 2,
+    RES_IRON_ORE         = 3,
+    RES_GOLD_ORE         = 4,
+    RES_SILVER_ORE       = 5
+};
 #endif	/* CONSTS_H */
 

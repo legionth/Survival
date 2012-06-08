@@ -8,8 +8,11 @@
 #ifndef TILE_H
 #define	TILE_H
 #include "LivingObject.h"
+#include "Ressource.h"
 
 class LivingObject;
+//class Ressource;
+
 class Tile : public GameObject{
 public:
     Tile(sf::Texture* img, int x,int y);
@@ -20,8 +23,12 @@ public:
     void setIdentifier(char id);
     void setWalkAble(bool walkable);
     void setDestroyAble(bool destroyable);
-    LivingObject* getLivingObject();
+    void setLivingObject(LivingObject* o);
+    void setRessource(Ressource* ressource);
+    void removeRessource();
     
+    LivingObject* getLivingObject();
+    Ressource* getRessource();
     bool getWalkAble();
     bool getDestroyAble();
     
@@ -30,6 +37,7 @@ private:
     int yPos;
     char identifier;
     LivingObject* object;
+    Ressource* ressource;
     
     bool destroyAble;
     bool walkAble;

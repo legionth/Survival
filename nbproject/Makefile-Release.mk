@@ -37,6 +37,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/GameObject.o \
 	${OBJECTDIR}/World.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/Ressource.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/LivingObject.o \
@@ -82,6 +83,11 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/Ressource.o: Ressource.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Ressource.o Ressource.cpp
 
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}

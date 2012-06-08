@@ -11,13 +11,14 @@ Game::Game() {
     window = new sf::RenderWindow(sf::VideoMode(5*128, 5*128), "Survival Game");
     images["player"] = this->loadImage("player.png");
     images["land"] = this->loadImage("land.png");
+    images["ressources"] = this->loadImage("ressources.png");
 
     world = new World(images["land"]);
     player = new Player(images["player"]);
     player->setTileMap(getTileMap(0,0));
     player->setPos(1,1);
-    getTileMap(0,0)->loadTileMap("map0_0.map");
     
+    getTileMap(0,0)->loadTileMap("map0_0.map");
     getTileMap(0,1)->loadTileMap("map0_1.map");
     getTileMap(0,2)->loadTileMap("map0_2.map");
     getTileMap(0,3)->loadTileMap("map0_3.map");
@@ -28,7 +29,6 @@ Game::Game() {
     getTileMap(1,3)->loadTileMap("map1_3.map");
     getTileMap(1,4)->loadTileMap("map1_4.map");
     getTileMap(2,0)->loadTileMap("map2_0.map");
-    /*
     getTileMap(2,1)->loadTileMap("map2_1.map");
     getTileMap(2,2)->loadTileMap("map2_2.map");
     getTileMap(2,3)->loadTileMap("map2_3.map");
@@ -43,7 +43,11 @@ Game::Game() {
     getTileMap(4,2)->loadTileMap("map4_2.map");
     getTileMap(4,3)->loadTileMap("map4_3.map");
     getTileMap(4,4)->loadTileMap("map4_4.map");
-    */
+   
+    Ressource* res = new Ressource(RES_WOOD,images["ressources"]);
+    getTileMap(0,0)->getTile(0,1)->setRessource(res);
+    Ressource* res2 = new Ressource(RES_WOOD,images["ressources"]);
+    getTileMap(0,0)->getTile(1,1)->setRessource(res2);
 }
 
 Game::Game(const Game& orig) {
@@ -59,6 +63,7 @@ Game::~Game() {
 void Game::run(){
     while(window->isOpen()){
         sf::Event event;
+        
         while(window->pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 window->close();
@@ -76,19 +81,39 @@ void Game::run(){
                 else if(event.key.code == sf::Keyboard::A){
                     player->move(MOVE_LEFT,world);
                 }
-               
+                if(event.key.code == sf::Keyboard::Space){
+                    if(player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource() != 0){
+                        player->pickup(player->getTileMap()->getTile(player->getXPos(),player->getYPos()));
+                    }
+                }
+            }
+            else if(event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::W ||
+                                                             event.key.code == sf::Keyboard::D ||
+                                                             event.key.code == sf::Keyboard::S ||
+                                                             event.key.code == sf::Keyboard::A)
+                   ){
+                player->stopAnimation();
             }
         }
         
+        
+        generateRessoruces();
         // Draw the things
         window->clear();
+        
         for(int y = 0; y < getCurrentTileMap()->getYSize(); y++){
             for(int x = 0; x < getCurrentTileMap()->getXSize(); x++){
-                sf::Sprite *sprite = getCurrentTileMap()->getTile(x,y)->getSprite();
+                Tile* tile = getCurrentTileMap()->getTile(x,y);
+                sf::Sprite *sprite = tile->getSprite();
                 window->draw(*sprite);
+                
+                if(tile->getRessource() != 0){
+                    window->draw(*tile->getRessource()->getSprite());
+                }
             }   
         }
         
+        player->updateAnimation();
         window->draw(*player->getSprite());
         window->display();
     }
@@ -105,10 +130,12 @@ sf::Texture* Game::loadImage(std::string fileName){
 
 sf::Texture* Game::loadImage(std::string fileName,int position,int width,int height){
     sf::Texture *texture = new sf::Texture();
+    
     if(!texture->loadFromFile(fileName)){
         std::cout<<"No File was found with name: "<<fileName<<std::endl;
         return NULL;
     }
+    
     return texture;
 }
 
@@ -118,4 +145,25 @@ TileMap* Game::getCurrentTileMap(){
 
 TileMap* Game::getTileMap(int x, int y){
     return world->getTileMap(x,y);
+}
+
+
+void Game::generateRessoruces(){
+    if(ressourceClock.getElapsedTime().asSeconds() > 5){
+        int randomXTileMap = rand() % 5;
+        int randomYTileMap = rand() % 5;
+        int randomXTile = rand() % 5;
+        int randomYTile = rand() % 5;
+        
+        Tile* tile = world->getTileMap(randomXTileMap,randomYTileMap)->getTile(randomXTile,randomYTile);
+        
+        if(tile->getWalkAble() && tile->getRessource() == 0){
+            int res = rand() % 5;
+            Ressource* ressource = new Ressource(res,images["ressources"]);
+            
+            tile->setRessource(ressource);
+            ressourceClock.restart();
+            std::cout<<"generate Rssource map x="<<randomXTileMap<<"map y"<<randomYTileMap<<" x="<<randomXTile<<"y="<<randomYTile<<std::endl;
+        }
+    }
 }

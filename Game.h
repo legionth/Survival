@@ -8,6 +8,7 @@
 #include <SFML/Window.hpp>
 #include "Player.h"
 #include "World.h"
+#include "Ressource.h"
 #include <iostream>
 #include "consts.h"
 
@@ -22,17 +23,18 @@ public:
     
     void run();
     void generateRessoruces();
-    
     Player* getPlayer();
     TileMap* getCurrentTileMap();
     TileMap* getTileMap(int x, int y);
     sf::Texture* loadImage(std::string);
     sf::Texture* loadImage(std::string,int position,int width,int height);
+    
 private:
     sf::RenderWindow *window;
     World *world;
     Player* player;
     std::map<std::string,sf::Texture*> images;
+    sf::Clock ressourceClock;
 
 };
 
