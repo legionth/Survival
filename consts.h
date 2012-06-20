@@ -26,5 +26,11 @@ enum Ressources{
     RES_GOLD_ORE         = 4,
     RES_SILVER_ORE       = 5
 };
+
+enum Behavior{ 
+    BEHAV_AGGRESSIVE      = 0, 
+    BEHAV_DEFENSIVE       = 1,
+    BEHAV_PASSIVE         = 2
+};
 #endif	/* CONSTS_H */
 

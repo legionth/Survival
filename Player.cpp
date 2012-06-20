@@ -15,7 +15,7 @@ Player::Player(sf::Texture* img) {
     
     ressources[RES_WOOD]        = 0;
     ressources[RES_STONE]       = 0;
-    ressources[RES_IRON_ORE]    = 0;
+    ressources[RES_IRON_ORE]    = 0;    
     ressources[RES_GOLD_ORE]    = 0;
     ressources[RES_SILVER_ORE]  = 0;
 }
