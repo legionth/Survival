@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "World.h"
 #include "TileMap.h"
+#include <iostream>
 
 class TileMap;
 class World;

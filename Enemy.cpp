@@ -36,7 +36,7 @@ void Enemy::execute(){
             
             break;
        default:
-           std::cout<<"behavior not executable"<<std::endl;
+//           std::cout<<"behavior not executable"<<std::endl;
            break;
     }
 }

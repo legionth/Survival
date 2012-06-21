@@ -32,5 +32,17 @@ enum Behavior{
     BEHAV_DEFENSIVE       = 1,
     BEHAV_PASSIVE         = 2
 };
+
+const char BUILDING_TENT		= '^';
+const char BUILDING_FIREPLACE	= 'f';
+
+const char TILE_GRASS			= ',';
+const char TILE_EARTH			= '.';
+const char TILE_TREE			= 'T';
+const char TILE_GRASS_EARTH		= ';';
+const char TILE_EARTH_LEFT		= '3';
+const char TILE_EARTH_RIGHT		= '1';
+const char TILE_EARTH_TOP		= '2';
+const char TILE_EARTH_DOWN		= '0';
 #endif	/* CONSTS_H */
 

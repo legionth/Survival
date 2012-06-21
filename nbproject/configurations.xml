@@ -3,10 +3,20 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="f3" displayName="GameObjects" projectFiles="true">
       <logicalFolder name="f1" displayName="LivingObjects" projectFiles="true">
+        <itemPath>Enemy.cpp</itemPath>
+        <itemPath>Enemy.h</itemPath>
         <itemPath>LivingObject.cpp</itemPath>
         <itemPath>LivingObject.h</itemPath>
         <itemPath>Player.cpp</itemPath>
         <itemPath>Player.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="Menu" projectFiles="true">
+        <itemPath>BuildingButton.cpp</itemPath>
+        <itemPath>BuildingButton.h</itemPath>
+        <itemPath>Button.cpp</itemPath>
+        <itemPath>Button.h</itemPath>
+        <itemPath>Menu.cpp</itemPath>
+        <itemPath>Menu.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="TileMap" projectFiles="true">
         <itemPath>Tile.cpp</itemPath>
@@ -16,6 +26,8 @@
         <itemPath>World.cpp</itemPath>
         <itemPath>World.h</itemPath>
       </logicalFolder>
+      <itemPath>Building.cpp</itemPath>
+      <itemPath>Building.h</itemPath>
       <itemPath>GameObject.cpp</itemPath>
       <itemPath>GameObject.h</itemPath>
       <itemPath>Ressource.cpp</itemPath>

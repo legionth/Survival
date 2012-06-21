@@ -38,10 +38,15 @@ OBJECTFILES= \
 	${OBJECTDIR}/World.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/Ressource.o \
+	${OBJECTDIR}/Building.o \
+	${OBJECTDIR}/Button.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/LivingObject.o \
 	${OBJECTDIR}/Game.o \
+	${OBJECTDIR}/Menu.o \
+	${OBJECTDIR}/BuildingButton.o \
+	${OBJECTDIR}/Enemy.o \
 	${OBJECTDIR}/Tile.o
 
 
@@ -89,6 +94,16 @@ ${OBJECTDIR}/Ressource.o: Ressource.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Ressource.o Ressource.cpp
 
+${OBJECTDIR}/Building.o: Building.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Building.o Building.cpp
+
+${OBJECTDIR}/Button.o: Button.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Button.o Button.cpp
+
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -108,6 +123,21 @@ ${OBJECTDIR}/Game.o: Game.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Game.o Game.cpp
+
+${OBJECTDIR}/Menu.o: Menu.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Menu.o Menu.cpp
+
+${OBJECTDIR}/BuildingButton.o: BuildingButton.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/BuildingButton.o BuildingButton.cpp
+
+${OBJECTDIR}/Enemy.o: Enemy.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Enemy.o Enemy.cpp
 
 ${OBJECTDIR}/Tile.o: Tile.cpp 
 	${MKDIR} -p ${OBJECTDIR}

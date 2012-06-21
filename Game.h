@@ -35,7 +35,8 @@ private:
     Player* player;
     std::map<std::string,sf::Texture*> images;
     sf::Clock ressourceClock;
-
+    Menu buildMenu;
+    Menu statusMenu;
 };
 
 #endif	/* GAME_H */
