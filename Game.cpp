@@ -6,6 +6,7 @@
  */
 
 #include "Game.h"
+#include "Menu.h"
 
 Game::Game() {
     window = new sf::RenderWindow(sf::VideoMode(5*128, 5*128), "Survival Game");
@@ -48,6 +49,9 @@ Game::Game() {
     getTileMap(0,0)->getTile(0,1)->setRessource(res);
     Ressource* res2 = new Ressource(RES_WOOD,images["ressources"]);
     getTileMap(0,0)->getTile(1,1)->setRessource(res2);
+    
+    buildMenu = new Menu(0, FRAME_HEIGHT * 5);
+    statusMenu = new Menu(FRAME_WIDTH * 5,0);
 }
 
 Game::Game(const Game& orig) {
@@ -57,6 +61,8 @@ Game::~Game() {
     delete world;
     delete player;
     delete window;
+    delete buildMenu;
+    delete statusMenu;
     images.clear();
 }
 
