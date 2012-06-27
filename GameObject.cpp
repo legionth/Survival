@@ -28,7 +28,7 @@ GameObject::~GameObject() {
 void GameObject::setImage(std::string fileName){
     //sf::Texture* texture = new sf::Texture();
     sf::Texture texture;
-    if(texture.loadFromFile(fileName)){
+    if(!texture.loadFromFile(fileName)){
         return;
     }
     else{

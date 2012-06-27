@@ -12,6 +12,7 @@
 class Button : public GameObject {
 public:
     Button();
+    Button(int frameRect,sf::Texture* tex,std::string buttonName);
     Button(std::string buttenName);
     Button(const Button& orig);
     virtual ~Button();
@@ -19,6 +20,7 @@ public:
     void setName(std::string name);
     std::string getName();
     bool isPressed();
+    void setPressed(bool press);
 private:
     std::string name;
     bool pressed;

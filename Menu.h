@@ -12,13 +12,16 @@
 
 class Menu : public GameObject{
 public:
-    Menu(int posX,int posY);
+    Menu(int posX,int posY,int sizeX,int sizeY);
     Menu(const Menu& orig);
     virtual ~Menu();
     void addButton(Button* button);
     Button* getButton(int i);
+    std::vector<Button*> getButtons();
 private:
-   std::vector<Button*> buttons; 
+   std::vector<Button*> buttons;
+   int sizeX;
+   int sizeY;
 };
 
 #endif	/* MENU_H */

@@ -7,13 +7,17 @@
 
 #include "Game.h"
 #include "Menu.h"
+#include "BuildingButton.h"
 
 Game::Game() {
-    window = new sf::RenderWindow(sf::VideoMode(5*128, 5*128), "Survival Game");
+    window = new sf::RenderWindow(sf::VideoMode((5*FRAME_WIDTH)+(2*FRAME_WIDTH), (5*FRAME_HEIGHT)+(2*FRAME_HEIGHT)), "Survival Game");
     images["player"] = this->loadImage("player.png");
     images["land"] = this->loadImage("land.png");
     images["ressources"] = this->loadImage("ressources.png");
-
+    images["menuBuilding"] = this->loadImage("menu_building.png");
+    images["buttonBuilding"] = this->loadImage("button_building.png");
+    images["buildings"] = this->loadImage("buildings.png");
+    
     world = new World(images["land"]);
     player = new Player(images["player"]);
     player->setTileMap(getTileMap(0,0));
@@ -50,8 +54,13 @@ Game::Game() {
     Ressource* res2 = new Ressource(RES_WOOD,images["ressources"]);
     getTileMap(0,0)->getTile(1,1)->setRessource(res2);
     
-    buildMenu = new Menu(0, FRAME_HEIGHT * 5);
-    statusMenu = new Menu(FRAME_WIDTH * 5,0);
+      buildMenu = new Menu(FRAME_WIDTH * 5,0,128,512);
+      buildMenu->setImage(images["menuBuilding"]);
+      Building *building = new Building('^',images["buildings"],1);
+      BuildingButton *button = new BuildingButton(1,images["buttonBuilding"],"tent",building);
+      buildMenu->addButton(button);
+    
+  //  statusMenu = new Menu(FRAME_WIDTH * 5,0,256,128);
 }
 
 Game::Game(const Game& orig) {
@@ -121,6 +130,12 @@ void Game::run(){
         
         player->updateAnimation();
         window->draw(*player->getSprite());
+        window->draw(*buildMenu->getSprite());
+        
+        for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
+            window->draw(*buildMenu->getButton(i)->getSprite());
+        }
+       // std::cout<<"sprite pos"<<buildMenu->getSprite()->getPosition().x<<" "<<buildMenu->getSprite()->getPosition().y<<std::endl;
         window->display();
     }
 }
@@ -169,7 +184,7 @@ void Game::generateRessoruces(){
             
             tile->setRessource(ressource);
             ressourceClock.restart();
-            std::cout<<"generate Rssource map x="<<randomXTileMap<<"map y"<<randomYTileMap<<" x="<<randomXTile<<"y="<<randomYTile<<std::endl;
+          //  std::cout<<"generate Rssource map x="<<randomXTileMap<<"map y"<<randomYTileMap<<" x="<<randomXTile<<"y="<<randomYTile<<std::endl;
         }
     }
 }

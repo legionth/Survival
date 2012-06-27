@@ -6,7 +6,7 @@ class Building : public GameObject
 {
 public:
 	Building(void);
-	Building(char id);
+	Building(char id, sf::Texture *t, int frameRect);
 	~Building(void);
 	std::map<int,int> getRessources();
 	char getIdentifier();

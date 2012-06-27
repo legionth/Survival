@@ -7,9 +7,17 @@
 
 #include "Button.h"
 #include "Building.h"
-
-Button::Button() {
+#include <iostream>
+Button::Button(){
     this->pressed = false;
+}
+
+Button::Button(int frameRect,sf::Texture* tex,std::string buttonName){
+    this->pressed = false;
+    this->name = buttonName;
+    this->setImage(tex);
+    setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+    setFrameRect(frameRect);
 }
 
 Button::Button(std::string buttonName){
@@ -37,5 +45,9 @@ void Button::setName(std::string name){
 
 std::string Button::getName(){
     return this->name;
+}
+
+void Button::setPressed(bool press){
+    this->pressed = press;
 }
 
