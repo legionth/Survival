@@ -13,7 +13,7 @@
 class BuildingButton : public Button{
 public:
     BuildingButton(Building* b, std::string name);
-    BuildingButton(int frameRect,sf::Texture* tex,std::string buttonName,Building *b);
+    BuildingButton(int frameRect,sf::Texture* tex,int rectBuilding,sf::Texture* texBuilding,std::string buttonName,char id);
     BuildingButton(const BuildingButton& orig);
     virtual ~BuildingButton();
     

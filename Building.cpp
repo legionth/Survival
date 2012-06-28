@@ -23,6 +23,17 @@ Building::Building(char id,sf::Texture *t,int frameRect){
     this->setFrameRect(frameRect);
 }
 
+Building::Building(Building& orig) : identifier(orig.identifier){
+    this->setIdentifier(orig.identifier);
+    this->ressources = orig.ressources;
+    
+    sf::Texture *tex = new sf::Texture(*orig.getSprite()->getTexture());
+    int currentFrame = orig.getCurrentFrame();
+    
+    setImage(tex);
+    setFrameRect(currentFrame);
+}
+
 Building::~Building(void)
 {
 }

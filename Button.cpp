@@ -8,6 +8,7 @@
 #include "Button.h"
 #include "Building.h"
 #include <iostream>
+
 Button::Button(){
     this->pressed = false;
 }
@@ -33,6 +34,13 @@ Button::~Button() {
 
 void Button::press(){
     this->pressed = !isPressed();
+    
+    if(pressed){
+        setFrameRect(getCurrentFrame() + 1);
+    }
+    else{
+        setFrameRect(getCurrentFrame() - 1);
+    }
 }
 
 bool Button::isPressed(){

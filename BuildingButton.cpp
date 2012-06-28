@@ -7,12 +7,12 @@
 
 #include "BuildingButton.h"
 #include <iostream>
-BuildingButton::BuildingButton(int frameRect,sf::Texture* tex,std::string buttonName,Building *b) : Button(frameRect,tex,buttonName){
-    std::cout<<"foobar"<<std::endl;
-    std::cout<<"width"<<BUTTON_WIDTH<<std::endl;
+
+BuildingButton::BuildingButton(int frameRect,sf::Texture* tex,int rectBuilding,sf::Texture* texBuilding,std::string buttonName,char id) 
+                              : Button(frameRect,tex,buttonName){
+    
     setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
-    std::cout<<"set building"<<std::endl;
-    setBuilding(b);
+    setBuilding(new Building(id,texBuilding,rectBuilding));
 }
 
 BuildingButton::BuildingButton(const BuildingButton& orig) {
@@ -27,6 +27,6 @@ void BuildingButton::setBuilding(Building* b){
 }
 
 Building* BuildingButton::getBuilding(){
-    return this->building;
+    return new Building(*this->building);
 }
 

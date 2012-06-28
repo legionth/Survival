@@ -12,7 +12,8 @@
 #include <iostream>
 #include "consts.h"
 //#include <thread>
-#include"Menu.h"
+#include "Menu.h"
+#include "BuildingMenu.h"
 
 #ifndef GAME_H
 #define	GAME_H
@@ -37,7 +38,7 @@ private:
     Player* player;
     std::map<std::string,sf::Texture*> images;
     sf::Clock ressourceClock;
-    Menu* buildMenu;
+    BuildingMenu* buildMenu;
     Menu* statusMenu;
 };
 

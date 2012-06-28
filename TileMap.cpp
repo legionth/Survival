@@ -9,7 +9,6 @@
 #include <iostream>
 
 TileMap::TileMap(sf::Texture* img, int x, int y) {
-    std::cout<<"tileMap constr"<<std::endl;
     this->xPos = x;
     this->yPos = y;
     this->xSize = 5;

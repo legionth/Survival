@@ -1,5 +1,5 @@
 build/Debug/GNU-Linux-x86/Enemy.o: Enemy.cpp Enemy.h LivingObject.h \
- GameObject.h consts.h World.h TileMap.h Tile.h Ressource.h
+ GameObject.h consts.h World.h TileMap.h Tile.h Ressource.h Building.h
 
 Enemy.h:
 
@@ -16,3 +16,5 @@ TileMap.h:
 Tile.h:
 
 Ressource.h:
+
+Building.h:

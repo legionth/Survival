@@ -10,6 +10,7 @@
 #include <iostream>
 
 LivingObject::LivingObject() {
+    this->setCurrentDirection(MOVE_DOWN);
 }
 
 LivingObject::LivingObject(const LivingObject& orig) {
@@ -42,10 +43,11 @@ void LivingObject::move(int direction,World *world){
                     }
                     
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
-                    this->startAnimation(5,8);                
+                    this->startAnimation(5,8); 
+                    this->setCurrentDirection(MOVE_UP);
             }
         }else if(direction == MOVE_RIGHT && (this->getXPos() + 1 <= 4  || this->getTileMap()->getXPos() + 1 <= 4 )){
-            if(this->getXPos() + 2 > 4 || getTileMap()->getTile(getXPos() + 1,getYPos())->getWalkAble()){
+            if(this->getXPos() + 1 >= 5 || getTileMap()->getTile(getXPos() + 1,getYPos())->getWalkAble()){
                     sprite->move(FRAME_WIDTH,0);
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
                     
@@ -65,9 +67,10 @@ void LivingObject::move(int direction,World *world){
                    this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
                     
                    this->startAnimation(9,12);
+                   this->setCurrentDirection(MOVE_RIGHT);
             }
         }else if(direction == MOVE_DOWN && (this->getYPos() + 1 <= 4  || this->getTileMap()->getYPos() + 1 <= 4 )){
-            if(this->getYPos() + 1 >= 4 || getTileMap()->getTile(getXPos(),getYPos()+1)->getWalkAble()){
+            if(this->getYPos() + 1 >= 5 || getTileMap()->getTile(getXPos(),getYPos()+1)->getWalkAble()){
                     sprite->move(0,FRAME_HEIGHT);
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
                     
@@ -86,6 +89,7 @@ void LivingObject::move(int direction,World *world){
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
                     
                     this->startAnimation(1,4);
+                    this->setCurrentDirection(MOVE_DOWN);
             }
         }else if(direction == MOVE_LEFT && (this->getXPos() - 1 >= 0 || this->getTileMap()->getXPos() - 1 >= 0)){
             if(this->getXPos() - 1 < 0 || getTileMap()->getTile(getXPos()-1,getYPos())->getWalkAble()){
@@ -108,6 +112,7 @@ void LivingObject::move(int direction,World *world){
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
                     
                     this->startAnimation(13,16);
+                    this->setCurrentDirection(MOVE_LEFT);
             }        
         }
         moveClock.restart(); 

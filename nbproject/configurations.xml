@@ -13,6 +13,8 @@
       <logicalFolder name="f3" displayName="Menu" projectFiles="true">
         <itemPath>BuildingButton.cpp</itemPath>
         <itemPath>BuildingButton.h</itemPath>
+        <itemPath>BuildingMenu.cpp</itemPath>
+        <itemPath>BuildingMenu.h</itemPath>
         <itemPath>Button.cpp</itemPath>
         <itemPath>Button.h</itemPath>
         <itemPath>Menu.cpp</itemPath>

@@ -9,6 +9,7 @@
 #define	TILE_H
 #include "LivingObject.h"
 #include "Ressource.h"
+#include "Building.h"
 
 class LivingObject;
 //class Ressource;
@@ -25,10 +26,12 @@ public:
     void setDestroyAble(bool destroyable);
     void setLivingObject(LivingObject* o);
     void setRessource(Ressource* ressource);
+    void setBuilding(Building* building);
     void removeRessource();
     
     LivingObject* getLivingObject();
     Ressource* getRessource();
+    Building* getBuilding();
     bool getWalkAble();
     bool getDestroyAble();
     
@@ -38,7 +41,7 @@ private:
     char identifier;
     LivingObject* object;
     Ressource* ressource;
-    
+    Building* building;
     bool destroyAble;
     bool walkAble;
     

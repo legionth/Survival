@@ -5,13 +5,14 @@
  * Created on 30. April 2012, 10:57
  */
 
-#include <stddef.h>
+//#include <stddef.h>
 #include <iostream>
 #include "Tile.h"
 
 Tile::Tile(sf::Texture* img, int x,int y) {
     object = 0;
     ressource = 0;
+    building = 0;
     this->xPos = x;
     this->yPos = y;
     getSprite()->setPosition(128*x,128*y);
@@ -29,7 +30,13 @@ Tile::Tile(const Tile& orig) {
 }
 
 Tile::~Tile() {
-    delete this->ressource;
+    if(this->ressource != 0){
+        delete this->ressource;
+    }
+    
+    if(this->building != 0){
+        delete this->building;
+    }
 }
 
 
@@ -116,4 +123,13 @@ Ressource* Tile::getRessource(){
 void Tile::removeRessource(){
     delete ressource;
     ressource = 0;
+}
+
+void Tile::setBuilding(Building* building){
+    this->building = building;
+    this->building->getSprite()->setPosition(this->xPos * FRAME_WIDTH,this->yPos * FRAME_HEIGHT);
+}
+
+Building* Tile::getBuilding(){
+    return this->building;
 }

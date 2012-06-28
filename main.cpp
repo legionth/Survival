@@ -8,10 +8,8 @@
 #include <cstdlib>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-
+#include <iostream>
 #include "Game.h"
-
-using namespace std;
 
 /*
  * 
@@ -19,6 +17,7 @@ using namespace std;
 int main(int argc, char** argv) {
     Game game;
     game.run();
-    return 0;
+    
+    return EXIT_SUCCESS;
 }
 

@@ -34,10 +34,19 @@ enum Behavior{
     BEHAV_DEFENSIVE       = 1,
     BEHAV_PASSIVE         = 2
 };
-
-const char BUILDING_TENT		= '^';
+//id's for the buildings
+const char BUILDING_TENT        = '^';
 const char BUILDING_FIREPLACE	= 'f';
 
+
+const int BUILDING_RECT_TENT        = 1;
+const int BUILDING_RECT_FIREPLACE   = 2;
+
+// Button rects
+const int BUTTON_BUILDING_RECT_TENT        = 0;
+const int BUTTON_BUILDING_RECT_FIREPLACE   = 2;
+
+//id's for the tiles
 const char TILE_GRASS			= ',';
 const char TILE_EARTH			= '.';
 const char TILE_TREE			= 'T';
