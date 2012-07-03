@@ -14,6 +14,7 @@
 
 class TileMap;
 class World;
+
 class LivingObject : public GameObject{
 public:
     LivingObject();
@@ -31,13 +32,20 @@ public:
     int getSpeed();
     int getAttackPower();
     int getDefense();
+    int getWalkIterator();
+    bool haveToWalk();
     TileMap* getTileMap();
     
     // set Attributes
-    void setSpeed(int speed);
+    void setSpeed(int speed);                           //@TODO: calculate speed with move function
     void setAttackPower(int atk);
     void setDefense(int def);
     void setTileMap(TileMap* tileMap);
+    void resetWalkIterator();                   // Set to 0
+    void setToWalk(bool walk);
+protected:
+    void setWalkIterator(int i);
+
 private:
     int currentDirection;
     int currentFrame;
@@ -49,6 +57,9 @@ private:
     
     TileMap* currentTileMap;
     sf::Clock moveClock;
+    int walkIterator;
+    bool toWalk;
+    
 };
 
 #endif	/* LIVINGOBJECT_H */

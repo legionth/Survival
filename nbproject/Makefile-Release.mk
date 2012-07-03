@@ -41,8 +41,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/Building.o \
 	${OBJECTDIR}/Button.o \
 	${OBJECTDIR}/Player.o \
-	${OBJECTDIR}/BuildingMenu.o \
 	${OBJECTDIR}/TileMap.o \
+	${OBJECTDIR}/BuildingMenu.o \
 	${OBJECTDIR}/LivingObject.o \
 	${OBJECTDIR}/Game.o \
 	${OBJECTDIR}/Menu.o \
@@ -110,15 +110,15 @@ ${OBJECTDIR}/Player.o: Player.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Player.o Player.cpp
 
-${OBJECTDIR}/BuildingMenu.o: BuildingMenu.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/BuildingMenu.o BuildingMenu.cpp
-
 ${OBJECTDIR}/TileMap.o: TileMap.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/TileMap.o TileMap.cpp
+
+${OBJECTDIR}/BuildingMenu.o: BuildingMenu.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/BuildingMenu.o BuildingMenu.cpp
 
 ${OBJECTDIR}/LivingObject.o: LivingObject.cpp 
 	${MKDIR} -p ${OBJECTDIR}

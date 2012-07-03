@@ -14,6 +14,7 @@
 //#include <thread>
 #include "Menu.h"
 #include "BuildingMenu.h"
+#include "BuildingButton.h"
 
 #ifndef GAME_H
 #define	GAME_H
@@ -32,6 +33,9 @@ public:
     sf::Texture* loadImage(std::string);
     sf::Texture* loadImage(std::string,int position,int width,int height);
     
+    BuildingButton* getSelectedBuildingButton();
+    void setSelectedBuildingButton(BuildingButton* button);
+    
 private:
     sf::RenderWindow *window;
     World *world;
@@ -40,6 +44,8 @@ private:
     sf::Clock ressourceClock;
     BuildingMenu* buildMenu;
     Menu* statusMenu;
+    
+    BuildingButton* selectedButton;
 };
 
 #endif	/* GAME_H */

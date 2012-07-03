@@ -88,24 +88,64 @@ void Game::run(){
                 window->close();
             }
             if(event.type == sf::Event::KeyPressed){
-                if(event.key.code == sf::Keyboard::W){
+                if(event.key.code == sf::Keyboard::W && !player->haveToWalk()){
                     player->move(MOVE_UP,world);
                 }
-                else if(event.key.code == sf::Keyboard::D){
+                else if(event.key.code == sf::Keyboard::D && !player->haveToWalk()){
                     player->move(MOVE_RIGHT,world);
                 }
-                else if(event.key.code == sf::Keyboard::S){
+                else if(event.key.code == sf::Keyboard::S && !player->haveToWalk()){
                     player->move(MOVE_DOWN,world);
                 }
-                else if(event.key.code == sf::Keyboard::A){
+                else if(event.key.code == sf::Keyboard::A && !player->haveToWalk()){
                     player->move(MOVE_LEFT,world);
                 }
+                
                 if(event.key.code == sf::Keyboard::Space){
                     if(player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource() != 0){
                         player->pickup(player->getTileMap()->getTile(player->getXPos(),player->getYPos()));
                     }
                 }
                 
+                
+                // Toggle throug button Menu
+                if(event.key.code == sf::Keyboard::Right){
+                    BuildingButton* selectedButton = 0;
+                    int number = 0;
+                    int count = buildMenu->getButtons().size();
+                    
+                    for(int i = 0; i < count; i++){
+                        if(buildMenu->getButton(i)->isPressed()){
+                            selectedButton = buildMenu->getButton(i);
+                            number = i;
+                        }
+                    }
+                    
+                    if(number + 1 < count){
+                        selectedButton->press();
+                        buildMenu->getButton(number + 1)->press();
+                    }
+                 }
+                
+                if(event.key.code == sf::Keyboard::Left){
+                    BuildingButton* selectedButton = 0;
+                    int number = 0;
+                    int count = buildMenu->getButtons().size();
+                    
+                    for(int i = 0; i < count; i++){
+                        if(buildMenu->getButton(i)->isPressed()){
+                            selectedButton = buildMenu->getButton(i);
+                            number = i;
+                        }
+                    }
+                    
+                    if(number - 1 >= 0){
+                        selectedButton->press();
+                        buildMenu->getButton(number - 1)->press();
+                    }
+                 }
+                
+                // Build a Building :P
                 if(event.key.code == sf::Keyboard::Return){
                     for(int i = 0; i < buildMenu->getButtons().size(); i++){
                         if(buildMenu->getButton(i)->isPressed()){
@@ -115,7 +155,6 @@ void Game::run(){
                             int posY = player->getYPos();
                             TileMap* map = player->getTileMap();
                             
-                            std::cout<<"x"<<posX<<"y"<<posY<<std::endl;    
                             switch(currentDirection){
                                 case MOVE_UP:
                                     if(posY - 1 > 0){
@@ -153,7 +192,9 @@ void Game::run(){
             }
         }
         
-        
+        if(player->haveToWalk()){
+            player->move(player->getCurrentDirection(),world);
+        }
         generateRessoruces();
         // Draw the things
         window->clear();
@@ -234,4 +275,13 @@ void Game::generateRessoruces(){
           //  std::cout<<"generate Rssource map x="<<randomXTileMap<<"map y"<<randomYTileMap<<" x="<<randomXTile<<"y="<<randomYTile<<std::endl;
         }
     }
+}
+
+
+BuildingButton* Game::getSelectedBuildingButton(){
+    return this->selectedButton;
+}
+
+void Game::setSelectedBuildingButton(BuildingButton* button){
+    this->selectedButton = button;
 }

@@ -183,6 +183,11 @@ void GameObject::setPos(int x,int y,bool setSprite){
     }
 }
 
+void GameObject::setSpritePosition(int x, int y){
+    std::cout<<"x"<<x<<"y"<<y<<std::endl;
+    this->getSprite()->setPosition(x,y);
+}
+
 int GameObject::getXPos(){
     return xPos;
 }
