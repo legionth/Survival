@@ -39,13 +39,11 @@ void LivingObject::move(int direction,World *world){
                         if(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()-1)->getTile(getXPos(),4)->getWalkAble()){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()-1));
                             this->setPos(getXPos(),4);
-                            resetWalkIterator();
                             //this->setSpritePosition(getXPos() * getWalkIterator() ,getYPos() * FRAME_WIDTH); 
                         }
                         else{                                                           // Moving on current map
                             sprite->move(0,FRAME_HEIGHT);
                             this->setPos(getXPos(),0);
-                            resetWalkIterator();
                            // this->setSpritePosition(getXPos() * getWalkIterator(),0);
                         } 
                         
@@ -74,12 +72,10 @@ void LivingObject::move(int direction,World *world){
                         if(world->getTileMap(getTileMap()->getXPos()+1,getTileMap()->getYPos())->getTile(0,getYPos())->getWalkAble()){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos()+1,getTileMap()->getYPos()));
                             this->setPos(0,getYPos());
-                            resetWalkIterator();
                         }
                         else{
                             sprite->move(-FRAME_WIDTH,0);
                             this->setPos(4,getYPos());
-                            resetWalkIterator();
                         }
                         
                    }else{
@@ -109,11 +105,9 @@ void LivingObject::move(int direction,World *world){
                         if(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()+1)->getTile(getXPos(),0)->getWalkAble()){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()+1));
                             this->setPos(getXPos(),0);
-                            resetWalkIterator();
                         }else{
                             sprite->move(0,-FRAME_HEIGHT);
                             this->setPos(getXPos(),4);
-                            resetWalkIterator();
                         }
                         
                     }else{
@@ -164,8 +158,9 @@ void LivingObject::move(int direction,World *world){
             }        
         }
         
-        if(getWalkIterator() >= FRAME_WIDTH){
+        if(getWalkIterator() >= FRAME_WIDTH){                                   //@TODO: Iterate everytime. Stop this !
             resetWalkIterator();
+            stopAnimation();
         }else{
             setWalkIterator(getWalkIterator() + WALK_ITERATOR);
             setToWalk(true);
