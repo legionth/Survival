@@ -3,5 +3,3 @@
 #
 # NOCDDL
 #
-# Debug configuration
-# Release configuration

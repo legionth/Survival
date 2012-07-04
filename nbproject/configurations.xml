@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <configurationDescriptor version="80">
+=======
+<configurationDescriptor version="79">
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="f3" displayName="GameObjects" projectFiles="true">
       <logicalFolder name="f1" displayName="LivingObjects" projectFiles="true">
@@ -77,12 +81,20 @@
       <compileType>
         <ccTool>
           <incDir>
+<<<<<<< HEAD
             <pElem>../../libs/LaurentGomila-SFML-3c0de3e/include</pElem>
+=======
+            <pElem>../../Libs/SFML2/src/SFML</pElem>
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
           </incDir>
         </ccTool>
         <linkerTool>
           <linkerAddLib>
+<<<<<<< HEAD
             <pElem>../../libs/LaurentGomila-SFML-3c0de3e/lib</pElem>
+=======
+            <pElem>../../Libs/SFML2/lib</pElem>
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibLibItem>sfml-audio</linkerLibLibItem>

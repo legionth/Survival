@@ -51,7 +51,10 @@ public:
     void setYPos(int y);
     void setPos(int x,int y);
     void setPos(int x,int y,bool setSprite);
+<<<<<<< HEAD
     void setSpritePosition(int x, int y);
+=======
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 
 
 private:

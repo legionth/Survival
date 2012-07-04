@@ -55,7 +55,10 @@ const char TILE_EARTH_LEFT		= '3';
 const char TILE_EARTH_RIGHT		= '1';
 const char TILE_EARTH_TOP		= '2';
 const char TILE_EARTH_DOWN		= '0';
+<<<<<<< HEAD
 
 const int WALK_ITERATOR = 32;
+=======
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 #endif	/* CONSTS_H */
 

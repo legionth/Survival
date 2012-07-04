@@ -88,6 +88,7 @@ void Game::run(){
                 window->close();
             }
             if(event.type == sf::Event::KeyPressed){
+<<<<<<< HEAD
                 if(event.key.code == sf::Keyboard::W && !player->haveToWalk()){
                     player->move(MOVE_UP,world);
                 }
@@ -101,12 +102,27 @@ void Game::run(){
                     player->move(MOVE_LEFT,world);
                 }
                 
+=======
+                if(event.key.code == sf::Keyboard::W){
+                    player->move(MOVE_UP,world);
+                }
+                else if(event.key.code == sf::Keyboard::D){
+                    player->move(MOVE_RIGHT,world);
+                }
+                else if(event.key.code == sf::Keyboard::S){
+                    player->move(MOVE_DOWN,world);
+                }
+                else if(event.key.code == sf::Keyboard::A){
+                    player->move(MOVE_LEFT,world);
+                }
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                 if(event.key.code == sf::Keyboard::Space){
                     if(player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource() != 0){
                         player->pickup(player->getTileMap()->getTile(player->getXPos(),player->getYPos()));
                     }
                 }
                 
+<<<<<<< HEAD
                 
                 // Toggle throug button Menu
                 if(event.key.code == sf::Keyboard::Right){
@@ -146,6 +162,8 @@ void Game::run(){
                  }
                 
                 // Build a Building :P
+=======
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                 if(event.key.code == sf::Keyboard::Return){
                     for(int i = 0; i < buildMenu->getButtons().size(); i++){
                         if(buildMenu->getButton(i)->isPressed()){
@@ -155,6 +173,10 @@ void Game::run(){
                             int posY = player->getYPos();
                             TileMap* map = player->getTileMap();
                             
+<<<<<<< HEAD
+=======
+                            std::cout<<"x"<<posX<<"y"<<posY<<std::endl;    
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                             switch(currentDirection){
                                 case MOVE_UP:
                                     if(posY - 1 > 0){
@@ -192,9 +214,13 @@ void Game::run(){
             }
         }
         
+<<<<<<< HEAD
         if(player->haveToWalk()){
             player->move(player->getCurrentDirection(),world);
         }
+=======
+        
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
         generateRessoruces();
         // Draw the things
         window->clear();
@@ -275,6 +301,7 @@ void Game::generateRessoruces(){
           //  std::cout<<"generate Rssource map x="<<randomXTileMap<<"map y"<<randomYTileMap<<" x="<<randomXTile<<"y="<<randomYTile<<std::endl;
         }
     }
+<<<<<<< HEAD
 }
 
 
@@ -284,4 +311,6 @@ BuildingButton* Game::getSelectedBuildingButton(){
 
 void Game::setSelectedBuildingButton(BuildingButton* button){
     this->selectedButton = button;
+=======
+>>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 }
