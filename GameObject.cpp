@@ -65,13 +65,8 @@ int GameObject::getLife(){
 }
 
 int GameObject::getNumberOfFrames(){
-<<<<<<< HEAD
     unsigned int height = this->getSprite()->getTexture()->getSize().y;
     unsigned int width =  this->getSprite()->getTexture()->getSize().x;
-=======
-    unsigned int height = this->getSprite()->getTexture()->getHeight();
-    unsigned int width =  this->getSprite()->getTexture()->getWidth();
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
     
     return height/width;
 }
@@ -108,13 +103,8 @@ void GameObject::updateAnimation(){
 }
 
 sf::IntRect GameObject::getFrameRect(int frame){
-<<<<<<< HEAD
     unsigned int width = (getSprite()->getTexture()->getSize().x / getFrameWidth());
     unsigned int height = (getSprite()->getTexture()->getSize().y / getFrameHeight());
-=======
-    unsigned int width = (getSprite()->getTexture()->getWidth() / getFrameWidth());
-    unsigned int height = (getSprite()->getTexture()->getHeight() / getFrameHeight());
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
    // std::cout<<"width"<<width<<std::endl;
     int tileX = frame % width;
     int tileY = frame / width;
@@ -193,14 +183,11 @@ void GameObject::setPos(int x,int y,bool setSprite){
     }
 }
 
-<<<<<<< HEAD
 void GameObject::setSpritePosition(int x, int y){
     std::cout<<"x"<<x<<"y"<<y<<std::endl;
     this->getSprite()->setPosition(x,y);
 }
 
-=======
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 int GameObject::getXPos(){
     return xPos;
 }

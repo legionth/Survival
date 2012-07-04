@@ -16,7 +16,9 @@ Game::Game() {
     images["land"] = this->loadImage("land.png");
     images["ressources"] = this->loadImage("ressources.png");
     images["menuBuilding"] = this->loadImage("menu_building.png");
+    images["menuItem"] = this->loadImage("menu_item.png");
     images["buttonBuilding"] = this->loadImage("button_building.png");
+    images["buttonItem"] = this->loadImage("button_item.png");
     images["buildings"] = this->loadImage("buildings.png");
     
     world = new World(images["land"]);
@@ -64,7 +66,13 @@ Game::Game() {
     
     button = new BuildingButton(BUTTON_BUILDING_RECT_FIREPLACE,images["buttonBuilding"],BUILDING_RECT_FIREPLACE,images["buildings"],"fireplace",BUILDING_FIREPLACE);
     buildMenu->addButton(button);
-  //  statusMenu = new Menu(FRAME_WIDTH * 5,0,256,128);
+    
+    itemMenu = new ItemMenu(FRAME_WIDTH * 5,FRAME_HEIGHT * 5,256,256);
+    itemMenu->setImage(images["menuItem"]);
+    
+    ItemButton* itemButton = new ItemButton(0,images["buttonItem"],RES_WOOD);
+    itemMenu->addButton(itemButton);
+    
 }
 
 Game::Game(const Game& orig) {
@@ -88,7 +96,6 @@ void Game::run(){
                 window->close();
             }
             if(event.type == sf::Event::KeyPressed){
-<<<<<<< HEAD
                 if(event.key.code == sf::Keyboard::W && !player->haveToWalk()){
                     player->move(MOVE_UP,world);
                 }
@@ -102,27 +109,12 @@ void Game::run(){
                     player->move(MOVE_LEFT,world);
                 }
                 
-=======
-                if(event.key.code == sf::Keyboard::W){
-                    player->move(MOVE_UP,world);
-                }
-                else if(event.key.code == sf::Keyboard::D){
-                    player->move(MOVE_RIGHT,world);
-                }
-                else if(event.key.code == sf::Keyboard::S){
-                    player->move(MOVE_DOWN,world);
-                }
-                else if(event.key.code == sf::Keyboard::A){
-                    player->move(MOVE_LEFT,world);
-                }
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                 if(event.key.code == sf::Keyboard::Space){
                     if(player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource() != 0){
                         player->pickup(player->getTileMap()->getTile(player->getXPos(),player->getYPos()));
                     }
                 }
                 
-<<<<<<< HEAD
                 
                 // Toggle throug button Menu
                 if(event.key.code == sf::Keyboard::Right){
@@ -162,8 +154,6 @@ void Game::run(){
                  }
                 
                 // Build a Building :P
-=======
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                 if(event.key.code == sf::Keyboard::Return){
                     for(int i = 0; i < buildMenu->getButtons().size(); i++){
                         if(buildMenu->getButton(i)->isPressed()){
@@ -173,10 +163,6 @@ void Game::run(){
                             int posY = player->getYPos();
                             TileMap* map = player->getTileMap();
                             
-<<<<<<< HEAD
-=======
-                            std::cout<<"x"<<posX<<"y"<<posY<<std::endl;    
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                             switch(currentDirection){
                                 case MOVE_UP:
                                     if(posY - 1 > 0){
@@ -214,13 +200,9 @@ void Game::run(){
             }
         }
         
-<<<<<<< HEAD
         if(player->haveToWalk()){
             player->move(player->getCurrentDirection(),world);
         }
-=======
-        
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
         generateRessoruces();
         // Draw the things
         window->clear();
@@ -244,6 +226,7 @@ void Game::run(){
         player->updateAnimation();
         window->draw(*player->getSprite());
         window->draw(*buildMenu->getSprite());
+        window->draw(*itemMenu->getSprite());
         
         for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
             window->draw(*buildMenu->getButton(i)->getSprite());
@@ -301,7 +284,6 @@ void Game::generateRessoruces(){
           //  std::cout<<"generate Rssource map x="<<randomXTileMap<<"map y"<<randomYTileMap<<" x="<<randomXTile<<"y="<<randomYTile<<std::endl;
         }
     }
-<<<<<<< HEAD
 }
 
 
@@ -311,6 +293,4 @@ BuildingButton* Game::getSelectedBuildingButton(){
 
 void Game::setSelectedBuildingButton(BuildingButton* button){
     this->selectedButton = button;
-=======
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 }

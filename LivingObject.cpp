@@ -11,10 +11,7 @@
 
 LivingObject::LivingObject() {
     this->setCurrentDirection(MOVE_DOWN);
-<<<<<<< HEAD
     toWalk = false;
-=======
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 }
 
 LivingObject::LivingObject(const LivingObject& orig) {
@@ -22,7 +19,6 @@ LivingObject::LivingObject(const LivingObject& orig) {
 
 LivingObject::~LivingObject() {
 }
-<<<<<<< HEAD
 /**
  *  Don't touch it is working ...
  * @param direction
@@ -44,28 +40,10 @@ void LivingObject::move(int direction,World *world){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()-1));
                             this->setPos(getXPos(),4);
                             changedMap = true;
-=======
-
-void LivingObject::move(int direction,World *world){
-    sf::Sprite *sprite = this->getSprite();
-  //std::cout<<"clock"<<moveClock.getElapsedTime().asSeconds()<<std::endl;
-    
-    if(moveClock.getElapsedTime().asSeconds() > 0.25f){
-        if(direction == MOVE_UP && (this->getYPos() - 1 >= 0 || this->getTileMap()->getYPos() - 1 >= 0)){
-            if(this->getYPos() - 1 < 0 || getTileMap()->getTile(getXPos(),getYPos()-1)->getWalkAble() ){
-                    sprite->move(0,-FRAME_HEIGHT);
-                    this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
-
-                    if(this->getYPos() - 1 < 0){                                        // Moving to next map                                                                              
-                        if(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()-1)->getTile(getXPos(),4)->getWalkAble()){
-                            this->setTileMap(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()-1));
-                            this->setPos(getXPos(),4);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                         }
                         else{                                                           // Moving on current map
                             sprite->move(0,FRAME_HEIGHT);
                             this->setPos(getXPos(),0);
-<<<<<<< HEAD
                            // this->setSpritePosition(getXPos() * getWalkIterator(),0);
                         } 
                         
@@ -78,11 +56,6 @@ void LivingObject::move(int direction,World *world){
                             this->getSprite()->move(0,-WALK_ITERATOR);
                         }
                         
-=======
-                        } 
-                    }else{
-                       this->setPos(getXPos(),getYPos()-1,false);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                     }
                     
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
@@ -91,7 +64,6 @@ void LivingObject::move(int direction,World *world){
             }
         }else if(direction == MOVE_RIGHT && (this->getXPos() + 1 <= 4  || this->getTileMap()->getXPos() + 1 <= 4 )){
             if(this->getXPos() + 1 >= 5 || getTileMap()->getTile(getXPos() + 1,getYPos())->getWalkAble()){
-<<<<<<< HEAD
                    // sprite->move(FRAME_WIDTH,0);
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
                     
@@ -101,21 +73,11 @@ void LivingObject::move(int direction,World *world){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos()+1,getTileMap()->getYPos()));
                             this->setPos(0,getYPos());
                             changedMap = true;
-=======
-                    sprite->move(FRAME_WIDTH,0);
-                    this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
-                    
-                    if(this->getXPos() + 1 > 4){
-                        if(world->getTileMap(getTileMap()->getXPos()+1,getTileMap()->getYPos())->getTile(0,getYPos())->getWalkAble()){
-                            this->setTileMap(world->getTileMap(getTileMap()->getXPos()+1,getTileMap()->getYPos()));
-                            this->setPos(0,getYPos());
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                         }
                         else{
                             sprite->move(-FRAME_WIDTH,0);
                             this->setPos(4,getYPos());
                         }
-<<<<<<< HEAD
                         
                    }else{
                         
@@ -125,10 +87,6 @@ void LivingObject::move(int direction,World *world){
                             this->getSprite()->move(WALK_ITERATOR,0);
                         }
                         
-=======
-                   }else{
-                        this->setPos(getXPos()+1,getYPos(),false);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                    }
                     
                    this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
@@ -137,7 +95,6 @@ void LivingObject::move(int direction,World *world){
                    this->setCurrentDirection(MOVE_RIGHT);
             }
         }else if(direction == MOVE_DOWN && (this->getYPos() + 1 <= 4  || this->getTileMap()->getYPos() + 1 <= 4 )){
-<<<<<<< HEAD
                                         //std::cout<<"start: WALK_ITERATOR"<<WALK_ITERATOR<<"x"<<this->getSprite()->getPosition().x<<"y"<<this->getSprite()->getPosition().y<<std::endl;
 
             if(this->getYPos() + 1 >= 5 || getTileMap()->getTile(getXPos(),getYPos()+1)->getWalkAble()){
@@ -150,21 +107,10 @@ void LivingObject::move(int direction,World *world){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()+1));
                             this->setPos(getXPos(),0);
                             changedMap = true;
-=======
-            if(this->getYPos() + 1 >= 5 || getTileMap()->getTile(getXPos(),getYPos()+1)->getWalkAble()){
-                    sprite->move(0,FRAME_HEIGHT);
-                    this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
-                    
-                    if(this->getYPos() + 1 > 4){
-                        if(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()+1)->getTile(getXPos(),0)->getWalkAble()){
-                            this->setTileMap(world->getTileMap(getTileMap()->getXPos(),getTileMap()->getYPos()+1));
-                            this->setPos(getXPos(),0);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                         }else{
                             sprite->move(0,-FRAME_HEIGHT);
                             this->setPos(getXPos(),4);
                         }
-<<<<<<< HEAD
                         
                     }else{
                         
@@ -174,10 +120,6 @@ void LivingObject::move(int direction,World *world){
                             this->getSprite()->move(0,WALK_ITERATOR);
                         }
                         
-=======
-                    }else{
-                        this->setPos(getXPos(),getYPos()+1,false);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                     }
                     
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
@@ -187,31 +129,20 @@ void LivingObject::move(int direction,World *world){
             }
         }else if(direction == MOVE_LEFT && (this->getXPos() - 1 >= 0 || this->getTileMap()->getXPos() - 1 >= 0)){
             if(this->getXPos() - 1 < 0 || getTileMap()->getTile(getXPos()-1,getYPos())->getWalkAble()){
-<<<<<<< HEAD
                   //  sprite->move(-FRAME_WIDTH,0);
-=======
-                    sprite->move(-FRAME_WIDTH,0);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                     
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
                     
                     if(this->getXPos() - 1 < 0){
-<<<<<<< HEAD
                         
                         if(world->getTileMap(getTileMap()->getXPos()-1,getTileMap()->getYPos())->getTile(4,getYPos())->getWalkAble()){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos()-1,getTileMap()->getYPos()));
                             this->setPos(4,getYPos());
                             changedMap = true;
-=======
-                        if(world->getTileMap(getTileMap()->getXPos()-1,getTileMap()->getYPos())->getTile(4,getYPos())->getWalkAble()){
-                            this->setTileMap(world->getTileMap(getTileMap()->getXPos()-1,getTileMap()->getYPos()));
-                            this->setPos(4,getYPos());
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                         }else{
                             sprite->move(FRAME_WIDTH,0);
                             this->setPos(0,getYPos());
                         }
-<<<<<<< HEAD
                         
                     }else{
                         if(this->getWalkIterator() == FRAME_WIDTH){
@@ -220,10 +151,6 @@ void LivingObject::move(int direction,World *world){
                             this->getSprite()->move(-WALK_ITERATOR,0);
                         }
                         
-=======
-                    }else{
-                        this->setPos(getXPos()-1,getYPos(),false);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
                     }
                     
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
@@ -232,7 +159,6 @@ void LivingObject::move(int direction,World *world){
                     this->setCurrentDirection(MOVE_LEFT);
             }        
         }
-<<<<<<< HEAD
         
         if(getWalkIterator() >= FRAME_WIDTH || changedMap){                                   //@TODO: Iterate everytime. Stop this !
             resetWalkIterator();
@@ -241,8 +167,6 @@ void LivingObject::move(int direction,World *world){
             setWalkIterator(getWalkIterator() + WALK_ITERATOR);
             setToWalk(true);
         }
-=======
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
         moveClock.restart(); 
     }
 }
@@ -288,7 +212,6 @@ void LivingObject::setTileMap(TileMap* tileMap){
     this->currentTileMap = tileMap;
 }
 
-<<<<<<< HEAD
 int LivingObject::getWalkIterator(){
     return this->walkIterator;
 }
@@ -310,6 +233,3 @@ bool LivingObject::haveToWalk(){
 void LivingObject::setToWalk(bool walk){
     this->toWalk = walk;
 }
-=======
-
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270

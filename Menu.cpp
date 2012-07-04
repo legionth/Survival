@@ -6,6 +6,7 @@
  */
 
 #include "Menu.h"
+#include <iostream>
 
 Menu::Menu(int posX, int posY,int sizeX,int sizeY) {
     getSprite()->setPosition(posX,posY);

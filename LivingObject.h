@@ -14,10 +14,7 @@
 
 class TileMap;
 class World;
-<<<<<<< HEAD
 
-=======
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 class LivingObject : public GameObject{
 public:
     LivingObject();
@@ -35,7 +32,6 @@ public:
     int getSpeed();
     int getAttackPower();
     int getDefense();
-<<<<<<< HEAD
     int getWalkIterator();
     bool haveToWalk();
     TileMap* getTileMap();
@@ -50,15 +46,6 @@ public:
 protected:
     void setWalkIterator(int i);
 
-=======
-    TileMap* getTileMap();
-    
-    // set Attributes
-    void setSpeed(int speed);
-    void setAttackPower(int atk);
-    void setDefense(int def);
-    void setTileMap(TileMap* tileMap);
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 private:
     int currentDirection;
     int currentFrame;
@@ -70,12 +57,9 @@ private:
     
     TileMap* currentTileMap;
     sf::Clock moveClock;
-<<<<<<< HEAD
     int walkIterator;
     bool toWalk;
     
-=======
->>>>>>> abfa2e8395288c787bdd2735fa5c3bc8a6fdf270
 };
 
 #endif	/* LIVINGOBJECT_H */

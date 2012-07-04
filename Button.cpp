@@ -21,6 +21,14 @@ Button::Button(int frameRect,sf::Texture* tex,std::string buttonName){
     setFrameRect(frameRect);
 }
 
+Button::Button(int frameRect,sf::Texture* tex,std::string buttonName,int sizeX,int sizeY){
+    this->pressed = false;
+    this->name = buttonName;
+    this->setImage(tex);
+    setFrameSize(sizeX,sizeY);
+    setFrameRect(frameRect);
+}
+
 Button::Button(std::string buttonName){
     this->pressed = false;
     this->name = buttonName;
@@ -58,4 +66,5 @@ std::string Button::getName(){
 void Button::setPressed(bool press){
     this->pressed = press;
 }
+
 
