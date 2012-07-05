@@ -24,6 +24,6 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=legionth-Survival-1333766
+PROJECTNAME=Survival
 
 # Active Configuration
