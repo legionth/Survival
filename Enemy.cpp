@@ -30,7 +30,8 @@ void Enemy::execute(){
             
             break;
         case BEHAV_DEFENSIVE:
-            
+            int rand = rand() % 5;
+            this->move(rand);
             break;
         case BEHAV_PASSIVE:
             

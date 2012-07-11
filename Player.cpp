@@ -18,6 +18,7 @@ Player::Player(sf::Texture* img) {
     ressources[RES_IRON_ORE]    = 0;    
     ressources[RES_GOLD_ORE]    = 0;
     ressources[RES_SILVER_ORE]  = 0;
+    ressources[RES_LEATHER]     = 0;
 }
 
 Player::Player(const Player& orig) {
@@ -30,3 +31,20 @@ void Player::pickup(Tile* tile){
     ressources[tile->getRessource()->getIdentifier()]++;
     tile->removeRessource();
 }
+
+int Player::getRessourceCountById(int id){
+    return ressources[id];
+}
+
+std::map<int,int> Player::getRessources(){
+    return this->ressources;
+}
+
+void Player::decreaseRessources(std::map<int,int> decreaseRes){
+   int size = ressources.size();
+   
+   for(int i = 0; i < size; i++){
+       ressources[i] -= decreaseRes[i];
+   }
+}
+

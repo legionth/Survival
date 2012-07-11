@@ -6,7 +6,7 @@
  */
 
 #include "ItemButton.h"
-
+#include <iostream>
 ItemButton::ItemButton() {
 }
 
@@ -17,14 +17,14 @@ ItemButton::~ItemButton() {
     delete this->text;
 }
 
-ItemButton::ItemButton(int frameRect,sf::Texture* tex,char id){
+ItemButton::ItemButton(int frameRect,sf::Texture* tex,int id){
     this->id = id;
-    this->count = 0;
     this->setImage(tex);
-    setFrameSize(16,16);
+    setFrameSize(32,32);
     setFrameRect(frameRect);
+    
     text = new sf::Text();
-    text->setString("x "+count);
+    updateCount(0);
 }
 
 sf::Text* ItemButton::getText(){
@@ -33,5 +33,18 @@ sf::Text* ItemButton::getText(){
 
 
 void ItemButton::setCount(int i){
+    updateCount(i);
+}
+
+void ItemButton::updateCount(int i){
     this->count = i;
+    std::stringstream ss;
+    ss << count;
+    text->setString("x "+ss.str());
+    text->setColor(sf::Color::Black);
+    text->setCharacterSize(20);
+}
+
+int ItemButton::getId(){
+    return this->id;
 }

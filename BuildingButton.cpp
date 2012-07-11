@@ -13,6 +13,7 @@ BuildingButton::BuildingButton(int frameRect,sf::Texture* tex,int rectBuilding,s
     
     setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
     setBuilding(new Building(id,texBuilding,rectBuilding));
+    
 }
 
 BuildingButton::BuildingButton(const BuildingButton& orig) {

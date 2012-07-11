@@ -16,6 +16,7 @@ GameObject::GameObject() {
     frameHeight = 128;
     xPos = 0;
     yPos = 0;
+    isPlaying = false;
 }
 
 GameObject::GameObject(const GameObject& orig) {
@@ -85,6 +86,7 @@ void GameObject::stopAnimation(){
 }
 
 void GameObject::updateAnimation(){
+    
     if(isPlaying){
         int frameCount = getStopFrame() - getStartFrame();
  	float timePosition = (clock.getElapsedTime().asSeconds() * fps);

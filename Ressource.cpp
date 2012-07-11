@@ -33,19 +33,19 @@ void Ressource::setIdentifier(int id){
         this->setFrameRect(0);
     }
     else if(id == RES_GOLD_ORE){
-        this->setFrameRect(0);
+        this->setFrameRect(4);
     }
     else if(id == RES_IRON_ORE){
-        this->setFrameRect(0);
+        this->setFrameRect(3);
     }
     else if(id == RES_SILVER_ORE){
-        this->setFrameRect(0);
+        this->setFrameRect(5);
     }
     else if(id == RES_STONE){
-        this->setFrameRect(0);
+        this->setFrameRect(1);
     }
     else if(id == RES_LEATHER){
-        this->setFrameRect(0);
+        this->setFrameRect(2);
     }
     else{
         this->setFrameRect(0);

@@ -128,6 +128,16 @@ void Tile::removeRessource(){
 void Tile::setBuilding(Building* building){
     this->building = building;
     this->building->getSprite()->setPosition(this->xPos * FRAME_WIDTH,this->yPos * FRAME_HEIGHT);
+    
+    switch(building->getIdentifier()){
+        case BUILDING_TENT:
+            setWalkAble(false);
+            break;
+        case BUILDING_FIREPLACE:
+            setWalkAble(true);
+            building->startAnimation(BUILDING_RECT_FIREPLACE,BUILDING_RECT_FIREPLACE_END);
+            break;
+    }
 }
 
 Building* Tile::getBuilding(){

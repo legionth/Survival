@@ -49,7 +49,7 @@ void LivingObject::move(int direction,World *world){
                         
                     }else{
                         
-                        if(this->getWalkIterator() == FRAME_WIDTH){
+                        if(this->getWalkIterator() >= FRAME_WIDTH){
                                 this->setPos(getXPos(),getYPos()-1,true);              // Ursprünglich
                         }else{
                             //this->setSpritePosition(getXPos() * FRAME_WIDTH ,getYPos() * FRAME_HEIGHT - getWalkIterator());
@@ -81,7 +81,7 @@ void LivingObject::move(int direction,World *world){
                         
                    }else{
                         
-                        if(this->getWalkIterator() == FRAME_WIDTH){
+                        if(this->getWalkIterator() >= FRAME_WIDTH){
                             this->setPos(getXPos()+1,getYPos(),true);              // Ursprünglich
                         }else{
                             this->getSprite()->move(WALK_ITERATOR,0);
@@ -114,7 +114,7 @@ void LivingObject::move(int direction,World *world){
                         
                     }else{
                         
-                        if(this->getWalkIterator() == FRAME_WIDTH){
+                        if(this->getWalkIterator() >= FRAME_WIDTH){
                             this->setPos(getXPos(),getYPos()+1,true);              // Ursprünglich
                         }else{
                             this->getSprite()->move(0,WALK_ITERATOR);
@@ -145,7 +145,7 @@ void LivingObject::move(int direction,World *world){
                         }
                         
                     }else{
-                        if(this->getWalkIterator() == FRAME_WIDTH){
+                        if(this->getWalkIterator() >= FRAME_WIDTH){
                             this->setPos(getXPos()-1,getYPos(),true);              // Ursprünglich
                         }else{
                             this->getSprite()->move(-WALK_ITERATOR,0);

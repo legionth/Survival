@@ -18,6 +18,9 @@ public:
     int getHeat();
     void setHeat(int i);
     void pickup(Tile* tile);
+    int getRessourceCountById(int id);
+    std::map<int,int> getRessources();
+    void decreaseRessources(std::map<int,int> decreaseRes);
 private:
     int heat;
     std::map<int,int> ressources;

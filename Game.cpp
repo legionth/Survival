@@ -57,6 +57,10 @@ Game::Game() {
     Ressource* res2 = new Ressource(RES_WOOD,images["ressources"]);
     getTileMap(0,0)->getTile(1,1)->setRessource(res2);
     
+    
+    /**
+     * Building menu buttons
+     */
     buildMenu = new BuildingMenu(FRAME_WIDTH * 5,0,128,512);
     buildMenu->setImage(images["menuBuilding"]);
     
@@ -67,10 +71,31 @@ Game::Game() {
     button = new BuildingButton(BUTTON_BUILDING_RECT_FIREPLACE,images["buttonBuilding"],BUILDING_RECT_FIREPLACE,images["buildings"],"fireplace",BUILDING_FIREPLACE);
     buildMenu->addButton(button);
     
+    
+    
+    
+    /**
+     * Item Menu buttons
+     */
     itemMenu = new ItemMenu(FRAME_WIDTH * 5,FRAME_HEIGHT * 5,256,256);
     itemMenu->setImage(images["menuItem"]);
     
     ItemButton* itemButton = new ItemButton(0,images["buttonItem"],RES_WOOD);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(1,images["buttonItem"],RES_STONE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(2,images["buttonItem"],RES_LEATHER);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(3,images["buttonItem"],RES_IRON_ORE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(4,images["buttonItem"],RES_GOLD_ORE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(5,images["buttonItem"],RES_SILVER_ORE);
     itemMenu->addButton(itemButton);
     
 }
@@ -111,7 +136,9 @@ void Game::run(){
                 
                 if(event.key.code == sf::Keyboard::Space){
                     if(player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource() != 0){
+                        int id = player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource()->getIdentifier();
                         player->pickup(player->getTileMap()->getTile(player->getXPos(),player->getYPos()));
+                        itemMenu->getButtonById(id)->updateCount(player->getRessourceCountById(id));
                     }
                 }
                 
@@ -155,6 +182,7 @@ void Game::run(){
                 
                 // Build a Building :P
                 if(event.key.code == sf::Keyboard::Return){
+                    
                     for(int i = 0; i < buildMenu->getButtons().size(); i++){
                         if(buildMenu->getButton(i)->isPressed()){
                             Building *building = buildMenu->getButton(i)->getBuilding();
@@ -163,29 +191,51 @@ void Game::run(){
                             int posY = player->getYPos();
                             TileMap* map = player->getTileMap();
                             
-                            switch(currentDirection){
-                                case MOVE_UP:
-                                    if(posY - 1 > 0){
-                                        map->getTile(posX,posY - 1)->setBuilding(building);
-                                    }
-                                    break;
-                                case MOVE_DOWN:
-                                    if(posY + 1 < 4){
-                                        map->getTile(posX,posY + 1)->setBuilding(building);
-                                    }
-                                    break;
-                                case MOVE_RIGHT:
-                                    if(posX + 1 < 4){
-                                        map->getTile(posX + 1,posY)->setBuilding(building);
-                                    }
-                                    break;
-                                case MOVE_LEFT:
-                                    if(posX - 1 > 0){
-                                        map->getTile(posX - 1,posY)->setBuilding(building);
-                                    }
-                                    break;
-                                default: 
-                                    break;    
+                            // Check if can be build
+                            bool canBuild = true;
+                            std::map<int,int> ressourcesPlayer = player->getRessources();
+                            std::map<int,int> ressourcesBuilding = building->getRessources();
+                            int size = ressourcesPlayer.size();
+                            
+                            for(int i = 0; i < size;i++){
+                                if(ressourcesPlayer[i] < ressourcesBuilding[i]){
+                                    canBuild = false;
+                                }
+                            }
+                            
+                            if(canBuild){
+                                switch(currentDirection){
+                                    case MOVE_UP:
+                                        if(posY - 1 > 0){
+                                            map->getTile(posX,posY - 1)->setBuilding(building);
+                                        }
+                                        break;
+                                    case MOVE_DOWN:
+                                        if(posY + 1 < 4){
+                                            map->getTile(posX,posY + 1)->setBuilding(building);
+                                        }
+                                        break;
+                                    case MOVE_RIGHT:
+                                        if(posX + 1 < 4){
+                                            map->getTile(posX + 1,posY)->setBuilding(building);
+                                        }
+                                        break;
+                                    case MOVE_LEFT:
+                                        if(posX - 1 > 0){
+                                            map->getTile(posX - 1,posY)->setBuilding(building);
+                                        }
+                                        break;
+                                    default:
+                                        std::cout<<"break up building"<<std::endl;
+                                        break;    
+                                }
+                                player->decreaseRessources(ressourcesBuilding);
+                                ressourcesPlayer = player->getRessources();
+                                for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
+                                        ItemButton* itemButton = itemMenu->getButton(i);
+                                        itemButton->setCount(ressourcesPlayer[itemButton->getId()]);
+                                        std::cout<<"id"<<itemButton->getId()<<"="<<ressourcesPlayer[itemButton->getId()]<<std::endl;
+                                }
                             }
                         }
                     }
@@ -203,6 +253,7 @@ void Game::run(){
         if(player->haveToWalk()){
             player->move(player->getCurrentDirection(),world);
         }
+        
         generateRessoruces();
         // Draw the things
         window->clear();
@@ -217,20 +268,24 @@ void Game::run(){
                     window->draw(*tile->getRessource()->getSprite());
                 }
                 if(tile->getBuilding() != 0){
-                    window->draw(*tile->getBuilding()->getSprite());
-                    std::cout<<"tile"<<"x="<<x<<"y="<<y<<"\t"<<"build"<<"x="<<tile->getBuilding()->getSprite()->getPosition().x<<"y="<<tile->getBuilding()->getSprite()->getPosition().y<<std::endl;
+                    tile->getBuilding()->updateAnimation();
+                    window->draw(*tile->getBuilding()->getSprite());  
+                   // std::cout<<"tile"<<"x="<<x<<"y="<<y<<"\t"<<"build"<<"x="<<tile->getBuilding()->getSprite()->getPosition().x<<"y="<<tile->getBuilding()->getSprite()->getPosition().y<<std::endl;
                 }
             }   
         }
-        
         player->updateAnimation();
+
         window->draw(*player->getSprite());
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
         
         for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
             window->draw(*buildMenu->getButton(i)->getSprite());
-         //   std::cout<<"i="<<i<<"x"<<buildMenu->getButton(i)->getSprite()->getPosition().x<<"y"<<buildMenu->getButton(i)->getSprite()->getPosition().y<<std::endl;
+        }
+        for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
+            window->draw(*itemMenu->getButton(i)->getSprite());
+            window->draw(*itemMenu->getButton(i)->getText());
         }
        // std::cout<<"sprite pos"<<buildMenu->getSprite()->getPosition().x<<" "<<buildMenu->getSprite()->getPosition().y<<std::endl;
         window->display();

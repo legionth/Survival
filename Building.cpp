@@ -8,17 +8,41 @@ Building::Building(void)
     ressources[RES_IRON_ORE]    = 0;
     ressources[RES_GOLD_ORE]    = 0;
     ressources[RES_SILVER_ORE]  = 0;
+    ressources[RES_LEATHER]     = 0;
 }
 
 Building::Building(char id,sf::Texture *t,int frameRect){
     setIdentifier(id);
     
-    ressources[RES_WOOD]        = 0;
-    ressources[RES_STONE]       = 0;
-    ressources[RES_IRON_ORE]    = 0;
-    ressources[RES_GOLD_ORE]    = 0;
-    ressources[RES_SILVER_ORE]  = 0;
+
     
+    
+    switch (id){
+        case BUILDING_TENT:
+                ressources[RES_WOOD]        = 1;
+                ressources[RES_STONE]       = 0;
+                ressources[RES_IRON_ORE]    = 0;
+                ressources[RES_GOLD_ORE]    = 0;
+                ressources[RES_SILVER_ORE]  = 0;
+                ressources[RES_LEATHER]     = 2;
+            break;
+        case BUILDING_FIREPLACE:
+                ressources[RES_WOOD]        = 2;
+                ressources[RES_STONE]       = 2;
+                ressources[RES_IRON_ORE]    = 0;
+                ressources[RES_GOLD_ORE]    = 0;
+                ressources[RES_SILVER_ORE]  = 0;
+                ressources[RES_LEATHER]     = 0;
+            break;
+        default:
+                ressources[RES_WOOD]        = 0;
+                ressources[RES_STONE]       = 0;
+                ressources[RES_IRON_ORE]    = 0;
+                ressources[RES_GOLD_ORE]    = 0;
+                ressources[RES_SILVER_ORE]  = 0;
+                ressources[RES_LEATHER]     = 0;
+            break;
+    }
     this->setImage(t);
     this->setFrameRect(frameRect);
 }

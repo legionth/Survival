@@ -16,9 +16,12 @@ public:
     virtual ~ItemMenu();
     void addButton(ItemButton* button);
     ItemButton* getButton(int i);
+    ItemButton* getButtonById(int id);
     std::vector<ItemButton*> getButtons();
 private:
     std::vector<ItemButton*> buttons;
+    int line;
+    bool lineChanged;
 
 };
 

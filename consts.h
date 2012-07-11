@@ -34,13 +34,23 @@ enum Behavior{
     BEHAV_DEFENSIVE       = 1,
     BEHAV_PASSIVE         = 2
 };
+// Enemie id
+enum Enemies{ 
+    RES_WOOD             = 0, 
+    RES_STONE            = 1,
+    RES_LEATHER          = 2,
+    RES_IRON_ORE         = 3,
+    RES_GOLD_ORE         = 4,
+    RES_SILVER_ORE       = 5
+};
 //id's for the buildings
 const char BUILDING_TENT        = '^';
 const char BUILDING_FIREPLACE	= 'f';
 
 
-const int BUILDING_RECT_TENT        = 1;
-const int BUILDING_RECT_FIREPLACE   = 2;
+const int BUILDING_RECT_TENT            = 0;
+const int BUILDING_RECT_FIREPLACE       = 1;
+const int BUILDING_RECT_FIREPLACE_END   = 3;
 
 // Button rects
 const int BUTTON_BUILDING_RECT_TENT        = 0;

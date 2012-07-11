@@ -23,6 +23,8 @@ private:
     int behavior;
     std::vector<int> dropList;
     bool attacked;
+    
+    int id;
 };
 
 #endif	/* ENEMY_H */
