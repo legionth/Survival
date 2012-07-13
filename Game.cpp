@@ -257,6 +257,10 @@ void Game::run(){
         
         if(player->haveToWalk()){
             player->move(player->getCurrentDirection(),world);
+            std::cout<<"direction"<<player->getCurrentDirection()<<std::endl;
+        }
+        else{
+            player->setCurrentFrame(player->getDirectionRect());
         }
         
         generateRessoruces();
@@ -305,7 +309,7 @@ void Game::run(){
                     enemies[i]->updateAnimation();
                     window->draw(*enemies[i]->getSprite());
                    // std::cout<<"x="<<enemies[i]->getSprite()->getPosition().x<<"y"<<enemies[i]->getSprite()->getPosition().y<<std::endl;
-                    std::cout<<"x="<<enemies[i]->getXPos()<<"y="<<enemies[i]->getYPos()<<std::endl;
+              //      std::cout<<"x="<<enemies[i]->getXPos()<<"y="<<enemies[i]->getYPos()<<std::endl;
             }
         }
        // std::cout<<"sprite pos"<<buildMenu->getSprite()->getPosition().x<<" "<<buildMenu->getSprite()->getPosition().y<<std::endl;

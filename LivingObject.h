@@ -46,6 +46,7 @@ public:
     
     bool isAttacked();
     void setAttacked(bool b);
+    int getDirectionRect();
 protected:
     void setWalkIterator(int i);
 

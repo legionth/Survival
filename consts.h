@@ -67,5 +67,11 @@ const int WALK_ITERATOR = 32;
 const int MAX_ENEMIES = 5;
 const int CLOCK_ENEMY_SPAWN = 10;
 
+const int RECT_UP_START = 4;
+const int RECT_DOWN_START = 0;
+const int RECT_RIGHT_START = 9;
+const int RECT_LEFT_START = 13;
+
+
 #endif	/* CONSTS_H */
 

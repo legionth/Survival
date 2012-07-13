@@ -30,6 +30,7 @@ void LivingObject::move(int direction,World *world){
     
     if(moveClock.getElapsedTime().asSeconds() > 0.15f){
         if(direction == MOVE_UP && (this->getYPos() - 1 >= 0 || this->getTileMap()->getYPos() - 1 >= 0)){
+            
             if(this->getYPos() - 1 < 0 || getTileMap()->getTile(getXPos(),getYPos()-1)->getWalkAble() ){
                   //  sprite->move(0,-FRAME_HEIGHT);
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
@@ -63,6 +64,7 @@ void LivingObject::move(int direction,World *world){
                     this->setCurrentDirection(MOVE_UP);
             }
         }else if(direction == MOVE_RIGHT && (this->getXPos() + 1 <= 4  || this->getTileMap()->getXPos() + 1 <= 4 )){
+            
             if(this->getXPos() + 1 >= 5 || getTileMap()->getTile(getXPos() + 1,getYPos())->getWalkAble()){
                    // sprite->move(FRAME_WIDTH,0);
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
@@ -96,7 +98,7 @@ void LivingObject::move(int direction,World *world){
             }
         }else if(direction == MOVE_DOWN && (this->getYPos() + 1 <= 4  || this->getTileMap()->getYPos() + 1 <= 4 )){
                                         //std::cout<<"start: WALK_ITERATOR"<<WALK_ITERATOR<<"x"<<this->getSprite()->getPosition().x<<"y"<<this->getSprite()->getPosition().y<<std::endl;
-
+            
             if(this->getYPos() + 1 >= 5 || getTileMap()->getTile(getXPos(),getYPos()+1)->getWalkAble()){
                    // sprite->move(0,FRAME_HEIGHT);
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(0);
@@ -128,6 +130,7 @@ void LivingObject::move(int direction,World *world){
                     this->setCurrentDirection(MOVE_DOWN);
             }
         }else if(direction == MOVE_LEFT && (this->getXPos() - 1 >= 0 || this->getTileMap()->getXPos() - 1 >= 0)){
+            
             if(this->getXPos() - 1 < 0 || getTileMap()->getTile(getXPos()-1,getYPos())->getWalkAble()){
                   //  sprite->move(-FRAME_WIDTH,0);
                     
@@ -167,7 +170,22 @@ void LivingObject::move(int direction,World *world){
             setWalkIterator(getWalkIterator() + WALK_ITERATOR);
             setToWalk(true);
         }
-        moveClock.restart(); 
+        moveClock.restart();
+    }
+    
+    switch(direction){
+        case MOVE_UP:
+            setCurrentDirection(MOVE_UP);
+           break;
+        case MOVE_DOWN:
+            setCurrentDirection(MOVE_DOWN);
+            break;
+        case MOVE_RIGHT:
+            setCurrentDirection(MOVE_RIGHT);
+            break;
+        case MOVE_LEFT:
+            setCurrentDirection(MOVE_LEFT);
+            break;        
     }
 }
     
@@ -240,4 +258,27 @@ bool LivingObject::isAttacked(){
 
 void LivingObject::setAttacked(bool b){
     this->attacked = b;
+}
+
+int LivingObject::getDirectionRect(){
+    int ret = 0;
+    
+    switch (getCurrentDirection()){
+        case MOVE_UP:
+            ret = RECT_UP_START;
+            break;
+        case MOVE_DOWN:
+            ret = RECT_DOWN_START;
+            break;
+        case MOVE_LEFT:
+            ret = RECT_LEFT_START;
+            break;
+        case MOVE_RIGHT:
+            ret = RECT_RIGHT_START;
+            break;
+        default:
+            break;
+   }
+    
+   return ret;
 }
