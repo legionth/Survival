@@ -24,7 +24,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
+<<<<<<< HEAD
 PROJECTNAME=legionth-Survival-normal
+=======
+PROJECTNAME=Survival
+>>>>>>> 720d2e821a9e6902ac583e249201d206dda53c70
 
 # Active Configuration
 DEFAULTCONF=Debug

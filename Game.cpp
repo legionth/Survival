@@ -20,6 +20,7 @@ Game::Game() {
     images["buttonBuilding"] = this->loadImage("button_building.png");
     images["buttonItem"] = this->loadImage("button_item.png");
     images["buildings"] = this->loadImage("buildings.png");
+    images["enemyPig"] = this->loadImage("enemy_pig.png");
     
     world = new World(images["land"]);
     player = new Player(images["player"]);
@@ -98,6 +99,7 @@ Game::Game() {
     itemButton = new ItemButton(5,images["buttonItem"],RES_SILVER_ORE);
     itemMenu->addButton(itemButton);
     
+    this->spawnEnemy();
 }
 
 Game::Game(const Game& orig) {
@@ -110,6 +112,7 @@ Game::~Game() {
     delete buildMenu;
     delete statusMenu;
     images.clear();
+    enemies.clear();
 }
 
 void Game::run(){
@@ -229,8 +232,10 @@ void Game::run(){
                                         std::cout<<"break up building"<<std::endl;
                                         break;    
                                 }
+                                
                                 player->decreaseRessources(ressourcesBuilding);
                                 ressourcesPlayer = player->getRessources();
+                                
                                 for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
                                         ItemButton* itemButton = itemMenu->getButton(i);
                                         itemButton->setCount(ressourcesPlayer[itemButton->getId()]);
@@ -274,18 +279,34 @@ void Game::run(){
                 }
             }   
         }
+        
+        for(int i = 0; i < enemies.size();i++){
+            enemies[i]->execute(world);
+        }
         player->updateAnimation();
-
+        
         window->draw(*player->getSprite());
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
         
+        // Menu drawing
         for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
             window->draw(*buildMenu->getButton(i)->getSprite());
         }
+        
         for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
             window->draw(*itemMenu->getButton(i)->getSprite());
             window->draw(*itemMenu->getButton(i)->getText());
+        }
+        
+        // Enemie drawing
+        for(int i = 0; i < enemies.size();i++){
+            if(enemies[i]->getTileMap() == this->getCurrentTileMap()){
+                    enemies[i]->updateAnimation();
+                    window->draw(*enemies[i]->getSprite());
+                   // std::cout<<"x="<<enemies[i]->getSprite()->getPosition().x<<"y"<<enemies[i]->getSprite()->getPosition().y<<std::endl;
+                    std::cout<<"x="<<enemies[i]->getXPos()<<"y="<<enemies[i]->getYPos()<<std::endl;
+            }
         }
        // std::cout<<"sprite pos"<<buildMenu->getSprite()->getPosition().x<<" "<<buildMenu->getSprite()->getPosition().y<<std::endl;
         window->display();
@@ -348,4 +369,8 @@ BuildingButton* Game::getSelectedBuildingButton(){
 
 void Game::setSelectedBuildingButton(BuildingButton* button){
     this->selectedButton = button;
+}
+
+void Game::spawnEnemy(){
+    enemies.push_back(new Enemy(this->getCurrentTileMap(),3,3,images["enemyPig"],9,0));
 }

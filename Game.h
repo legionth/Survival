@@ -17,6 +17,7 @@
 #include "BuildingButton.h"
 #include "ItemMenu.h"
 #include "ItemButton.h"
+#include "Enemy.h"
 
 #ifndef GAME_H
 #define	GAME_H
@@ -37,6 +38,7 @@ public:
     
     BuildingButton* getSelectedBuildingButton();
     void setSelectedBuildingButton(BuildingButton* button);
+    void spawnEnemy();
     
 private:
     sf::RenderWindow *window;
@@ -49,6 +51,10 @@ private:
     ItemMenu* itemMenu;
     
     BuildingButton* selectedButton;
+    
+    // Enemies vars
+    std::vector<Enemy*> enemies;
+    sf::Clock enemySpawnClock;
 };
 
 #endif	/* GAME_H */

@@ -36,12 +36,8 @@ enum Behavior{
 };
 // Enemie id
 enum Enemies{ 
-    RES_WOOD             = 0, 
-    RES_STONE            = 1,
-    RES_LEATHER          = 2,
-    RES_IRON_ORE         = 3,
-    RES_GOLD_ORE         = 4,
-    RES_SILVER_ORE       = 5
+    ENEMY_PIG             = 0, 
+    ENEMY_WOLF            = 1
 };
 //id's for the buildings
 const char BUILDING_TENT        = '^';
@@ -67,5 +63,9 @@ const char TILE_EARTH_TOP		= '2';
 const char TILE_EARTH_DOWN		= '0';
 
 const int WALK_ITERATOR = 32;
+
+const int MAX_ENEMIES = 5;
+const int CLOCK_ENEMY_SPAWN = 10;
+
 #endif	/* CONSTS_H */
 

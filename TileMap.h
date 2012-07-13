@@ -28,6 +28,9 @@ public:
     void setIdentifierOnTile(int x, int y, char c);
     Tile* getTile(int x,int y);
     virtual ~TileMap();
+    
+    int getEnemyCounter();
+    void increaseEnemyCounter();
 private:
     std::vector<std::vector<Tile*> > tileMap;
     int xPos;
@@ -35,6 +38,9 @@ private:
     
     int xSize;
     int ySize;
+    
+    // counter the amount of the enemies on the tileMap
+    int enemyCounter;
 };
 
 #endif	/* TILEMAP_H */

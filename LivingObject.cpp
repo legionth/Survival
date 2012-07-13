@@ -72,7 +72,7 @@ void LivingObject::move(int direction,World *world){
                         if(world->getTileMap(getTileMap()->getXPos()+1,getTileMap()->getYPos())->getTile(0,getYPos())->getWalkAble()){
                             this->setTileMap(world->getTileMap(getTileMap()->getXPos()+1,getTileMap()->getYPos()));
                             this->setPos(0,getYPos());
-                            changedMap = true;
+                            changedMap = true;               
                         }
                         else{
                             sprite->move(-FRAME_WIDTH,0);
@@ -232,4 +232,12 @@ bool LivingObject::haveToWalk(){
 
 void LivingObject::setToWalk(bool walk){
     this->toWalk = walk;
+}
+
+bool LivingObject::isAttacked(){
+    return this->attacked;
+}
+
+void LivingObject::setAttacked(bool b){
+    this->attacked = b;
 }

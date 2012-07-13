@@ -43,6 +43,9 @@ public:
     void setTileMap(TileMap* tileMap);
     void resetWalkIterator();                   // Set to 0
     void setToWalk(bool walk);
+    
+    bool isAttacked();
+    void setAttacked(bool b);
 protected:
     void setWalkIterator(int i);
 
@@ -50,15 +53,20 @@ private:
     int currentDirection;
     int currentFrame;
     
+    
+    // Attack stats
     int speed;
     int attackPower;
     int defense;
     int agility;
+    bool attacked;
     
     TileMap* currentTileMap;
     sf::Clock moveClock;
     int walkIterator;
     bool toWalk;
+    
+    
     
 };
 

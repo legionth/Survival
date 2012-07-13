@@ -94,3 +94,11 @@ int TileMap::getYSize(){
 Tile* TileMap::getTile(int x,int y){
     return this->tileMap[y][x];
 }
+
+int TileMap::getEnemyCounter(){
+    return this->enemyCounter;
+}
+
+void TileMap::increaseEnemyCounter(){
+    this->enemyCounter++;
+}

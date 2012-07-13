@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="80">
+<<<<<<< HEAD
+=======
+<configurationDescriptor version="79">
+>>>>>>> 720d2e821a9e6902ac583e249201d206dda53c70
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -56,6 +60,10 @@
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
       </dbx_gdbdebugger>
       <gizmo_options version="3">
+<<<<<<< HEAD
+=======
+        <configurationname>GizmoSimple</configurationname>
+>>>>>>> 720d2e821a9e6902ac583e249201d206dda53c70
       </gizmo_options>
       <nativedebugger version="1">
         <engine>gdb</engine>

@@ -8,23 +8,30 @@
 #ifndef ENEMY_H
 #define	ENEMY_H
 #include "LivingObject.h"
+#include <cstdlib>
+#include <iostream>
+
 
 class Enemy : public LivingObject {
 public:
-    Enemy();
+    Enemy(TileMap* tilemap, int posX, int posY, sf::Texture* texture,int frameRect,int id);
     Enemy(const Enemy& orig);
     virtual ~Enemy();
     void setBeheavior(int b);
     int getBehavior();
-    void execute();
+    void execute(World* world);
     void drop();
     bool isAttacked();
+    
+    int getId();
+    void setId(int i);          // Also sets Behavior
 private:
     int behavior;
     std::vector<int> dropList;
     bool attacked;
     
     int id;
+    sf::Clock passiveClock;
 };
 
 #endif	/* ENEMY_H */
