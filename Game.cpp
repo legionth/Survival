@@ -136,7 +136,37 @@ void Game::run(){
                 else if(event.key.code == sf::Keyboard::A && !player->haveToWalk()){
                     player->move(MOVE_LEFT,world);
                 }
+                else if(event.key.code == sf::Keyboard::E && !player->haveToWalk()){
+                    int direction = player->getCurrentDirection();
+                    int x = 0;
+                    int y = 0;
+                    
+                    switch(direction){
+                        case MOVE_UP:
+                            x = player->getXPos();
+                            y = player->getYPos() - 1;
+                            break;
+                        case MOVE_DOWN:
+                            x = player->getXPos();
+                            y = player->getYPos() + 1;
+                            break;
+                        case MOVE_RIGHT:
+                            x = player->getXPos() + 1;
+                            y = player->getYPos();
+                            break;
+                        case MOVE_LEFT:
+                            x = player->getXPos() - 1;
+                            y = player->getYPos();
+                            break;
+                    }
+                    
+                    if(player->getTileMap()->getTile(x,y)->getLivingObject() != 0){
+                        player->attack(player->getTileMap()->getTile(x,y)->getLivingObject());
+                    }
+                    
+                }
                 
+                // Pickup
                 if(event.key.code == sf::Keyboard::Space){
                     if(player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource() != 0){
                         int id = player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource()->getIdentifier();
@@ -257,7 +287,7 @@ void Game::run(){
         
         if(player->haveToWalk()){
             player->move(player->getCurrentDirection(),world);
-            std::cout<<"direction"<<player->getCurrentDirection()<<std::endl;
+          //  std::cout<<"direction"<<player->getCurrentDirection()<<std::endl;
         }
         else{
             player->setCurrentFrame(player->getDirectionRect());
@@ -308,8 +338,6 @@ void Game::run(){
             if(enemies[i]->getTileMap() == this->getCurrentTileMap()){
                     enemies[i]->updateAnimation();
                     window->draw(*enemies[i]->getSprite());
-                   // std::cout<<"x="<<enemies[i]->getSprite()->getPosition().x<<"y"<<enemies[i]->getSprite()->getPosition().y<<std::endl;
-              //      std::cout<<"x="<<enemies[i]->getXPos()<<"y="<<enemies[i]->getYPos()<<std::endl;
             }
         }
        // std::cout<<"sprite pos"<<buildMenu->getSprite()->getPosition().x<<" "<<buildMenu->getSprite()->getPosition().y<<std::endl;

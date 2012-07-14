@@ -85,8 +85,7 @@ void GameObject::stopAnimation(){
     isPlaying = false;
 }
 
-void GameObject::updateAnimation(){
-    
+void GameObject::updateAnimation(){  
     if(isPlaying){
         int frameCount = getStopFrame() - getStartFrame();
  	float timePosition = (clock.getElapsedTime().asSeconds() * fps);

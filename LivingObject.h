@@ -47,6 +47,7 @@ public:
     bool isAttacked();
     void setAttacked(bool b);
     int getDirectionRect();
+    void attack(LivingObject* target);
 protected:
     void setWalkIterator(int i);
 

@@ -12,6 +12,9 @@
 LivingObject::LivingObject() {
     this->setCurrentDirection(MOVE_DOWN);
     toWalk = false;
+    attackPower = 1;
+    agility = 1;
+    
 }
 
 LivingObject::LivingObject(const LivingObject& orig) {
@@ -281,4 +284,8 @@ int LivingObject::getDirectionRect(){
    }
     
    return ret;
+}
+
+void LivingObject::attack(LivingObject* target){
+    target->setLife(target->getLife() - this->getAttackPower());
 }
