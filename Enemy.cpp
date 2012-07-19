@@ -45,7 +45,41 @@ void Enemy::execute(World* world){
                     if(passiveClock.getElapsedTime().asSeconds() > 1.5f){
                         this->move(rnd,world);
                         passiveClock.restart();
+                       
+                        int x = 0;
+                        int y = 0;
+                        bool toAttack = false;
+                        
+                        switch(getCurrentDirection()){
+                            case MOVE_UP:
+                                x = getXPos();
+                                y = getYPos() - 1;
+                                toAttack = true;
+                                break;
+                            case MOVE_DOWN:
+                                x = getXPos();
+                                y = getYPos() + 1;
+                                toAttack = true;
+                                break;
+                            case MOVE_RIGHT:
+                                x = getXPos() + 1;
+                                y = getYPos();
+                                toAttack = true;
+                                break;
+                            case MOVE_LEFT:
+                                x = getXPos() - 1;
+                                y = getYPos();
+                                toAttack = true;
+                                break;
+                        }
+                    
+                        if(toAttack && (x >= 0 && x < 5) && (y >= 0 && y < 5) &&getTileMap()->getTile(x,y)->getLivingObject() != 0){
+                            std::cout<<"attack"<<std::endl;
+                            attack(getTileMap()->getTile(x,y)->getLivingObject());
+                        }
+                    
                     }
+
                 }
             break;
         case BEHAV_PASSIVE:

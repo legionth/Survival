@@ -34,6 +34,7 @@ public:
     int getDefense();
     int getWalkIterator();
     bool haveToWalk();
+    bool haveToAttack();
     TileMap* getTileMap();
     
     // set Attributes
@@ -48,6 +49,7 @@ public:
     void setAttacked(bool b);
     int getDirectionRect();
     void attack(LivingObject* target);
+    void stopAttackAnimation();
 protected:
     void setWalkIterator(int i);
 
@@ -67,6 +69,7 @@ private:
     sf::Clock moveClock;
     int walkIterator;
     bool toWalk;
+    bool toAttack;
     
     
     

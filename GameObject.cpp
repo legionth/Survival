@@ -17,6 +17,7 @@ GameObject::GameObject() {
     xPos = 0;
     yPos = 0;
     isPlaying = false;
+    life = 3;
 }
 
 GameObject::GameObject(const GameObject& orig) {

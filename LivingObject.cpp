@@ -12,6 +12,7 @@
 LivingObject::LivingObject() {
     this->setCurrentDirection(MOVE_DOWN);
     toWalk = false;
+    toAttack = false;
     attackPower = 1;
     agility = 1;
     
@@ -31,7 +32,7 @@ void LivingObject::move(int direction,World *world){
     sf::Sprite *sprite = this->getSprite();
     bool changedMap = false;
     
-    if(moveClock.getElapsedTime().asSeconds() > 0.15f){
+    if(moveClock.getElapsedTime().asSeconds() > 0.15f && !haveToAttack()){
         if(direction == MOVE_UP && (this->getYPos() - 1 >= 0 || this->getTileMap()->getYPos() - 1 >= 0)){
             
             if(this->getYPos() - 1 < 0 || getTileMap()->getTile(getXPos(),getYPos()-1)->getWalkAble() ){
@@ -52,14 +53,14 @@ void LivingObject::move(int direction,World *world){
                         } 
                         
                     }else{
-                        
-                        if(this->getWalkIterator() >= FRAME_WIDTH){
-                                this->setPos(getXPos(),getYPos()-1,true);              // Ursprünglich
-                        }else{
-                            //this->setSpritePosition(getXPos() * FRAME_WIDTH ,getYPos() * FRAME_HEIGHT - getWalkIterator());
-                            this->getSprite()->move(0,-WALK_ITERATOR);
+                        if(getTileMap()->getTile(getXPos(),getYPos() - 1)->getLivingObject() == 0){
+                            if(this->getWalkIterator() >= FRAME_WIDTH){
+                                    this->setPos(getXPos(),getYPos()-1,true);              // Ursprünglich
+                            }else{
+                                //this->setSpritePosition(getXPos() * FRAME_WIDTH ,getYPos() * FRAME_HEIGHT - getWalkIterator());
+                                this->getSprite()->move(0,-WALK_ITERATOR);
+                            }
                         }
-                        
                     }
                     
                     this->getTileMap()->getTile(getXPos(),getYPos())->setLivingObject(this);
@@ -85,11 +86,12 @@ void LivingObject::move(int direction,World *world){
                         }
                         
                    }else{
-                        
-                        if(this->getWalkIterator() >= FRAME_WIDTH){
-                            this->setPos(getXPos()+1,getYPos(),true);              // Ursprünglich
-                        }else{
-                            this->getSprite()->move(WALK_ITERATOR,0);
+                        if(getTileMap()->getTile(getXPos() + 1,getYPos())->getLivingObject() == 0){
+                            if(this->getWalkIterator() >= FRAME_WIDTH){
+                                this->setPos(getXPos()+1,getYPos(),true);              // Ursprünglich
+                            }else{
+                                this->getSprite()->move(WALK_ITERATOR,0);
+                            }
                         }
                         
                    }
@@ -118,11 +120,12 @@ void LivingObject::move(int direction,World *world){
                         }
                         
                     }else{
-                        
-                        if(this->getWalkIterator() >= FRAME_WIDTH){
-                            this->setPos(getXPos(),getYPos()+1,true);              // Ursprünglich
-                        }else{
-                            this->getSprite()->move(0,WALK_ITERATOR);
+                        if(getTileMap()->getTile(getXPos(),getYPos() + 1)->getLivingObject() == 0){
+                            if(this->getWalkIterator() >= FRAME_WIDTH){
+                                this->setPos(getXPos(),getYPos()+1,true);              // Ursprünglich
+                            }else{
+                                this->getSprite()->move(0,WALK_ITERATOR);
+                            }
                         }
                         
                     }
@@ -151,10 +154,12 @@ void LivingObject::move(int direction,World *world){
                         }
                         
                     }else{
-                        if(this->getWalkIterator() >= FRAME_WIDTH){
-                            this->setPos(getXPos()-1,getYPos(),true);              // Ursprünglich
-                        }else{
-                            this->getSprite()->move(-WALK_ITERATOR,0);
+                        if(getTileMap()->getTile(getXPos() - 1,getYPos())->getLivingObject() == 0){
+                            if(this->getWalkIterator() >= FRAME_WIDTH){
+                                this->setPos(getXPos()-1,getYPos(),true);              // Ursprünglich
+                            }else{
+                                this->getSprite()->move(-WALK_ITERATOR,0);
+                            }
                         }
                         
                     }
@@ -288,4 +293,32 @@ int LivingObject::getDirectionRect(){
 
 void LivingObject::attack(LivingObject* target){
     target->setLife(target->getLife() - this->getAttackPower());
+    
+    switch(getCurrentDirection()){
+        case MOVE_DOWN:
+            startAnimation(RECT_ATTACK_DOWN_START,RECT_ATTACK_DOWN_END);
+            break;
+        case MOVE_UP:
+            startAnimation(RECT_ATTACK_UP_START,RECT_ATTACK_UP_END);
+            break;
+        case MOVE_RIGHT:
+            startAnimation(RECT_ATTACK_RIGHT_START,RECT_ATTACK_RIGHT_END);
+            break;
+        case MOVE_LEFT:
+            startAnimation(RECT_ATTACK_LEFT_START,RECT_ATTACK_LEFT_END);
+            break;
+    }
+    this->toAttack = true;
+}
+
+void LivingObject::stopAttackAnimation(){
+    if(getCurrentFrame() == getStopFrame() - 1){
+        stopAnimation();
+        toAttack = false;
+        
+    }
+}
+
+bool LivingObject::haveToAttack(){
+    return this->toAttack;
 }

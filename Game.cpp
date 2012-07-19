@@ -17,10 +17,13 @@ Game::Game() {
     images["ressources"] = this->loadImage("ressources.png");
     images["menuBuilding"] = this->loadImage("menu_building.png");
     images["menuItem"] = this->loadImage("menu_item.png");
+    images["menuStatus"] = this->loadImage("menu_status.png");
     images["buttonBuilding"] = this->loadImage("button_building.png");
     images["buttonItem"] = this->loadImage("button_item.png");
     images["buildings"] = this->loadImage("buildings.png");
     images["enemyPig"] = this->loadImage("enemy_pig.png");
+    images["buttonStatus"] = this->loadImage("button_status.png");
+
     
     world = new World(images["land"]);
     player = new Player(images["player"]);
@@ -99,7 +102,26 @@ Game::Game() {
     itemButton = new ItemButton(5,images["buttonItem"],RES_SILVER_ORE);
     itemMenu->addButton(itemButton);
     
-    this->spawnEnemy();
+  //  this->spawnEnemy();
+    enemies.push_back(new Enemy(world->getTileMap(0,0),0,0,images["enemyPig"],9,0));
+    pressedW = false;
+    pressedA = false;
+    pressedS = false;
+    pressedD = false;
+    /**
+     * Status Menu init
+     */
+    statusMenu = new StatusMenu(0,FRAME_HEIGHT * 5,640,256);
+    statusMenu->setImage(images["menuStatus"]);
+    
+    for(int i = 0; i < player->getLife(); i++){
+        StatusButton* statusButton = new StatusButton(STATUS_BUTTON_LIFE);
+        statusButton->setImage(images["buttonStatus"]);
+        
+        statusButton->setFrameRect(0);
+        statusMenu->addButton(statusButton);
+    }
+    
 }
 
 Game::Game(const Game& orig) {
@@ -125,16 +147,48 @@ void Game::run(){
             }
             if(event.type == sf::Event::KeyPressed){
                 if(event.key.code == sf::Keyboard::W && !player->haveToWalk()){
-                    player->move(MOVE_UP,world);
+                    if(!pressedW){
+                        player->setCurrentDirection(MOVE_UP);                   // change directeion without walking
+                        pressedW = true;
+                        disableTypedKey('W');
+                    }
+                    else{
+                        player->move(MOVE_UP,world);
+                        disableTypedKey();
+                    }
                 }
                 else if(event.key.code == sf::Keyboard::D && !player->haveToWalk()){
-                    player->move(MOVE_RIGHT,world);
+                   if(!pressedD){
+                        player->setCurrentDirection(MOVE_RIGHT);
+                        pressedD = true;
+                        disableTypedKey('D');
+                    }
+                    else{
+                        player->move(MOVE_RIGHT,world);
+                        disableTypedKey();
+                    }
                 }
                 else if(event.key.code == sf::Keyboard::S && !player->haveToWalk()){
-                    player->move(MOVE_DOWN,world);
+                    if(!pressedS){
+                        player->setCurrentDirection(MOVE_DOWN);
+                        pressedS = true;
+                        disableTypedKey('S');
+                    }
+                    else{
+                        player->move(MOVE_DOWN,world);
+                        disableTypedKey();
+                    }
                 }
                 else if(event.key.code == sf::Keyboard::A && !player->haveToWalk()){
-                    player->move(MOVE_LEFT,world);
+                    if(!pressedA){
+                        player->setCurrentDirection(MOVE_LEFT);
+                        pressedA = true;
+                        disableTypedKey('A');
+                    }
+                    else{
+                        player->move(MOVE_LEFT,world);
+                        disableTypedKey();
+                    }
                 }
                 else if(event.key.code == sf::Keyboard::E && !player->haveToWalk()){
                     int direction = player->getCurrentDirection();
@@ -160,7 +214,7 @@ void Game::run(){
                             break;
                     }
                     
-                    if(player->getTileMap()->getTile(x,y)->getLivingObject() != 0){
+                    if((x >= 0 && x < 5) && (y >= 0 && y < 5) && player->getTileMap()->getTile(x,y)->getLivingObject() != 0){
                         player->attack(player->getTileMap()->getTile(x,y)->getLivingObject());
                     }
                     
@@ -289,11 +343,15 @@ void Game::run(){
             player->move(player->getCurrentDirection(),world);
           //  std::cout<<"direction"<<player->getCurrentDirection()<<std::endl;
         }
-        else{
+        else if(!player->haveToAttack()){
             player->setCurrentFrame(player->getDirectionRect());
         }
         
         generateRessoruces();
+      //  spawnEnemy();
+        if(player->haveToAttack()){
+                player->stopAttackAnimation();
+        }
         // Draw the things
         window->clear();
         
@@ -313,7 +371,12 @@ void Game::run(){
                 }
             }   
         }
-        
+        for(int i = 0; i < enemies.size();i++){
+            if(enemies[i]->getLife() == 0){
+                enemies[i]->getTileMap()->getTile(enemies[i]->getXPos(),enemies[i]->getYPos())->setLivingObject(0);
+                enemies.erase(enemies.begin()+i);
+            }
+        }
         for(int i = 0; i < enemies.size();i++){
             enemies[i]->execute(world);
         }
@@ -322,10 +385,16 @@ void Game::run(){
         window->draw(*player->getSprite());
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
+        window->draw(*statusMenu->getSprite());
+
         
         // Menu drawing
         for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
             window->draw(*buildMenu->getButton(i)->getSprite());
+        }
+        
+        for(int i = 0 ; i < statusMenu->getButtons().size(); i++){
+            window->draw(*statusMenu->getButton(i)->getSprite());
         }
         
         for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
@@ -335,6 +404,7 @@ void Game::run(){
         
         // Enemie drawing
         for(int i = 0; i < enemies.size();i++){
+           // std::cout<<"life enemy"<<enemies[i]->getLife()<<std::endl;
             if(enemies[i]->getTileMap() == this->getCurrentTileMap()){
                     enemies[i]->updateAnimation();
                     window->draw(*enemies[i]->getSprite());
@@ -347,6 +417,7 @@ void Game::run(){
 
 sf::Texture* Game::loadImage(std::string fileName){
     sf::Texture *texture = new sf::Texture();
+    
     if(!texture->loadFromFile(fileName)){
         std::cout<<"No File was found with name: "<<fileName<<std::endl;
         return NULL;
@@ -404,5 +475,66 @@ void Game::setSelectedBuildingButton(BuildingButton* button){
 }
 
 void Game::spawnEnemy(){
-    enemies.push_back(new Enemy(this->getCurrentTileMap(),3,3,images["enemyPig"],9,0));
+    if(enemySpawnClock.getElapsedTime().asSeconds() > 5.0f){
+        int randomXTileMap = rand() % 5;
+        int randomYTileMap = rand() % 5;
+        int randomXTile = rand() % 5;
+        int randomYTile = rand() % 5;
+        int enemyId = rand() % 2;
+        sf::Texture* tex = 0;
+        
+        switch(enemyId){
+            case ENEMY_PIG:
+                tex = images["enemyPig"];
+                break;
+            case ENEMY_WOLF:
+                tex = 0;
+                break;
+        }
+        
+        if(tex != 0){
+            enemies.push_back(new Enemy(world->getTileMap(randomXTileMap,randomYTileMap),randomXTile,randomYTile,tex,9,0));
+            std::cout<<"new enemy at tielmap"<<randomXTileMap<<":"<<randomYTileMap<<"tile="<<randomXTile<<":"<<randomYTile<<std::endl;
+        }
+        
+        enemySpawnClock.restart();
+    }
+}
+
+void Game::disableTypedKey(){
+    pressedW = false;
+    pressedA = false;
+    pressedS = false;
+    pressedD = false;
+}
+
+void Game::disableTypedKey(char key){
+    switch (key){
+        case 'W':
+            pressedA = false;
+            pressedS = false;
+            pressedD = false;
+            break;
+        case 'A':
+            pressedW = false;
+            pressedS = false;
+            pressedD = false;
+            break;
+        case 'S':
+            pressedW = false;
+            pressedA = false;
+            pressedD = false;
+            break;
+        case 'D':
+            pressedW = false;
+            pressedA = false;
+            pressedS = false;
+            break;
+        default:
+            pressedW = false;
+            pressedA = false;
+            pressedS = false;
+            pressedD = false;
+            break;
+    }
 }

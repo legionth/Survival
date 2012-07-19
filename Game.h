@@ -14,9 +14,10 @@
 //#include <thread>
 #include "Menu.h"
 #include "BuildingMenu.h"
-#include "BuildingButton.h"
+//#include "BuildingButton.h"
 #include "ItemMenu.h"
-#include "ItemButton.h"
+//#include "ItemButton.h"
+#include "StatusMenu.h"s
 #include "Enemy.h"
 
 #ifndef GAME_H
@@ -47,7 +48,7 @@ private:
     std::map<std::string,sf::Texture*> images;
     sf::Clock ressourceClock;
     BuildingMenu* buildMenu;
-    Menu* statusMenu;
+    StatusMenu* statusMenu;
     ItemMenu* itemMenu;
     
     BuildingButton* selectedButton;
@@ -55,6 +56,15 @@ private:
     // Enemies vars
     std::vector<Enemy*> enemies;
     sf::Clock enemySpawnClock;
+    
+    bool pressedW;              // needed for change direction wihtout walking
+    bool pressedA;
+    bool pressedS;
+    bool pressedD;
+    
+    void disableTypedKey();
+    void disableTypedKey(char key);             
+
 };
 
 #endif	/* GAME_H */
