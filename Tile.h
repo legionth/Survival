@@ -12,8 +12,7 @@
 #include "Building.h"
 
 class LivingObject;
-//class Ressource;
-
+//class Dropable;
 class Tile : public GameObject{
 public:
     Tile(sf::Texture* img, int x,int y);
@@ -32,9 +31,12 @@ public:
     LivingObject* getLivingObject();
     Ressource* getRessource();
     Building* getBuilding();
-    bool getWalkAble();
-    bool getDestroyAble();
+    bool isWalkAble();
+    bool isDestroyAble();
     
+    void drop(Tile* tile);
+    void addDrop(int id);
+    void setRessourceTexture(sf::Texture* tex);
 private:
     int xPos;
     int yPos;
@@ -45,6 +47,8 @@ private:
     bool destroyAble;
     bool walkAble;
     
+    std::vector<int> dropList;
+    sf::Texture* ressourceTex;  
 };
 
 #endif	/* TILE_H */

@@ -7,29 +7,24 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(TileMap* tilemap, int posX, int posY, sf::Texture* texture,int frameRect, int id,sf::Texture *ressourceTex) {
+Enemy::Enemy(TileMap* tilemap, int posX, int posY, sf::Texture* texture,int frameRect, int id,sf::Texture *ressourceTex) : Dropable(ressourceTex) {
     this->setTileMap(tilemap);
     this->setImage(texture);
     this->setPos(posX,posY,true);
     this->setFrameRect(frameRect);
     this->setId(id);
     this->setAttacked(false);
-    this->ressourceTex = ressourceTex;
-    
-    
+
     // Put loot list here
     switch(id){
         case ENEMY_PIG:
-            dropList.push_back(RES_LEATHER);
+            addDrop(RES_LEATHER);
             break;            
     }
 }
 
-Enemy::Enemy(const Enemy& orig) {
-}
-
 Enemy::~Enemy() {
-    dropList.clear();
+//    dropList.clear();
 }
 
 void Enemy::setBeheavior(int b){
@@ -123,11 +118,4 @@ void Enemy::setId(int i){
         default:
             break;
     }
-}
-
-void Enemy::drop(){
-    int size = dropList.size();
-    int rnd = rand() % size;
-
-    getTileMap()->getTile(getXPos(),getYPos())->setRessource(new Ressource(dropList[rnd], ressourceTex));
 }

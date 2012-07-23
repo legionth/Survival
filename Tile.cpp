@@ -19,6 +19,7 @@ Tile::Tile(sf::Texture* img, int x,int y) {
     this->setImage(img);
     setWalkAble(true);
     setDestroyAble(false);
+    setLife(3);
 }
 
 Tile::Tile(char c) {
@@ -46,35 +47,39 @@ char Tile::getIdentifier(){
 
 void Tile::setIdentifier(char id){
     this->identifier = id;
-    if(id == ','){
+    
+    if(id == TILE_GRASS){
         this->setFrameRect(0);
         setWalkAble(true);
     }
-    else if(id == '.'){
+    else if(id == TILE_EARTH){
         this->setFrameRect(1);
         setWalkAble(true);
     }
-    else if(id == 'T'){
+    else if(id == TILE_TREE){
         this->setFrameRect(2);
         setWalkAble(false);
+        setDestroyAble(true);
+        addDrop(RES_WOOD);
+        setLife(3);
     }
-    else if(id == ';'){
+    else if(id == TILE_GRASS_EARTH){
         this->setFrameRect(3);
         setWalkAble(true);
     }
-    else if(id == '0'){
+    else if(id == TILE_EARTH_DOWN){
         this->setFrameRect(7);
         setWalkAble(true);
     }
-    else if(id == '1'){
+    else if(id == TILE_EARTH_RIGHT){
         this->setFrameRect(4);
         setWalkAble(true);
     }
-    else if(id == '2'){
+    else if(id == TILE_EARTH_TOP){
         this->setFrameRect(6);
         setWalkAble(true);
     }
-    else if(id == '3'){
+    else if(id == TILE_EARTH_LEFT){
         this->setFrameRect(5);
         setWalkAble(true);
     }
@@ -100,11 +105,11 @@ LivingObject* Tile::getLivingObject(){
     return this->object;
 }
     
-bool Tile::getWalkAble(){
+bool Tile::isWalkAble(){
     return this->walkAble;
 }
 
-bool Tile::getDestroyAble(){
+bool Tile::isDestroyAble(){
     return this->destroyAble;
 }
 
@@ -143,3 +148,18 @@ void Tile::setBuilding(Building* building){
 Building* Tile::getBuilding(){
     return this->building;
 }
+
+void Tile::addDrop(int ressource){
+    dropList.push_back(ressource);
+}
+
+void Tile::drop(Tile* tile){
+    int size = dropList.size();
+    int rnd = rand() % size;
+
+    tile->setRessource(new Ressource(dropList[rnd], ressourceTex));
+}
+
+ void Tile::setRessourceTexture(sf::Texture* tex){
+     this->ressourceTex = tex;
+ }

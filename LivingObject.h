@@ -36,6 +36,7 @@ public:
     bool haveToWalk();
     bool haveToAttack();
     TileMap* getTileMap();
+    Tile* getTile();
     
     // set Attributes
     void setSpeed(int speed);                           //@TODO: calculate speed with move function
@@ -48,7 +49,10 @@ public:
     bool isAttacked();
     void setAttacked(bool b);
     int getDirectionRect();
+    
     void attack(LivingObject* target);
+    void attack(Tile* tile);
+    
     void stopAttackAnimation();
     void setToAttack(bool b);
 protected:

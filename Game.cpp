@@ -214,8 +214,19 @@ void Game::run(){
                             break;
                     }
                     
-                    if((x >= 0 && x < 5) && (y >= 0 && y < 5) && player->getTileMap()->getTile(x,y)->getLivingObject() != 0){
-                        player->attack(player->getTileMap()->getTile(x,y)->getLivingObject());
+                    if((x >= 0 && x < 5) && (y >= 0 && y < 5)){
+                        Tile* tile = player->getTileMap()->getTile(x,y);
+                        if(tile->getLivingObject() != 0){
+                            player->attack(player->getTileMap()->getTile(x,y)->getLivingObject());
+                        }
+                        else if(tile->isDestroyAble()){
+                            player->attack(tile);
+                            if(tile->getLife() <= 0){
+                                tile->setRessourceTexture(images["ressources"]);
+                                tile->setIdentifier(TILE_GRASS);
+                                tile->drop(tile);
+                            }
+                        }
                     }
                     
                 }
@@ -375,7 +386,7 @@ void Game::run(){
         for(int i = 0; i < enemies.size();i++){
             if(enemies[i]->getLife() == 0){
                 enemies[i]->getTileMap()->getTile(enemies[i]->getXPos(),enemies[i]->getYPos())->setLivingObject(0);
-                enemies[i]->drop();
+                enemies[i]->drop(enemies[i]->getTile());
                 enemies.erase(enemies.begin()+i);
             }
         }
@@ -455,7 +466,7 @@ void Game::generateRessoruces(){
         
         Tile* tile = world->getTileMap(randomXTileMap,randomYTileMap)->getTile(randomXTile,randomYTile);
         
-        if(tile->getWalkAble() && tile->getRessource() == 0){
+        if(tile->isWalkAble() && tile->getRessource() == 0){
             int res = rand() % 2;
             Ressource* ressource = new Ressource(res,images["ressources"]);
             
