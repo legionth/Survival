@@ -21,3 +21,5 @@ StatusButton::~StatusButton() {
 int StatusButton::getId(){
     return this->id;
 }
+
+

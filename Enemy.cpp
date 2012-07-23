@@ -7,12 +7,22 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(TileMap* tilemap, int posX, int posY, sf::Texture* texture,int frameRect, int id) {
+Enemy::Enemy(TileMap* tilemap, int posX, int posY, sf::Texture* texture,int frameRect, int id,sf::Texture *ressourceTex) {
     this->setTileMap(tilemap);
     this->setImage(texture);
     this->setPos(posX,posY,true);
     this->setFrameRect(frameRect);
     this->setId(id);
+    this->setAttacked(false);
+    this->ressourceTex = ressourceTex;
+    
+    
+    // Put loot list here
+    switch(id){
+        case ENEMY_PIG:
+            dropList.push_back(RES_LEATHER);
+            break;            
+    }
 }
 
 Enemy::Enemy(const Enemy& orig) {
@@ -45,37 +55,41 @@ void Enemy::execute(World* world){
                     if(passiveClock.getElapsedTime().asSeconds() > 1.5f){
                         this->move(rnd,world);
                         passiveClock.restart();
-                       
-                        int x = 0;
-                        int y = 0;
-                        bool toAttack = false;
-                        
-                        switch(getCurrentDirection()){
-                            case MOVE_UP:
-                                x = getXPos();
-                                y = getYPos() - 1;
-                                toAttack = true;
-                                break;
-                            case MOVE_DOWN:
-                                x = getXPos();
-                                y = getYPos() + 1;
-                                toAttack = true;
-                                break;
-                            case MOVE_RIGHT:
-                                x = getXPos() + 1;
-                                y = getYPos();
-                                toAttack = true;
-                                break;
-                            case MOVE_LEFT:
-                                x = getXPos() - 1;
-                                y = getYPos();
-                                toAttack = true;
-                                break;
-                        }
-                    
-                        if(toAttack && (x >= 0 && x < 5) && (y >= 0 && y < 5) &&getTileMap()->getTile(x,y)->getLivingObject() != 0){
-                            std::cout<<"attack"<<std::endl;
-                            attack(getTileMap()->getTile(x,y)->getLivingObject());
+                        std::cout<<"isAttacked"<<isAttacked()<<std::endl;
+                        if(isAttacked()){
+                            
+                            int x = 0;
+                            int y = 0;
+                            bool toAttack = false;
+
+                            switch(getCurrentDirection()){
+                                case MOVE_UP:
+                                    x = getXPos();
+                                    y = getYPos() - 1;
+                                    toAttack = true;
+                                    break;
+                                case MOVE_DOWN:
+                                    x = getXPos();
+                                    y = getYPos() + 1;
+                                    toAttack = true;
+                                    break;
+                                case MOVE_RIGHT:
+                                    x = getXPos() + 1;
+                                    y = getYPos();
+                                    toAttack = true;
+                                    break;
+                                case MOVE_LEFT:
+                                    x = getXPos() - 1;
+                                    y = getYPos();
+                                    toAttack = true;
+                                    break;
+                            }
+
+                            if(toAttack && (x >= 0 && x < 5) && (y >= 0 && y < 5) && getTileMap()->getTile(x,y)->getLivingObject() != 0){
+                                attack(getTileMap()->getTile(x,y)->getLivingObject());
+                                setToAttack(false);
+
+                            }
                         }
                     
                     }
@@ -89,10 +103,6 @@ void Enemy::execute(World* world){
 //           std::cout<<"behavior not executable"<<std::endl;
            break;
     }
-}
-
-bool Enemy::isAttacked(){
-    return this->attacked;
 }
 
 
@@ -113,5 +123,11 @@ void Enemy::setId(int i){
         default:
             break;
     }
-    
+}
+
+void Enemy::drop(){
+    int size = dropList.size();
+    int rnd = rand() % size;
+
+    getTileMap()->getTile(getXPos(),getYPos())->setRessource(new Ressource(dropList[rnd], ressourceTex));
 }

@@ -60,13 +60,20 @@ void StatusMenu::removeById(int id){
     bool removed = false;
     
     for(int i = 0; i > buttons.size(); i++){
-        
         if(!removed && buttons[i]->getId() == id){
             buttons.erase(buttons.end()-i);
             removed = true;
         }
-        
     }
 }
 
+void StatusMenu::setLifeButton(StatusButton* lifeButton){
+    this->lifeButton = lifeButton;
+}
 
+void StatusMenu::drawLifeButton(sf::RenderWindow *window, int life){
+    for(int i = 0; i < life; i++){
+        lifeButton->getSprite()->setPosition(getSprite()->getPosition().x +( i * STATUS_BUTTON_WIDTH ),getSprite()->getPosition().y + 3);
+        window->draw(*lifeButton->getSprite());
+    }
+}

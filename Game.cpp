@@ -103,7 +103,7 @@ Game::Game() {
     itemMenu->addButton(itemButton);
     
   //  this->spawnEnemy();
-    enemies.push_back(new Enemy(world->getTileMap(0,0),0,0,images["enemyPig"],9,0));
+    enemies.push_back(new Enemy(world->getTileMap(0,0),0,0,images["enemyPig"],9,0,images["ressources"]));
     pressedW = false;
     pressedA = false;
     pressedS = false;
@@ -114,13 +114,12 @@ Game::Game() {
     statusMenu = new StatusMenu(0,FRAME_HEIGHT * 5,640,256);
     statusMenu->setImage(images["menuStatus"]);
     
-    for(int i = 0; i < player->getLife(); i++){
-        StatusButton* statusButton = new StatusButton(STATUS_BUTTON_LIFE);
-        statusButton->setImage(images["buttonStatus"]);
+    // Life init
+    StatusButton* statusButton = new StatusButton(STATUS_BUTTON_LIFE);
+    statusButton->setImage(images["buttonStatus"]);
         
-        statusButton->setFrameRect(0);
-        statusMenu->addButton(statusButton);
-    }
+    statusButton->setFrameRect(0);
+    statusMenu->setLifeButton(statusButton);
     
 }
 
@@ -142,6 +141,7 @@ void Game::run(){
         sf::Event event;
         
         while(window->pollEvent(event)){
+        //    std::cout<<"player"<<player->getLife()<<std::endl;
             if(event.type == sf::Event::Closed){
                 window->close();
             }
@@ -323,7 +323,7 @@ void Game::run(){
                                 for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
                                         ItemButton* itemButton = itemMenu->getButton(i);
                                         itemButton->setCount(ressourcesPlayer[itemButton->getId()]);
-                                        std::cout<<"id"<<itemButton->getId()<<"="<<ressourcesPlayer[itemButton->getId()]<<std::endl;
+                                //        std::cout<<"id"<<itemButton->getId()<<"="<<ressourcesPlayer[itemButton->getId()]<<std::endl;
                                 }
                             }
                         }
@@ -371,12 +371,15 @@ void Game::run(){
                 }
             }   
         }
+        
         for(int i = 0; i < enemies.size();i++){
             if(enemies[i]->getLife() == 0){
                 enemies[i]->getTileMap()->getTile(enemies[i]->getXPos(),enemies[i]->getYPos())->setLivingObject(0);
+                enemies[i]->drop();
                 enemies.erase(enemies.begin()+i);
             }
         }
+        
         for(int i = 0; i < enemies.size();i++){
             enemies[i]->execute(world);
         }
@@ -386,15 +389,13 @@ void Game::run(){
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
         window->draw(*statusMenu->getSprite());
+        
+        statusMenu->drawLifeButton(window,player->getLife());
 
         
         // Menu drawing
         for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
             window->draw(*buildMenu->getButton(i)->getSprite());
-        }
-        
-        for(int i = 0 ; i < statusMenu->getButtons().size(); i++){
-            window->draw(*statusMenu->getButton(i)->getSprite());
         }
         
         for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
@@ -455,7 +456,7 @@ void Game::generateRessoruces(){
         Tile* tile = world->getTileMap(randomXTileMap,randomYTileMap)->getTile(randomXTile,randomYTile);
         
         if(tile->getWalkAble() && tile->getRessource() == 0){
-            int res = rand() % 5;
+            int res = rand() % 2;
             Ressource* ressource = new Ressource(res,images["ressources"]);
             
             tile->setRessource(ressource);
@@ -493,8 +494,8 @@ void Game::spawnEnemy(){
         }
         
         if(tex != 0){
-            enemies.push_back(new Enemy(world->getTileMap(randomXTileMap,randomYTileMap),randomXTile,randomYTile,tex,9,0));
-            std::cout<<"new enemy at tielmap"<<randomXTileMap<<":"<<randomYTileMap<<"tile="<<randomXTile<<":"<<randomYTile<<std::endl;
+            enemies.push_back(new Enemy(world->getTileMap(randomXTileMap,randomYTileMap),randomXTile,randomYTile,tex,9,0,images["ressources"]));
+          //  std::cout<<"new enemy at tielmap"<<randomXTileMap<<":"<<randomYTileMap<<"tile="<<randomXTile<<":"<<randomYTile<<std::endl;
         }
         
         enemySpawnClock.restart();

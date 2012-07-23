@@ -50,6 +50,7 @@ public:
     int getDirectionRect();
     void attack(LivingObject* target);
     void stopAttackAnimation();
+    void setToAttack(bool b);
 protected:
     void setWalkIterator(int i);
 

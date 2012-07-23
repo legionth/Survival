@@ -15,14 +15,17 @@ class StatusMenu : public Menu{
 public:
     StatusMenu(int posX, int posY,int sizeX,int sizeY);
     virtual ~StatusMenu();
-    void addButton(StatusButton* button);
-    StatusButton* getButton(int i);
-    std::vector<StatusButton*> getButtons();
-    int countButton(int id);    // Counts Button of this kind
-    void removeById(int id);
+    void setLifeButton(StatusButton* lifeButton);
+    void drawLifeButton(sf::RenderWindow *window, int life);
+    void drawCoinButton(sf::RenderWindow *window, int coin);
+    void drawHungerButton(sf::RenderWindow *window, int hunger);
+    void drawHeatButton(sf::RenderWindow *window, int heat);
 private:
-    std::vector<StatusButton*> buttons;
     sf::Text coinText;
+    StatusButton* coinButton;
+    StatusButton* heatButton;
+    StatusButton* hungerButton;
+    StatusButton* lifeButton;
 };
 
 #endif	/* STATUSMENU_H */

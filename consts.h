@@ -80,8 +80,8 @@ const int CLOCK_ENEMY_SPAWN = 10;
 
 const int RECT_UP_START = 4;
 const int RECT_DOWN_START = 0;
-const int RECT_RIGHT_START = 9;
-const int RECT_LEFT_START = 13;
+const int RECT_RIGHT_START = 8;
+const int RECT_LEFT_START = 12;
 
 const int RECT_ATTACK_UP_START          = 20;
 const int RECT_ATTACK_UP_END            = 23;

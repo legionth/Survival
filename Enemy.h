@@ -14,24 +14,23 @@
 
 class Enemy : public LivingObject {
 public:
-    Enemy(TileMap* tilemap, int posX, int posY, sf::Texture* texture,int frameRect,int id);
+    Enemy(TileMap* tilemap, int posX, int posY, sf::Texture* texture,int frameRect,int id, sf::Texture *ressourceTex);
     Enemy(const Enemy& orig);
     virtual ~Enemy();
     void setBeheavior(int b);
     int getBehavior();
     void execute(World* world);
     void drop();
-    bool isAttacked();
     
     int getId();
     void setId(int i);          // Also sets Behavior
 private:
     int behavior;
     std::vector<int> dropList;
-    bool attacked;
     
     int id;
     sf::Clock passiveClock;
+    sf::Texture* ressourceTex;
 };
 
 #endif	/* ENEMY_H */

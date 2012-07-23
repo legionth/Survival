@@ -308,6 +308,7 @@ void LivingObject::attack(LivingObject* target){
             startAnimation(RECT_ATTACK_LEFT_START,RECT_ATTACK_LEFT_END);
             break;
     }
+    target->setAttacked(true);
     this->toAttack = true;
 }
 
@@ -321,4 +322,8 @@ void LivingObject::stopAttackAnimation(){
 
 bool LivingObject::haveToAttack(){
     return this->toAttack;
+}
+
+void LivingObject::setToAttack(bool b){
+    this->toAttack = b;
 }
