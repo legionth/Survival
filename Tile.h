@@ -34,7 +34,7 @@ public:
     bool isWalkAble();
     bool isDestroyAble();
     
-    void drop(Tile* tile);
+    void drop(Tile* tile);              // Must be done like this, because include tiel in Dropable
     void addDrop(int id);
     void setRessourceTexture(sf::Texture* tex);
 private:
