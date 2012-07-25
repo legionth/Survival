@@ -13,6 +13,11 @@ Player::Player(sf::Texture* img) {
     this->setImage(img);
     this->setFrameRect(0);
     
+    this->weapon = 0;
+    this->axe = 0;
+    this->pickAxe = 0;
+    this->currentTool = 0;
+    
     ressources[RES_WOOD]        = 0;
     ressources[RES_STONE]       = 0;
     ressources[RES_IRON_ORE]    = 0;    
@@ -25,6 +30,9 @@ Player::Player(const Player& orig) {
 }
 
 Player::~Player() {
+    delete weapon;
+    delete axe;
+    delete pickAxe;
 }
 
 void Player::pickup(Tile* tile){
@@ -46,5 +54,28 @@ void Player::decreaseRessources(std::map<int,int> decreaseRes){
    for(int i = 0; i < size; i++){
        ressources[i] -= decreaseRes[i];
    }
+}
+
+WeaponTool* Player::getWeapon(){
+    return this->weapon;
+}
+
+AxeTool* Player::getAxe(){
+    return this->axe;
+}
+
+PickAxeTool* Player::getPickAxe(){
+    return this->pickAxe;
+}
+    
+void Player::setWeapon(WeaponTool* w){
+    this->weapon = w;
+}    
+void Player::setAxe(AxeTool* axe){
+    this->axe = axe;
+}
+
+void Player::setPickAxe(PickAxeTool* pickAxe){
+    this->pickAxe = pickAxe;
 }
 

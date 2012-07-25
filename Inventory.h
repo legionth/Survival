@@ -14,8 +14,10 @@ class Inventory : public Menu {
 public:
     Inventory();
     virtual ~Inventory();
+    bool isShown();
+    void show(); 
 private:
-    
+    bool shown;
 };
 
 #endif	/* INVENTORY_H */

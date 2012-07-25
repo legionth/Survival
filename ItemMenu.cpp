@@ -9,7 +9,7 @@
 #include <iostream>
 ItemMenu::ItemMenu(int posX, int posY,int sizeX,int sizeY) : Menu (posX,posY,sizeX,sizeY){
     line = 0;
-    lineChanged = false;
+    buttonLineCounter = 0;
 }
 
 ItemMenu::~ItemMenu() {
@@ -26,26 +26,22 @@ void ItemMenu::addButton(ItemButton* button){
     if(count == 1){
         button->getSprite()->setPosition((posX*count),posY);
         button->getText()->setPosition((posX*count) + 32,posY - 2);
-        lineChanged = false;
-        line = 1;
+        line = 0;
+        buttonLineCounter++;
     }
-    else if(lineChanged){
-        count = count / 5;
-        button->getSprite()->setPosition((posX) + (BUTTON_WIDTH*(count )),posY + 32); //Put in line
-        button->getText()->setPosition((posX) + (BUTTON_WIDTH*(count)) + 32,(posY) - 2 + 32);
-    }
-    else if(mod == 0){                            // sobald 5 icons = naechste reihe
-       button->getSprite()->setPosition(posX,posY*(count/5) + 32);
-       button->getText()->setPosition(posX+32,posY*(count/5) +32 - 2);
+    else if(buttonLineCounter == 4){                            // sobald 5 icons = naechste reihe
        line++;
-       lineChanged = true;
+       button->getSprite()->setPosition(posX,posY+(line * 32));
+       button->getText()->setPosition(posX+32,posY+(line * 32) - 2);
+       buttonLineCounter = 1;
     }
     else{
-        button->getSprite()->setPosition((posX) + (BUTTON_WIDTH*(count - line )),posY*line); //Put in line
-        button->getText()->setPosition((posX) + (BUTTON_WIDTH*(count - line)) + 32,(posY*line) - 2);
-        lineChanged = false;
+        // std::cout<<"no mod"<<line<<std::endl;
+        button->getSprite()->setPosition((posX) + ((buttonLineCounter) * 64 ),posY+(line * 32)); //Put in line
+        button->getText()->setPosition((posX) + ((buttonLineCounter) * 64 ) + 32,(posY+(line * 32)) - 2);
+        buttonLineCounter++;
     }
-    std::cout<<"id="<<button->getId()<<"x="<<button->getSprite()->getPosition().x<<"y="<<button->getSprite()->getPosition().y<<std::endl;
+   // std::cout<<"lineCounter"<<buttonLineCounter<<" line="<<line<<" id="<<button->getId()<<"x="<<button->getSprite()->getPosition().x<<"y="<<button->getSprite()->getPosition().y<<std::endl;
     
 }
 

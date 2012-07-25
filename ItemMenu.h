@@ -21,7 +21,8 @@ public:
 private:
     std::vector<ItemButton*> buttons;
     int line;
-    bool lineChanged;
+    int buttonLineCounter;
+
 
 };
 

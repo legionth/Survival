@@ -21,9 +21,9 @@ StatusMenu::StatusMenu(int posX, int posY,int sizeX,int sizeY) : Menu (posX,posY
 }
 
 StatusMenu::~StatusMenu() {
-    buttons.clear();
+   // buttons.clear();
 }
-
+/*
 void StatusMenu::addButton(StatusButton* button){
     buttons.push_back(button);
     int count = countButton(button->getId());
@@ -66,7 +66,7 @@ void StatusMenu::removeById(int id){
         }
     }
 }
-
+*/
 void StatusMenu::setLifeButton(StatusButton* lifeButton){
     this->lifeButton = lifeButton;
 }

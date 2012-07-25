@@ -6,6 +6,10 @@
  */
 
 #include "LivingObject.h"
+#include "WeaponTool.h"
+#include "AxeTool.h"
+#include "PickAxeTool.h"
+
 #ifndef PLAYER_H
 #define	PLAYER_H
 
@@ -21,9 +25,23 @@ public:
     int getRessourceCountById(int id);
     std::map<int,int> getRessources();
     void decreaseRessources(std::map<int,int> decreaseRes);
+    
+    WeaponTool* getWeapon();
+    AxeTool* getAxe();
+    PickAxeTool* getPickAxe();
+    
+    void setWeapon(WeaponTool* w);
+    void setAxe(AxeTool* axe);
+    void setPickAxe(PickAxeTool* pickAxe);
 private:
     int heat;
     std::map<int,int> ressources;
+    
+    WeaponTool* weapon;
+    AxeTool* axe;
+    PickAxeTool* pickAxe;
+    
+    Tool* currentTool;
 };
 
 #endif	/* PLAYER_H */

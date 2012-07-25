@@ -30,7 +30,11 @@ enum Ressources{
     RES_LEATHER          = 2,
     RES_IRON_ORE         = 3,
     RES_GOLD_ORE         = 4,
-    RES_SILVER_ORE       = 5
+    RES_SILVER_ORE       = 5,
+    RES_COLE             = 6,
+    RES_IRON_BAR         = 7,
+    RES_SILVER_BAR       = 8,
+    RES_GOLD_BAR         = 9
 };
 
 enum Behavior{ 

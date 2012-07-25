@@ -22,10 +22,14 @@ public:
     void drawHeatButton(sf::RenderWindow *window, int heat);
 private:
     sf::Text coinText;
+    
     StatusButton* coinButton;
     StatusButton* heatButton;
     StatusButton* hungerButton;
     StatusButton* lifeButton;
+    
+   std::vector<StatusButton*> buttons;
+
 };
 
 #endif	/* STATUSMENU_H */

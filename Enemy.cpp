@@ -50,7 +50,7 @@ void Enemy::execute(World* world){
                     if(passiveClock.getElapsedTime().asSeconds() > 1.5f){
                         this->move(rnd,world);
                         passiveClock.restart();
-                        std::cout<<"isAttacked"<<isAttacked()<<std::endl;
+                        //std::cout<<"isAttacked"<<isAttacked()<<std::endl;
                         if(isAttacked()){
                             
                             int x = 0;

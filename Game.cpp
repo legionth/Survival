@@ -23,7 +23,7 @@ Game::Game() {
     images["buildings"] = this->loadImage("buildings.png");
     images["enemyPig"] = this->loadImage("enemy_pig.png");
     images["buttonStatus"] = this->loadImage("button_status.png");
-
+    images["inventory"] = this->loadImage("inventory.png");
     
     world = new World(images["land"]);
     player = new Player(images["player"]);
@@ -102,6 +102,17 @@ Game::Game() {
     itemButton = new ItemButton(5,images["buttonItem"],RES_SILVER_ORE);
     itemMenu->addButton(itemButton);
     
+    itemButton = new ItemButton(6,images["buttonItem"],RES_COLE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(7,images["buttonItem"],RES_GOLD_BAR);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(8,images["buttonItem"],RES_SILVER_BAR);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(9,images["buttonItem"],RES_IRON_BAR);
+    itemMenu->addButton(itemButton);
   //  this->spawnEnemy();
     enemies.push_back(new Enemy(world->getTileMap(0,0),0,0,images["enemyPig"],9,0,images["ressources"]));
     pressedW = false;
@@ -120,7 +131,9 @@ Game::Game() {
         
     statusButton->setFrameRect(0);
     statusMenu->setLifeButton(statusButton);
-    
+    // Init Inventory
+    inventory = new Inventory();
+    inventory->setImage(images["inventory"]);
 }
 
 Game::Game(const Game& orig) {
@@ -189,6 +202,9 @@ void Game::run(){
                         player->move(MOVE_LEFT,world);
                         disableTypedKey();
                     }
+                }
+                else if(event.key.code == sf::Keyboard::I){
+                    inventory->show();
                 }
                 else if(event.key.code == sf::Keyboard::E && !player->haveToWalk()){
                     int direction = player->getCurrentDirection();
@@ -363,40 +379,55 @@ void Game::run(){
         if(player->haveToAttack()){
                 player->stopAttackAnimation();
         }
+        
+        
         // Draw the things
-        window->clear();
         
-        for(int y = 0; y < getCurrentTileMap()->getYSize(); y++){
-            for(int x = 0; x < getCurrentTileMap()->getXSize(); x++){
-                Tile* tile = getCurrentTileMap()->getTile(x,y);
-                sf::Sprite *sprite = tile->getSprite();
-                window->draw(*sprite);
-                
-                if(tile->getRessource() != 0){
-                    window->draw(*tile->getRessource()->getSprite());
-                }
-                if(tile->getBuilding() != 0){
-                    tile->getBuilding()->updateAnimation();
-                    window->draw(*tile->getBuilding()->getSprite());  
-                   // std::cout<<"tile"<<"x="<<x<<"y="<<y<<"\t"<<"build"<<"x="<<tile->getBuilding()->getSprite()->getPosition().x<<"y="<<tile->getBuilding()->getSprite()->getPosition().y<<std::endl;
-                }
-            }   
-        }
-        
-        for(int i = 0; i < enemies.size();i++){
-            if(enemies[i]->getLife() == 0){
-                enemies[i]->getTileMap()->getTile(enemies[i]->getXPos(),enemies[i]->getYPos())->setLivingObject(0);
-                enemies[i]->drop(enemies[i]->getTile());
-                enemies.erase(enemies.begin()+i);
+        if(!inventory->isShown()){
+            window->clear();
+
+            for(int y = 0; y < getCurrentTileMap()->getYSize(); y++){
+                for(int x = 0; x < getCurrentTileMap()->getXSize(); x++){
+                    Tile* tile = getCurrentTileMap()->getTile(x,y);
+                    sf::Sprite *sprite = tile->getSprite();
+                    window->draw(*sprite);
+
+                    if(tile->getRessource() != 0){
+                        window->draw(*tile->getRessource()->getSprite());
+                    }
+                    if(tile->getBuilding() != 0){
+                        tile->getBuilding()->updateAnimation();
+                        window->draw(*tile->getBuilding()->getSprite());  
+                       // std::cout<<"tile"<<"x="<<x<<"y="<<y<<"\t"<<"build"<<"x="<<tile->getBuilding()->getSprite()->getPosition().x<<"y="<<tile->getBuilding()->getSprite()->getPosition().y<<std::endl;
+                    }
+                }   
             }
+
+            for(int i = 0; i < enemies.size();i++){
+                if(enemies[i]->getLife() == 0){
+                    enemies[i]->getTileMap()->getTile(enemies[i]->getXPos(),enemies[i]->getYPos())->setLivingObject(0);
+                    enemies[i]->drop(enemies[i]->getTile());
+                    enemies.erase(enemies.begin()+i);
+                }
+            }
+
+            for(int i = 0; i < enemies.size();i++){
+                enemies[i]->execute(world);
+            }
+            player->updateAnimation();
+
+            window->draw(*player->getSprite());
+            // Enemie drawing
+            for(int i = 0; i < enemies.size();i++){
+               // std::cout<<"life enemy"<<enemies[i]->getLife()<<std::endl;
+                if(enemies[i]->getTileMap() == this->getCurrentTileMap()){
+                        enemies[i]->updateAnimation();
+                        window->draw(*enemies[i]->getSprite());
+                }
+            }
+        }else{
+            window->draw(*inventory->getSprite());
         }
-        
-        for(int i = 0; i < enemies.size();i++){
-            enemies[i]->execute(world);
-        }
-        player->updateAnimation();
-        
-        window->draw(*player->getSprite());
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
         window->draw(*statusMenu->getSprite());
@@ -414,14 +445,7 @@ void Game::run(){
             window->draw(*itemMenu->getButton(i)->getText());
         }
         
-        // Enemie drawing
-        for(int i = 0; i < enemies.size();i++){
-           // std::cout<<"life enemy"<<enemies[i]->getLife()<<std::endl;
-            if(enemies[i]->getTileMap() == this->getCurrentTileMap()){
-                    enemies[i]->updateAnimation();
-                    window->draw(*enemies[i]->getSprite());
-            }
-        }
+
        // std::cout<<"sprite pos"<<buildMenu->getSprite()->getPosition().x<<" "<<buildMenu->getSprite()->getPosition().y<<std::endl;
         window->display();
     }

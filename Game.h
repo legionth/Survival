@@ -11,14 +11,11 @@
 #include "Ressource.h"
 #include <iostream>
 #include "consts.h"
-//#include <thread>
-#include "Menu.h"
 #include "BuildingMenu.h"
-//#include "BuildingButton.h"
 #include "ItemMenu.h"
-//#include "ItemButton.h"
-#include "StatusMenu.h"s
+#include "StatusMenu.h"
 #include "Enemy.h"
+#include "Inventory.h"
 
 #ifndef GAME_H
 #define	GAME_H
@@ -50,7 +47,7 @@ private:
     BuildingMenu* buildMenu;
     StatusMenu* statusMenu;
     ItemMenu* itemMenu;
-    
+    Inventory* inventory;
     BuildingButton* selectedButton;
     
     // Enemies vars

@@ -5,8 +5,6 @@
  * Created on 30. April 2012, 12:06
  */
 
-#include <SFML/Graphics/Texture.hpp>
-
 #include "GameObject.h"
 #include "Game.h"
 
@@ -107,7 +105,7 @@ void GameObject::updateAnimation(){
 sf::IntRect GameObject::getFrameRect(int frame){
     unsigned int width = (getSprite()->getTexture()->getSize().x / getFrameWidth());
     unsigned int height = (getSprite()->getTexture()->getSize().y / getFrameHeight());
-   // std::cout<<"width"<<width<<std::endl;
+
     int tileX = frame % width;
     int tileY = frame / width;
     
