@@ -19,6 +19,7 @@ Button::Button(int frameRect,sf::Texture* tex,std::string buttonName){
     this->setImage(tex);
     setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
     setFrameRect(frameRect);
+    this->visible = true;
 }
 
 Button::Button(int frameRect,sf::Texture* tex,std::string buttonName,int sizeX,int sizeY){
@@ -27,6 +28,7 @@ Button::Button(int frameRect,sf::Texture* tex,std::string buttonName,int sizeX,i
     this->setImage(tex);
     setFrameSize(sizeX,sizeY);
     setFrameRect(frameRect);
+    this->visible = true;
 }
 
 Button::Button(std::string buttonName){
@@ -67,4 +69,10 @@ void Button::setPressed(bool press){
     this->pressed = press;
 }
 
+void Button::setVisible(bool vis){
+    this->visible = vis;
+}
 
+bool Button::isVisible(){
+    return this->visible;
+}

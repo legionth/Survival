@@ -21,7 +21,6 @@ public:
     Building* getBuilding();
 private:
     Building* building;
-
 };
 
 #endif	/* BUILDINGBUTTON_H */

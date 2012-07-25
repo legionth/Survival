@@ -12,20 +12,22 @@
 
 Game::Game() {
     window = new sf::RenderWindow(sf::VideoMode((5*FRAME_WIDTH)+(2*FRAME_WIDTH), (5*FRAME_HEIGHT)+(2*FRAME_HEIGHT)), "Survival Game");
-    images["player"] = this->loadImage("player.png");
-    images["land"] = this->loadImage("land.png");
-    images["ressources"] = this->loadImage("ressources.png");
-    images["menuBuilding"] = this->loadImage("menu_building.png");
-    images["menuItem"] = this->loadImage("menu_item.png");
-    images["menuStatus"] = this->loadImage("menu_status.png");
-    images["buttonBuilding"] = this->loadImage("button_building.png");
-    images["buttonItem"] = this->loadImage("button_item.png");
-    images["buildings"] = this->loadImage("buildings.png");
-    images["enemyPig"] = this->loadImage("enemy_pig.png");
-    images["buttonStatus"] = this->loadImage("button_status.png");
-    images["inventory"] = this->loadImage("inventory.png");
+    
+    images["player"]            = this->loadImage("player.png");
+    images["land"]              = this->loadImage("land.png");
+    images["ressources"]        = this->loadImage("ressources.png");
+    images["menuBuilding"]      = this->loadImage("menu_building.png");
+    images["menuItem"]          = this->loadImage("menu_item.png");
+    images["menuStatus"]        = this->loadImage("menu_status.png");
+    images["buttonBuilding"]    = this->loadImage("button_building.png");
+    images["buttonItem"]        = this->loadImage("button_item.png");
+    images["buildings"]         = this->loadImage("buildings.png");
+    images["enemyPig"]          = this->loadImage("enemy_pig.png");
+    images["buttonStatus"]      = this->loadImage("button_status.png");
+    images["inventory"]         = this->loadImage("inventory.png");
     
     world = new World(images["land"]);
+    
     player = new Player(images["player"]);
     player->setTileMap(getTileMap(0,0));
     player->setPos(1,1);
@@ -253,6 +255,7 @@ void Game::run(){
                         int id = player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource()->getIdentifier();
                         player->pickup(player->getTileMap()->getTile(player->getXPos(),player->getYPos()));
                         itemMenu->getButtonById(id)->updateCount(player->getRessourceCountById(id));
+                        itemMenu->getButtonById(id)->setVisible(true);
                     }
                 }
                 
@@ -441,8 +444,10 @@ void Game::run(){
         }
         
         for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
-            window->draw(*itemMenu->getButton(i)->getSprite());
-            window->draw(*itemMenu->getButton(i)->getText());
+            if(itemMenu->getButton(i)->isVisible()){
+                window->draw(*itemMenu->getButton(i)->getSprite());
+                window->draw(*itemMenu->getButton(i)->getText());
+            }
         }
         
 

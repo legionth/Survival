@@ -8,6 +8,7 @@
 #include "ItemButton.h"
 #include <iostream>
 ItemButton::ItemButton() {
+    setVisible(false);
 }
 
 ItemButton::ItemButton(const ItemButton& orig) {
@@ -25,6 +26,7 @@ ItemButton::ItemButton(int frameRect,sf::Texture* tex,int id){
     
     text = new sf::Text();
     updateCount(0);
+    setVisible(false);
 }
 
 sf::Text* ItemButton::getText(){

@@ -22,9 +22,13 @@ public:
     std::string getName();
     bool isPressed();
     void setPressed(bool press);
+    // Visible or not visible
+    void setVisible(bool vis);    
+    bool isVisible();
 private:
     std::string name;
     bool pressed;
+    bool visible;       // standard: TRUE
 };
 
 #endif	/* BUTTON_H */
