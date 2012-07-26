@@ -12,6 +12,9 @@ Menu::Menu(int posX, int posY,int sizeX,int sizeY) {
     getSprite()->setPosition(posX,posY);
     this->sizeX = sizeX;
     this->sizeY = sizeY;
+    setMaxLineButtons(5);
+    this->line = 0;
+    this->buttonCounterLine = 0;
 }
 
 Menu::Menu(const Menu& orig) {
@@ -27,10 +30,19 @@ void Menu::addButton(Button* button){
     int posX = getSprite()->getPosition().x;
     int posY = getSprite()->getPosition().y;
     
+    int mod = count % maxLineButtons;
+    
     if(count == 1){
         button->getSprite()->setPosition((posX*count),posY);
-    }else{
-        button->getSprite()->setPosition((posX*count)*BUTTON_WIDTH,posY);
+        buttonCounterLine++;
+    }else if(buttonCounterLine == maxLineButtons){
+        line++;
+        button->getSprite()->setPosition(posX, posY + (line * BUTTON_WIDTH ));
+        buttonCounterLine = 1;
+    }
+    else{
+        button->getSprite()->setPosition(posX + (buttonCounterLine*BUTTON_WIDTH), posY + (line * BUTTON_WIDTH ));
+        buttonCounterLine++;
     }
     
 }
@@ -43,3 +55,11 @@ std::vector<Button*> Menu::getButtons(){
     return buttons;
 }
 
+
+void Menu::setMaxLineButtons(int max){
+    maxLineButtons = max;
+}
+
+int Menu::getMaxLineButtons(){
+    return this->maxLineButtons;
+}

@@ -18,10 +18,17 @@ public:
     void addButton(Button* button);
     Button* getButton(int i);
     std::vector<Button*> getButtons();
+    
+    void setMaxLineButtons(int max);
+    int getMaxLineButtons();
 private:
    std::vector<Button*> buttons;
    int sizeX;
    int sizeY;
+   
+   int maxLineButtons;
+   int buttonCounterLine;
+   int line;
 };
 
 #endif	/* MENU_H */

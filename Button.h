@@ -13,6 +13,7 @@ class Button : public GameObject {
 public:
     Button();
     Button(int frameRect,sf::Texture* tex,std::string buttonName);
+    Button(int frameRect,sf::Texture* tex,int id);
     Button(int frameRect,sf::Texture* tex,std::string buttonName,int sizeX,int sizeY);
     Button(std::string buttenName);
     Button(const Button& orig);

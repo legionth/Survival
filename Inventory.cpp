@@ -10,8 +10,8 @@
 
 Inventory::Inventory() : Menu(0,0,FRAME_WIDTH * 5, FRAME_HEIGHT * 5){
     shown = false;
+    setMaxLineButtons(7);
 }
-
 
 Inventory::~Inventory() {
     buttons.clear();

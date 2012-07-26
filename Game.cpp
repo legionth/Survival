@@ -330,6 +330,9 @@ void Game::run(){
             for(int i = 0; i < inventory->getInventoryButtons().size(); i++){
                 window->draw(*inventory->getInventoryButton(i)->getSprite());
             }
+            for(int i = 0; i < inventory->getButtons().size(); i++){
+                window->draw(*inventory->getButton(i)->getSprite());
+            }
         }
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
@@ -593,12 +596,18 @@ void Game::initInventory(){
     inventory = new Inventory();
     inventory->setImage(images["inventory"]);
     
-    InventoryButton* button = new InventoryButton(INVENTORY_ALCHEMY,RECT_INVENTORY_ALCHEMY,images["buttonInventory"]);
-    inventory->addInventoryButton(button);
+    InventoryButton* invButton = new InventoryButton(INVENTORY_ALCHEMY,RECT_INVENTORY_ALCHEMY,images["buttonInventory"]);
+    inventory->addInventoryButton(invButton);
     
-    button = new InventoryButton(INVENTORY_CRAFT,RECT_INVENTORY_CRAFT,images["buttonInventory"]);
-    inventory->addInventoryButton(button);
+    invButton = new InventoryButton(INVENTORY_CRAFT,RECT_INVENTORY_CRAFT,images["buttonInventory"]);
+    inventory->addInventoryButton(invButton);
     
-    button = new InventoryButton(INVENTORY_COOK,RECT_INVENTORY_COOK,images["buttonInventory"]);
-    inventory->addInventoryButton(button);
+    invButton = new InventoryButton(INVENTORY_COOK,RECT_INVENTORY_COOK,images["buttonInventory"]);
+    inventory->addInventoryButton(invButton);
+    
+    // Empty Buttons
+    for(int i = 0; i < 21; i++){
+        Button* button = new Button(RECT_INVENTORY_EMPTY,images["buttonInventory"],INVENTORY_EMPTY);
+        inventory->addButton(button);
+    }
 }
