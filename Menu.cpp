@@ -26,6 +26,7 @@ void Menu::addButton(Button* button){
     int count = buttons.size();
     int posX = getSprite()->getPosition().x;
     int posY = getSprite()->getPosition().y;
+    
     if(count == 1){
         button->getSprite()->setPosition((posX*count),posY);
     }else{

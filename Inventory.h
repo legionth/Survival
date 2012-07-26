@@ -9,6 +9,7 @@
 #define	INVENTORY_H
 
 #include "Menu.h"
+#include "InventoryButton.h"
 
 class Inventory : public Menu {
 public:
@@ -16,8 +17,18 @@ public:
     virtual ~Inventory();
     bool isShown();
     void show(); 
+    void addInventoryButton(InventoryButton* invButton);
+    std::vector<InventoryButton*> getInventoryButtons();
+    InventoryButton* getInventoryButton(int i);
+    InventoryButton* getInventoryButtonById(int id);
+    InventoryButton* getCurrentPressed();
+    void setCurrentPressed(InventoryButton* cur);
 private:
     bool shown;
+    std::vector<InventoryButton*> buttons;
+    InventoryButton* currentPressed;
+
+    
 };
 
 #endif	/* INVENTORY_H */

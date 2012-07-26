@@ -11,6 +11,7 @@
 
 Button::Button(){
     this->pressed = false;
+    this->id = 0;
 }
 
 Button::Button(int frameRect,sf::Texture* tex,std::string buttonName){
@@ -29,11 +30,13 @@ Button::Button(int frameRect,sf::Texture* tex,std::string buttonName,int sizeX,i
     setFrameSize(sizeX,sizeY);
     setFrameRect(frameRect);
     this->visible = true;
+    this->id = 0;
 }
 
 Button::Button(std::string buttonName){
     this->pressed = false;
     this->name = buttonName;
+    this->id = 0;
 }
 
 Button::Button(const Button& orig) {
@@ -75,4 +78,12 @@ void Button::setVisible(bool vis){
 
 bool Button::isVisible(){
     return this->visible;
+}
+
+void Button::setId(int i){
+    this->id = i;
+}
+
+int Button::getId(){
+    return this->id;
 }

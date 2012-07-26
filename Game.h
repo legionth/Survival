@@ -38,6 +38,13 @@ public:
     void setSelectedBuildingButton(BuildingButton* button);
     void spawnEnemy();
     
+    // init functions
+    void initImages();          // should be called first
+    void initWorld();
+    void initBuildMenu();
+    void initItemMenu();
+    void initStatusMenu();
+    void initInventory();
 private:
     sf::RenderWindow *window;
     World *world;

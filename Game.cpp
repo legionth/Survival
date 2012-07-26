@@ -13,129 +13,24 @@
 Game::Game() {
     window = new sf::RenderWindow(sf::VideoMode((5*FRAME_WIDTH)+(2*FRAME_WIDTH), (5*FRAME_HEIGHT)+(2*FRAME_HEIGHT)), "Survival Game");
     
-    images["player"]            = this->loadImage("player.png");
-    images["land"]              = this->loadImage("land.png");
-    images["ressources"]        = this->loadImage("ressources.png");
-    images["menuBuilding"]      = this->loadImage("menu_building.png");
-    images["menuItem"]          = this->loadImage("menu_item.png");
-    images["menuStatus"]        = this->loadImage("menu_status.png");
-    images["buttonBuilding"]    = this->loadImage("button_building.png");
-    images["buttonItem"]        = this->loadImage("button_item.png");
-    images["buildings"]         = this->loadImage("buildings.png");
-    images["enemyPig"]          = this->loadImage("enemy_pig.png");
-    images["buttonStatus"]      = this->loadImage("button_status.png");
-    images["inventory"]         = this->loadImage("inventory.png");
+    initImages();
+    initWorld();
+    initBuildMenu();
+    initItemMenu();
+    initStatusMenu();
+    initInventory();
     
-    world = new World(images["land"]);
-    
-    player = new Player(images["player"]);
-    player->setTileMap(getTileMap(0,0));
-    player->setPos(1,1);
-    
-    getTileMap(0,0)->loadTileMap("map0_0.map");
-    getTileMap(0,1)->loadTileMap("map0_1.map");
-    getTileMap(0,2)->loadTileMap("map0_2.map");
-    getTileMap(0,3)->loadTileMap("map0_3.map");
-    getTileMap(0,4)->loadTileMap("map0_4.map");
-    getTileMap(1,0)->loadTileMap("map1_0.map");
-    getTileMap(1,1)->loadTileMap("map1_1.map");
-    getTileMap(1,2)->loadTileMap("map1_2.map");
-    getTileMap(1,3)->loadTileMap("map1_3.map");
-    getTileMap(1,4)->loadTileMap("map1_4.map");
-    getTileMap(2,0)->loadTileMap("map2_0.map");
-    getTileMap(2,1)->loadTileMap("map2_1.map");
-    getTileMap(2,2)->loadTileMap("map2_2.map");
-    getTileMap(2,3)->loadTileMap("map2_3.map");
-    getTileMap(2,4)->loadTileMap("map2_4.map");
-    getTileMap(3,0)->loadTileMap("map3_0.map");
-    getTileMap(3,1)->loadTileMap("map3_1.map");
-    getTileMap(3,2)->loadTileMap("map3_2.map");
-    getTileMap(3,3)->loadTileMap("map3_3.map");
-    getTileMap(3,4)->loadTileMap("map3_4.map");
-    getTileMap(4,0)->loadTileMap("map4_0.map");
-    getTileMap(4,1)->loadTileMap("map4_1.map");
-    getTileMap(4,2)->loadTileMap("map4_2.map");
-    getTileMap(4,3)->loadTileMap("map4_3.map");
-    getTileMap(4,4)->loadTileMap("map4_4.map");
-   
     Ressource* res = new Ressource(RES_WOOD,images["ressources"]);
     getTileMap(0,0)->getTile(0,1)->setRessource(res);
     Ressource* res2 = new Ressource(RES_WOOD,images["ressources"]);
     getTileMap(0,0)->getTile(1,1)->setRessource(res2);
-    
-    
-    /**
-     * Building menu buttons
-     */
-    buildMenu = new BuildingMenu(FRAME_WIDTH * 5,0,128,512);
-    buildMenu->setImage(images["menuBuilding"]);
-    
-    BuildingButton *button = new BuildingButton(BUTTON_BUILDING_RECT_TENT,images["buttonBuilding"],BUILDING_RECT_TENT,images["buildings"],"tent",BUILDING_TENT);
-    buildMenu->addButton(button);
-    button->press();
-    
-    button = new BuildingButton(BUTTON_BUILDING_RECT_FIREPLACE,images["buttonBuilding"],BUILDING_RECT_FIREPLACE,images["buildings"],"fireplace",BUILDING_FIREPLACE);
-    buildMenu->addButton(button);
-    
-    
-    
-    
-    /**
-     * Item Menu buttons
-     */
-    itemMenu = new ItemMenu(FRAME_WIDTH * 5,FRAME_HEIGHT * 5,256,256);
-    itemMenu->setImage(images["menuItem"]);
-    
-    ItemButton* itemButton = new ItemButton(0,images["buttonItem"],RES_WOOD);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(1,images["buttonItem"],RES_STONE);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(2,images["buttonItem"],RES_LEATHER);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(3,images["buttonItem"],RES_IRON_ORE);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(4,images["buttonItem"],RES_GOLD_ORE);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(5,images["buttonItem"],RES_SILVER_ORE);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(6,images["buttonItem"],RES_COLE);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(7,images["buttonItem"],RES_GOLD_BAR);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(8,images["buttonItem"],RES_SILVER_BAR);
-    itemMenu->addButton(itemButton);
-    
-    itemButton = new ItemButton(9,images["buttonItem"],RES_IRON_BAR);
-    itemMenu->addButton(itemButton);
   //  this->spawnEnemy();
     enemies.push_back(new Enemy(world->getTileMap(0,0),0,0,images["enemyPig"],9,0,images["ressources"]));
     pressedW = false;
     pressedA = false;
     pressedS = false;
     pressedD = false;
-    /**
-     * Status Menu init
-     */
-    statusMenu = new StatusMenu(0,FRAME_HEIGHT * 5,640,256);
-    statusMenu->setImage(images["menuStatus"]);
-    
-    // Life init
-    StatusButton* statusButton = new StatusButton(STATUS_BUTTON_LIFE);
-    statusButton->setImage(images["buttonStatus"]);
-        
-    statusButton->setFrameRect(0);
-    statusMenu->setLifeButton(statusButton);
-    // Init Inventory
-    inventory = new Inventory();
-    inventory->setImage(images["inventory"]);
+
 }
 
 Game::Game(const Game& orig) {
@@ -429,7 +324,12 @@ void Game::run(){
                 }
             }
         }else{
+            // Draw inventory
             window->draw(*inventory->getSprite());
+            
+            for(int i = 0; i < inventory->getInventoryButtons().size(); i++){
+                window->draw(*inventory->getInventoryButton(i)->getSprite());
+            }
         }
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
@@ -578,4 +478,127 @@ void Game::disableTypedKey(char key){
             pressedD = false;
             break;
     }
+}
+
+void Game::initImages(){
+    images["player"]            = this->loadImage("player.png");
+    images["land"]              = this->loadImage("land.png");
+    images["ressources"]        = this->loadImage("ressources.png");
+    images["menuBuilding"]      = this->loadImage("menu_building.png");
+    images["menuItem"]          = this->loadImage("menu_item.png");
+    images["menuStatus"]        = this->loadImage("menu_status.png");
+    images["buttonBuilding"]    = this->loadImage("button_building.png");
+    images["buttonItem"]        = this->loadImage("button_item.png");
+    images["buttonInventory"]   = this->loadImage("button_inventory.png");
+    images["buildings"]         = this->loadImage("buildings.png");
+    images["enemyPig"]          = this->loadImage("enemy_pig.png");
+    images["buttonStatus"]      = this->loadImage("button_status.png");
+    images["inventory"]         = this->loadImage("inventory.png");
+}
+
+void Game::initWorld(){
+        world = new World(images["land"]);
+    
+    player = new Player(images["player"]);
+    player->setTileMap(getTileMap(0,0));
+    player->setPos(1,1);
+    
+    getTileMap(0,0)->loadTileMap("map0_0.map");
+    getTileMap(0,1)->loadTileMap("map0_1.map");
+    getTileMap(0,2)->loadTileMap("map0_2.map");
+    getTileMap(0,3)->loadTileMap("map0_3.map");
+    getTileMap(0,4)->loadTileMap("map0_4.map");
+    getTileMap(1,0)->loadTileMap("map1_0.map");
+    getTileMap(1,1)->loadTileMap("map1_1.map");
+    getTileMap(1,2)->loadTileMap("map1_2.map");
+    getTileMap(1,3)->loadTileMap("map1_3.map");
+    getTileMap(1,4)->loadTileMap("map1_4.map");
+    getTileMap(2,0)->loadTileMap("map2_0.map");
+    getTileMap(2,1)->loadTileMap("map2_1.map");
+    getTileMap(2,2)->loadTileMap("map2_2.map");
+    getTileMap(2,3)->loadTileMap("map2_3.map");
+    getTileMap(2,4)->loadTileMap("map2_4.map");
+    getTileMap(3,0)->loadTileMap("map3_0.map");
+    getTileMap(3,1)->loadTileMap("map3_1.map");
+    getTileMap(3,2)->loadTileMap("map3_2.map");
+    getTileMap(3,3)->loadTileMap("map3_3.map");
+    getTileMap(3,4)->loadTileMap("map3_4.map");
+    getTileMap(4,0)->loadTileMap("map4_0.map");
+    getTileMap(4,1)->loadTileMap("map4_1.map");
+    getTileMap(4,2)->loadTileMap("map4_2.map");
+    getTileMap(4,3)->loadTileMap("map4_3.map");
+    getTileMap(4,4)->loadTileMap("map4_4.map");
+}
+
+void Game::initBuildMenu(){
+    buildMenu = new BuildingMenu(FRAME_WIDTH * 5,0,128,512);
+    buildMenu->setImage(images["menuBuilding"]);
+    
+    BuildingButton *button = new BuildingButton(BUTTON_BUILDING_RECT_TENT,images["buttonBuilding"],BUILDING_RECT_TENT,images["buildings"],"tent",BUILDING_TENT);
+    buildMenu->addButton(button);
+    button->press();
+    
+    button = new BuildingButton(BUTTON_BUILDING_RECT_FIREPLACE,images["buttonBuilding"],BUILDING_RECT_FIREPLACE,images["buildings"],"fireplace",BUILDING_FIREPLACE);
+    buildMenu->addButton(button);
+}
+
+void Game::initItemMenu(){
+    itemMenu = new ItemMenu(FRAME_WIDTH * 5,FRAME_HEIGHT * 5,256,256);
+    itemMenu->setImage(images["menuItem"]);
+    
+    ItemButton* itemButton = new ItemButton(0,images["buttonItem"],RES_WOOD);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(1,images["buttonItem"],RES_STONE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(2,images["buttonItem"],RES_LEATHER);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(3,images["buttonItem"],RES_IRON_ORE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(4,images["buttonItem"],RES_GOLD_ORE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(5,images["buttonItem"],RES_SILVER_ORE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(6,images["buttonItem"],RES_COLE);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(7,images["buttonItem"],RES_GOLD_BAR);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(8,images["buttonItem"],RES_SILVER_BAR);
+    itemMenu->addButton(itemButton);
+    
+    itemButton = new ItemButton(9,images["buttonItem"],RES_IRON_BAR);
+    itemMenu->addButton(itemButton);
+}
+
+void Game::initStatusMenu(){
+    statusMenu = new StatusMenu(0,FRAME_HEIGHT * 5,640,256);
+    statusMenu->setImage(images["menuStatus"]);
+    
+        // Life init
+    StatusButton* statusButton = new StatusButton(STATUS_BUTTON_LIFE);
+    statusButton->setImage(images["buttonStatus"]);
+        
+    statusButton->setFrameRect(0);
+    statusMenu->setLifeButton(statusButton);
+}
+
+void Game::initInventory(){
+    inventory = new Inventory();
+    inventory->setImage(images["inventory"]);
+    
+    InventoryButton* button = new InventoryButton(INVENTORY_ALCHEMY,RECT_INVENTORY_ALCHEMY,images["buttonInventory"]);
+    inventory->addInventoryButton(button);
+    
+    button = new InventoryButton(INVENTORY_CRAFT,RECT_INVENTORY_CRAFT,images["buttonInventory"]);
+    inventory->addInventoryButton(button);
+    
+    button = new InventoryButton(INVENTORY_COOK,RECT_INVENTORY_COOK,images["buttonInventory"]);
+    inventory->addInventoryButton(button);
 }

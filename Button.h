@@ -25,10 +25,13 @@ public:
     // Visible or not visible
     void setVisible(bool vis);    
     bool isVisible();
+    int getId();
+    void setId(int i);
 private:
     std::string name;
     bool pressed;
     bool visible;       // standard: TRUE
+    int id;
 };
 
 #endif	/* BUTTON_H */

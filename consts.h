@@ -87,15 +87,30 @@ const int RECT_DOWN_START = 0;
 const int RECT_RIGHT_START = 8;
 const int RECT_LEFT_START = 12;
 
-const int RECT_ATTACK_UP_START          = 20;
-const int RECT_ATTACK_UP_END            = 23;
-const int RECT_ATTACK_DOWN_START        = 16;
-const int RECT_ATTACK_DOWN_END          = 19;
-const int RECT_ATTACK_RIGHT_START       = 24;
-const int RECT_ATTACK_RIGHT_END         = 27;
-const int RECT_ATTACK_LEFT_START        = 28;
-const int RECT_ATTACK_LEFT_END          = 31;
+enum RECT_ATTACK{
+         RECT_ATTACK_UP_START          = 20,
+         RECT_ATTACK_UP_END            = 23,
+         RECT_ATTACK_DOWN_START        = 16,
+         RECT_ATTACK_DOWN_END          = 19,
+         RECT_ATTACK_RIGHT_START       = 24,
+         RECT_ATTACK_RIGHT_END         = 27,
+         RECT_ATTACK_LEFT_START        = 28,
+         RECT_ATTACK_LEFT_END          = 31,
+};
 
+enum RECT_INVENTORY{
+    RECT_INVENTORY_EMPTY        = 0,
+    RECT_INVENTORY_ALCHEMY      = 1,
+    RECT_INVENTORY_CRAFT        = 2,
+    RECT_INVENTORY_COOK         = 3
+};
 
+// id of inveotr buttons
+enum IVENTORY_BUTTONS{
+    INVENTORY_EMPTY        = 0,
+    INVENTORY_ALCHEMY      = 1,
+    INVENTORY_CRAFT        = 2,
+    INVENTORY_COOK         = 3
+};
 #endif	/* CONSTS_H */
 
