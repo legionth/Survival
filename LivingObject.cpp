@@ -357,3 +357,13 @@ bool LivingObject::haveToAttack(){
 void LivingObject::setToAttack(bool b){
     this->toAttack = b;
 }
+
+void LivingObject::setPos(int x, int y){
+    GameObject::setPos(x,y);
+    
+    getTileMap()->getTile(x,y)->setLivingObject(this);
+}
+
+void LivingObject::setPos(int x, int y, bool setSprite){
+    GameObject::setPos(x, y,setSprite);
+} 

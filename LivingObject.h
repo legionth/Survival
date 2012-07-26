@@ -55,6 +55,9 @@ public:
     
     void stopAttackAnimation();
     void setToAttack(bool b);
+    
+    void setPos(int x, int y);
+    void setPos(int x, int y, bool setSprite);          // crap -.-
 protected:
     void setWalkIterator(int i);
 
