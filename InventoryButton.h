@@ -15,7 +15,7 @@
  */
 class InventoryButton : public Button{
 public:
-    InventoryButton(int id, int frame,sf::Texture* tex);
+    InventoryButton(int id, int frame, sf::Texture* tex);
     InventoryButton(const InventoryButton& orig);
     void addInventoryButtons();
     virtual ~InventoryButton();

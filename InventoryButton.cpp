@@ -7,7 +7,11 @@
 
 #include "InventoryButton.h"
 
-InventoryButton::InventoryButton() {
+InventoryButton::InventoryButton(int id, int frame, sf::Texture* tex) {
+    this->setId(id);
+    this->setImage(tex);
+    this->setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+    this->setFrameRect(frame);
 }
 
 InventoryButton::InventoryButton(const InventoryButton& orig) {
