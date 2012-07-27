@@ -58,6 +58,9 @@ public:
     
     void setPos(int x, int y);
     void setPos(int x, int y, bool setSprite);          // crap -.-
+    
+    float getAttackTime();
+    void restartAttackTime();
 protected:
     void setWalkIterator(int i);
 
@@ -75,6 +78,7 @@ private:
     
     TileMap* currentTileMap;
     sf::Clock moveClock;
+    sf::Clock attackClock;
     int walkIterator;
     bool toWalk;
     bool toAttack;

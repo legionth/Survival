@@ -273,7 +273,8 @@ void Game::run(){
         }
         
         generateRessoruces();
-      //  spawnEnemy();
+        spawnEnemy();
+        
         if(player->haveToAttack()){
                 player->stopAttackAnimation();
         }
@@ -282,6 +283,7 @@ void Game::run(){
         // Draw the things
         
         if(!inventory->isShown()){
+            // Draw normal stuff here
             window->clear();
 
             for(int y = 0; y < getCurrentTileMap()->getYSize(); y++){
@@ -339,8 +341,11 @@ void Game::run(){
         window->draw(*statusMenu->getSprite());
         
         statusMenu->drawLifeButton(window,player->getLife());
-
+        statusMenu->drawHungerButton(window,player->getHunger());
+        statusMenu->drawHeatButton(window,player->getHeat());
         
+        window->draw(*statusMenu->getWeaponSlot()->getSprite());
+        window->draw(*statusMenu->getToolSlot()->getSprite());
         // Menu drawing
         for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
             window->draw(*buildMenu->getButton(i)->getSprite());
@@ -390,7 +395,7 @@ TileMap* Game::getTileMap(int x, int y){
 
 
 void Game::generateRessoruces(){
-    if(ressourceClock.getElapsedTime().asSeconds() > 5){
+    if(ressourceClock.getElapsedTime().asSeconds() > 10){
         int randomXTileMap = rand() % 5;
         int randomYTileMap = rand() % 5;
         int randomXTile = rand() % 5;
@@ -497,6 +502,7 @@ void Game::initImages(){
     images["enemyPig"]          = this->loadImage("enemy_pig.png");
     images["buttonStatus"]      = this->loadImage("button_status.png");
     images["inventory"]         = this->loadImage("inventory.png");
+    images["slot"]              = this->loadImage("slot.png");
 }
 
 void Game::initWorld(){
@@ -543,6 +549,9 @@ void Game::initBuildMenu(){
     
     button = new BuildingButton(BUTTON_BUILDING_RECT_FIREPLACE,images["buttonBuilding"],BUILDING_RECT_FIREPLACE,images["buildings"],"fireplace",BUILDING_FIREPLACE);
     buildMenu->addButton(button);
+    
+    button = new BuildingButton(BUTTON_BUILDING_RECT_ANVIL,images["buttonBuilding"],BUILDING_RECT_ANVIL,images["buildings"],"fireplace",BUILDING_FIREPLACE);
+    buildMenu->addButton(button);
 }
 
 void Game::initItemMenu(){
@@ -586,10 +595,25 @@ void Game::initStatusMenu(){
     
         // Life init
     StatusButton* statusButton = new StatusButton(STATUS_BUTTON_LIFE);
-    statusButton->setImage(images["buttonStatus"]);
-        
+    statusButton->setImage(images["buttonStatus"]);      
     statusButton->setFrameRect(0);
     statusMenu->setLifeButton(statusButton);
+    
+    statusButton = new StatusButton(STATUS_BUTTON_HUNGER);
+    statusButton->setImage(images["buttonStatus"]);
+    statusButton->setFrameRect(1);
+    statusMenu->setHungerButton(statusButton);
+    
+    statusButton = new StatusButton(STATUS_BUTTON_HEAT);
+    statusButton->setImage(images["buttonStatus"]);
+    statusButton->setFrameRect(3);
+    statusMenu->setHeatButton(statusButton);
+    
+    SlotButton* slotButton = new SlotButton(0,images["slot"]);
+    statusMenu->setWeaponSlot(slotButton);
+    
+    slotButton = new SlotButton(0,images["slot"]);
+    statusMenu->setToolSlot(slotButton);
 }
 
 void Game::initInventory(){
@@ -606,7 +630,7 @@ void Game::initInventory(){
     inventory->addInventoryButton(invButton);
     
     // Empty Buttons
-    for(int i = 0; i < 21; i++){
+    for(int i = 0; i < 63; i++){
         Button* button = new Button(RECT_INVENTORY_EMPTY,images["buttonInventory"],INVENTORY_EMPTY);
         inventory->addButton(button);
     }

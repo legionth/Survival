@@ -47,44 +47,52 @@ void Enemy::execute(World* world){
                       this->move(getCurrentDirection(),world);
                 }
                 else{
-                    if(passiveClock.getElapsedTime().asSeconds() > 1.5f){
-                        this->move(rnd,world);
-                        passiveClock.restart();
+                    if(definsiveClock.getElapsedTime().asSeconds() > 1.5f){
+                        definsiveClock.restart();
                         //std::cout<<"isAttacked"<<isAttacked()<<std::endl;
                         if(isAttacked()){
                             
                             int x = 0;
                             int y = 0;
-                            bool toAttack = false;
-
-                            switch(getCurrentDirection()){
-                                case MOVE_UP:
-                                    x = getXPos();
-                                    y = getYPos() - 1;
-                                    toAttack = true;
-                                    break;
-                                case MOVE_DOWN:
-                                    x = getXPos();
-                                    y = getYPos() + 1;
-                                    toAttack = true;
-                                    break;
-                                case MOVE_RIGHT:
-                                    x = getXPos() + 1;
-                                    y = getYPos();
-                                    toAttack = true;
-                                    break;
-                                case MOVE_LEFT:
-                                    x = getXPos() - 1;
-                                    y = getYPos();
-                                    toAttack = true;
-                                    break;
+                            bool hadAttack = false;
+                            
+                            for(int direction = 0 ; direction < 4; direction++){
+                                switch(direction){
+                                    case MOVE_UP:
+                                        x = getXPos();
+                                        y = getYPos() - 1;
+                                      //  toAttack = true;
+                                        break;
+                                    case MOVE_DOWN:
+                                        x = getXPos();
+                                        y = getYPos() + 1;
+                                       // toAttack = true;
+                                        break;
+                                    case MOVE_RIGHT:
+                                        x = getXPos() + 1;
+                                        y = getYPos();
+                                       // toAttack = true;
+                                        break;
+                                    case MOVE_LEFT:
+                                        x = getXPos() - 1;
+                                        y = getYPos();
+                                        //toAttack = true;
+                                        break;
+                                }
+                                
+                                if((x >= 0 && x < 5) && (y >= 0 && y < 5) && getTileMap()->getTile(x,y)->getLivingObject() != 0){
+                                    attack(getTileMap()->getTile(x,y)->getLivingObject());
+                                    setCurrentDirection(direction);
+                                    setToAttack(false);
+                                    hadAttack = true;
+                                }
                             }
-
-                            if(toAttack && (x >= 0 && x < 5) && (y >= 0 && y < 5) && getTileMap()->getTile(x,y)->getLivingObject() != 0){
-                                attack(getTileMap()->getTile(x,y)->getLivingObject());
-                                setToAttack(false);
-
+                            
+                            if(!hadAttack){
+                                setAttacked(false);
                             }
+                        }else{
+                            this->move(rnd,world);
                         }
                     
                     }

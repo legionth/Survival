@@ -29,6 +29,8 @@ private:
     int behavior;
     int id;
     sf::Clock passiveClock;
+    sf::Clock aggressiveClock;
+    sf::Clock definsiveClock;
 };
 
 #endif	/* ENEMY_H */

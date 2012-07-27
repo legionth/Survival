@@ -21,6 +21,8 @@ public:
     
     int getHeat();
     void setHeat(int i);
+    void setHunger(int i);
+    int getHunger();
     void pickup(Tile* tile);
     int getRessourceCountById(int id);
     std::map<int,int> getRessources();
@@ -35,6 +37,7 @@ public:
     void setPickAxe(PickAxeTool* pickAxe);
 private:
     int heat;
+    int hunger;
     std::map<int,int> ressources;
     
     WeaponTool* weapon;

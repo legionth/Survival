@@ -71,9 +71,53 @@ void StatusMenu::setLifeButton(StatusButton* lifeButton){
     this->lifeButton = lifeButton;
 }
 
+void StatusMenu::setHeatButton(StatusButton* button){
+    this->heatButton = button;
+}
+
+void StatusMenu::setHungerButton(StatusButton* button){
+    this->hungerButton = button;
+}
+
+void StatusMenu::setCoinButton(StatusButton* button){
+    this->coinButton = button;
+}
+
 void StatusMenu::drawLifeButton(sf::RenderWindow *window, int life){
     for(int i = 0; i < life; i++){
         lifeButton->getSprite()->setPosition(getSprite()->getPosition().x +( i * STATUS_BUTTON_WIDTH ),getSprite()->getPosition().y + 3);
         window->draw(*lifeButton->getSprite());
     }
+}
+
+void StatusMenu::drawHungerButton(sf::RenderWindow *window, int hunger){    
+    for(int i = 0; i < hunger; i++){
+        hungerButton->getSprite()->setPosition(getSprite()->getPosition().x +( i * STATUS_BUTTON_WIDTH ),getSprite()->getPosition().y + 3 + 16);
+        window->draw(*hungerButton->getSprite());
+    }
+}
+
+void StatusMenu::drawHeatButton(sf::RenderWindow *window, int heat){    
+    for(int i = 0; i < heat; i++){
+        heatButton->getSprite()->setPosition(getSprite()->getPosition().x +( i * STATUS_BUTTON_WIDTH ),getSprite()->getPosition().y + 3 + 32);
+        window->draw(*heatButton->getSprite());
+    }
+}
+
+void StatusMenu::setWeaponSlot(SlotButton* slot){
+    this->weaponSlot = slot;
+    slot->getSprite()->setPosition(getSprite()->getPosition().x + getFrameWidth() - slot->getFrameWidth() - 36,getSprite()->getPosition().y + 30);
+}
+
+void StatusMenu::setToolSlot(SlotButton* slot){
+    this->toolSlot = slot;
+    slot->getSprite()->setPosition(getSprite()->getPosition().x + getFrameWidth() - slot->getFrameWidth() - 36 ,getSprite()->getPosition().y + 128);
+}
+
+SlotButton* StatusMenu::getWeaponSlot(){
+    return this->weaponSlot;
+}
+
+SlotButton* StatusMenu::getToolSlot(){
+    return this->toolSlot;
 }

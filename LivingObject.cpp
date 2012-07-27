@@ -315,6 +315,7 @@ void LivingObject::attack(LivingObject* target){
             startAnimation(RECT_ATTACK_LEFT_START,RECT_ATTACK_LEFT_END);
             break;
     }
+    
     target->setAttacked(true);
     this->toAttack = true;
 }
@@ -367,3 +368,11 @@ void LivingObject::setPos(int x, int y){
 void LivingObject::setPos(int x, int y, bool setSprite){
     GameObject::setPos(x, y,setSprite);
 } 
+
+float LivingObject::getAttackTime(){
+    return this->attackClock.getElapsedTime().asSeconds();
+}
+
+void LivingObject::restartAttackTime(){
+    this->attackClock.restart();
+}

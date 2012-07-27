@@ -6,7 +6,6 @@
  */
 
 #include "Inventory.h"
-#include "../Survival_normal/consts.h"
 
 Inventory::Inventory() : Menu(0,0,FRAME_WIDTH * 5, FRAME_HEIGHT * 5){
     shown = false;

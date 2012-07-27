@@ -12,6 +12,8 @@ Player::Player(sf::Texture* img) {
     this->setLife(3);
     this->setImage(img);
     this->setFrameRect(0);
+    this->setHunger(3);
+    this->setHeat(5);
     
     this->weapon = 0;
     this->axe = 0;
@@ -75,7 +77,22 @@ void Player::setAxe(AxeTool* axe){
     this->axe = axe;
 }
 
+void Player::setHeat(int heat){
+    this->heat = heat;
+}
+
 void Player::setPickAxe(PickAxeTool* pickAxe){
     this->pickAxe = pickAxe;
 }
 
+void Player::setHunger(int i){
+    this->hunger = i;
+}
+
+int Player::getHunger(){
+    return this->hunger;
+}
+
+int Player::getHeat(){
+    return this->heat;
+}

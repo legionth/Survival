@@ -52,8 +52,10 @@ enum StatusButtons{
     STATUS_BUTTON_LIFE                  = 0,
     STATUS_BUTTON_HEAT                  = 1,
     STATUS_BUTTON_COIN                  = 2,
-    STATUS_BUTTON_HUNGER                = 0,
+    STATUS_BUTTON_HUNGER                = 3,
 };
+
+const int RECT_SLOT_EMPTY                 = 0;
 //id's for the buildings
 const char BUILDING_TENT        = '^';
 const char BUILDING_FIREPLACE	= 'f';
@@ -62,10 +64,13 @@ const char BUILDING_FIREPLACE	= 'f';
 const int BUILDING_RECT_TENT            = 0;
 const int BUILDING_RECT_FIREPLACE       = 1;
 const int BUILDING_RECT_FIREPLACE_END   = 3;
-
+const int BUILDING_RECT_ANVIL           = 4;
+const int BUILDING_RECT_HUT             = 5;
 // Button rects
 const int BUTTON_BUILDING_RECT_TENT        = 0;
 const int BUTTON_BUILDING_RECT_FIREPLACE   = 2;
+const int BUTTON_BUILDING_RECT_ANVIL       = 4;
+const int BUTTON_BUILDING_RECT_HUT         = 5;
 
 //id's for the tiles
 const char TILE_GRASS			= ',';

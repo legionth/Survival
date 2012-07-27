@@ -12,6 +12,7 @@ Menu::Menu(int posX, int posY,int sizeX,int sizeY) {
     getSprite()->setPosition(posX,posY);
     this->sizeX = sizeX;
     this->sizeY = sizeY;
+    setFrameSize(sizeX,sizeY);
     setMaxLineButtons(5);
     this->line = 0;
     this->buttonCounterLine = 0;
@@ -33,15 +34,15 @@ void Menu::addButton(Button* button){
     int mod = count % maxLineButtons;
     
     if(count == 1){
-        button->getSprite()->setPosition((posX*count),posY);
+        button->getSprite()->setPosition((posX*count) + 10,posY + 10);
         buttonCounterLine++;
     }else if(buttonCounterLine == maxLineButtons){
         line++;
-        button->getSprite()->setPosition(posX, posY + (line * BUTTON_WIDTH ));
         buttonCounterLine = 1;
+        button->getSprite()->setPosition(posX + 10, posY + (line * 2) + (line * BUTTON_WIDTH )+10);
     }
     else{
-        button->getSprite()->setPosition(posX + (buttonCounterLine*BUTTON_WIDTH), posY + (line * BUTTON_WIDTH ));
+        button->getSprite()->setPosition(posX + (buttonCounterLine * 2 ) + 10 + (buttonCounterLine*BUTTON_WIDTH), posY + (line * 2) +  (line * BUTTON_WIDTH )+ 10);
         buttonCounterLine++;
     }
     
