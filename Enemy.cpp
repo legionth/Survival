@@ -49,8 +49,6 @@ void Enemy::execute(World* world){
                 else{
                     if(definsiveClock.getElapsedTime().asSeconds() > 1.5f){
                         definsiveClock.restart();
-                        //std::cout<<"isAttacked"<<isAttacked()<<std::endl;
-                        if(isAttacked()){
                             
                             int x = 0;
                             int y = 0;
@@ -83,18 +81,16 @@ void Enemy::execute(World* world){
                                 if((x >= 0 && x < 5) && (y >= 0 && y < 5) && getTileMap()->getTile(x,y)->getLivingObject() != 0){
                                     attack(getTileMap()->getTile(x,y)->getLivingObject());
                                     setCurrentDirection(direction);
+                                    setCurrentFrame(getDirectionRect());
                                     setToAttack(false);
                                     hadAttack = true;
                                 }
                             }
                             
                             if(!hadAttack){
-                                setAttacked(false);
+                                this->move(rnd,world);
                             }
-                        }else{
-                            this->move(rnd,world);
-                        }
-                    
+                        
                     }
 
                 }

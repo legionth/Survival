@@ -346,6 +346,15 @@ void Game::run(){
         
         window->draw(*statusMenu->getWeaponSlot()->getSprite());
         window->draw(*statusMenu->getToolSlot()->getSprite());
+        
+        //Drawing the slots
+        if(statusMenu->getWeaponSlot()->getTool() != 0){
+            window->draw(*statusMenu->getWeaponSlot()->getTool()->getSprite());
+        }
+        
+        if(statusMenu->getToolSlot()->getTool() != 0){
+            window->draw(*statusMenu->getToolSlot()->getTool()->getSprite());
+        }
         // Menu drawing
         for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
             window->draw(*buildMenu->getButton(i)->getSprite());
@@ -424,7 +433,7 @@ void Game::setSelectedBuildingButton(BuildingButton* button){
 }
 
 void Game::spawnEnemy(){
-    if(enemySpawnClock.getElapsedTime().asSeconds() > 5.0f){
+    if(enemySpawnClock.getElapsedTime().asSeconds() > 15.0f){
         int randomXTileMap = rand() % 5;
         int randomYTileMap = rand() % 5;
         int randomXTile = rand() % 5;
@@ -442,11 +451,14 @@ void Game::spawnEnemy(){
         }
         
         if(tex != 0){
-            enemies.push_back(new Enemy(world->getTileMap(randomXTileMap,randomYTileMap),randomXTile,randomYTile,tex,9,0,images["ressources"]));
-          //  std::cout<<"new enemy at tielmap"<<randomXTileMap<<":"<<randomYTileMap<<"tile="<<randomXTile<<":"<<randomYTile<<std::endl;
+            
+            if(getTileMap(randomXTileMap,randomXTile)->getTile(randomXTile,randomYTile)->isWalkAble()){
+                enemies.push_back(new Enemy(world->getTileMap(randomXTileMap,randomYTileMap),randomXTile,randomYTile,tex,9,0,images["ressources"]));
+            }
+            
+            enemySpawnClock.restart();
+            //  std::cout<<"new enemy at tielmap"<<randomXTileMap<<":"<<randomYTileMap<<"tile="<<randomXTile<<":"<<randomYTile<<std::endl;
         }
-        
-        enemySpawnClock.restart();
     }
 }
 

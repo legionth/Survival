@@ -321,7 +321,7 @@ void LivingObject::attack(LivingObject* target){
 }
 
 /**
- * Attack a tile
+ * Attack a tile, tree or something
  * @param tile
  */
 void LivingObject::attack(Tile* tile){
@@ -367,6 +367,7 @@ void LivingObject::setPos(int x, int y){
 
 void LivingObject::setPos(int x, int y, bool setSprite){
     GameObject::setPos(x, y,setSprite);
+    getTileMap()->getTile(x,y)->setLivingObject(this);
 } 
 
 float LivingObject::getAttackTime(){
