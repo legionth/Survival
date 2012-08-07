@@ -61,6 +61,9 @@ public:
     
     float getAttackTime();
     void restartAttackTime();
+    
+    void setMaxLife(int maxLife);
+    int getMaxLife();
 protected:
     void setWalkIterator(int i);
 
@@ -83,8 +86,7 @@ private:
     bool toWalk;
     bool toAttack;
     
-    
-    
+    int maxLife;   
 };
 
 #endif	/* LIVINGOBJECT_H */

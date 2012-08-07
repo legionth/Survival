@@ -8,6 +8,7 @@
 #ifndef RESSOURCE_H
 #define	RESSOURCE_H
 #include "GameObject.h"
+
 class Ressource : public GameObject{
 public:
     Ressource();
@@ -17,8 +18,23 @@ public:
     
     void setIdentifier(int id);
     int getIdentifier();
+    
+    bool isStatusRessource();
+    bool isAlchemyRessource();
+    bool isCraftingRessource();
+    bool isCookingRessource();
+    
+    void setStatusRessource(bool b);
+    void setAlchemyRessource(bool b);
+    void setCraftingRessource(bool b);
+    void setCookingRessource(bool b);
 private:
     int identifier;
+    
+    bool statusRessource;
+    bool alchemyRessource;
+    bool craftingRessource;
+    bool cookingRessource;
 
 };
 
