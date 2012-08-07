@@ -19,8 +19,11 @@ public:
     InventoryButton(const InventoryButton& orig);
     void addInventoryButtons();
     virtual ~InventoryButton();
-private:
     
+    Ressource* getRessource();
+    void setRessource(Ressource* res);
+private:
+    Ressource* ressource;
 
 };
 

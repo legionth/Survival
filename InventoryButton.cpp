@@ -18,5 +18,16 @@ InventoryButton::InventoryButton(const InventoryButton& orig) {
 }
 
 InventoryButton::~InventoryButton() {
+    if(this->ressource != 0){
+        delete ressource;
+    }
+}
+
+Ressource* InventoryButton::getRessource(){
+    return this->ressource;
+}
+
+void InventoryButton::setRessource(Ressource* res){
+    this->ressource = res;
 }
 
