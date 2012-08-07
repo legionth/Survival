@@ -29,5 +29,7 @@ Ressource* InventoryButton::getRessource(){
 
 void InventoryButton::setRessource(Ressource* res){
     this->ressource = res;
+    
+    this->ressource->getSprite()->setPosition(getSprite()->getPosition().x + 16, getSprite()->getPosition().y + 16);
 }
 
