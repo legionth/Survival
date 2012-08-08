@@ -58,3 +58,36 @@ int Ressource::getIdentifier(){
     return this->identifier;
 }
 
+bool Ressource::isAlchemyRessource(){
+    return this->alchemyRessource;
+}
+
+bool Ressource::isCookingRessource(){
+    return this->cookingRessource;
+}
+
+bool Ressource::isCraftingRessource(){
+    return this->craftingRessource;
+}
+
+bool Ressource::isStatusRessource(){
+    return this->statusRessource;
+}
+
+void Ressource::setAlchemyRessource(bool b){
+    this->alchemyRessource = b;
+}
+
+void Ressource::setCraftingRessource(bool b){
+    this->craftingRessource = b;
+}
+
+void Ressource::setCookingRessource(bool b){
+    this->cookingRessource = b;
+}
+
+void Ressource::setStatusRessource(bool b){
+    this->statusRessource = b;
+}
+
+

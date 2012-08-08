@@ -7,6 +7,7 @@
 
 #include "LivingObject.h"
 #include "World.h"
+#include "../Survival_normal/LivingObject.h"
 #include <iostream>
 
 LivingObject::LivingObject() {
@@ -376,4 +377,12 @@ float LivingObject::getAttackTime(){
 
 void LivingObject::restartAttackTime(){
     this->attackClock.restart();
+}
+
+void LivingObject::setMaxLife(int maxLife){
+    this->maxLife = maxLife;
+}
+
+int LivingObject::getMaxLife(){
+    return this->maxLife;
 }
