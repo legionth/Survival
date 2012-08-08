@@ -149,6 +149,7 @@ void Game::run(){
                     if(player->getTileMap()->getTile(player->getXPos(),player->getYPos())->getRessource() != 0){
                         Tile* tile = player->getTileMap()->getTile(player->getXPos(),player->getYPos());
                         int id = tile->getRessource()->getIdentifier();
+                        
                         if(tile->getRessource()->isStatusRessource()){
                                 player->pickup(tile);
                                 itemMenu->getButtonById(id)->updateCount(player->getRessourceCountById(id));
@@ -156,7 +157,7 @@ void Game::run(){
                         }else{
                             //player->pickup(tile);
                             inventory->addRessource(tile->getRessource());
-                            tile->setRessource(0);
+                            tile->setRessource(0,false);
                         }
                     }
                 }
@@ -339,12 +340,13 @@ void Game::run(){
             for(int i = 0; i < inventory->getInventoryButtons().size(); i++){
                 window->draw(*inventory->getInventoryButton(i)->getSprite());
                 
-                if(inventory->getInventoryButton(i)->getRessource() != 0){
-                    window->draw(*inventory->getInventoryButton(i)->getRessource()->getSprite());
-                }
             }
             for(int i = 0; i < inventory->getButtons().size(); i++){
                 window->draw(*inventory->getButton(i)->getSprite());
+                
+                if(inventory->getButton(i)->getRessource() != 0){
+                    window->draw(*inventory->getButton(i)->getRessource()->getSprite());
+                } 
             }
         }
         window->draw(*buildMenu->getSprite());

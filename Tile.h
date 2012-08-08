@@ -25,6 +25,8 @@ public:
     void setDestroyAble(bool destroyable);
     void setLivingObject(LivingObject* o);
     void setRessource(Ressource* ressource);
+    void setRessource(Ressource* ressource,bool setPos);
+
     void setBuilding(Building* building);
     void removeRessource();
     

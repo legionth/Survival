@@ -23,7 +23,12 @@ Ressource::~Ressource() {
 Ressource::Ressource(int id,sf::Texture *texture){
     setFrameSize(64,64);
     setImage(texture);
-
+    
+    setStatusRessource(true);
+    setAlchemyRessource(false);
+    setCookingRessource(false);
+    setCraftingRessource(false);
+    
     setIdentifier(id);
 //    this->setPos(x*64,y*64);
 }
@@ -46,6 +51,8 @@ void Ressource::setIdentifier(int id){
     }
     else if(id == RES_LEATHER){
         this->setFrameRect(2);
+        setStatusRessource(false);
+        setCraftingRessource(true);
     }
     else{
         this->setFrameRect(0);

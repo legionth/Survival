@@ -121,6 +121,17 @@ void Tile::setRessource(Ressource* ressource){
                                         (ressource->getYPos() * FRAME_HEIGHT) + ressource->getFrameHeight()/2);
 }
 
+void Tile::setRessource(Ressource* ressource, bool setPos){
+    this->ressource = ressource;
+    
+    if(setPos){
+        this->ressource->setPos(this->getXPos(),this->getYPos(),true);
+        // Set ressource int the middle of the tile
+        ressource->getSprite()->setPosition((ressource->getXPos() * FRAME_WIDTH) + ressource->getFrameWidth()/2,
+                                            (ressource->getYPos() * FRAME_HEIGHT) + ressource->getFrameHeight()/2);
+    }
+}
+
 Ressource* Tile::getRessource(){
     return this->ressource;
 }

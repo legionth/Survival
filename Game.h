@@ -17,7 +17,7 @@
 #include "Enemy.h"
 #include "Inventory.h"
 
-#ifndef GAME_H
+#ifndef GAME_H 
 #define	GAME_H
 
 class Game {

@@ -377,3 +377,11 @@ float LivingObject::getAttackTime(){
 void LivingObject::restartAttackTime(){
     this->attackClock.restart();
 }
+
+void LivingObject::setMaxLife(int maxLife){
+    this->maxLife = maxLife;
+}
+
+int LivingObject::getMaxLife(){
+    return this->maxLife;
+}

@@ -8,6 +8,7 @@
 #ifndef BUTTON_H
 #define	BUTTON_H
 #include "GameObject.h"
+#include "Ressource.h"
 
 class Button : public GameObject {
 public:
@@ -28,11 +29,16 @@ public:
     bool isVisible();
     int getId();
     void setId(int i);
+    
+    void setRessource(Ressource* res);
+    Ressource* getRessource();
 private:
     std::string name;
     bool pressed;
     bool visible;       // standard: TRUE
     int id;
+    
+    Ressource* ressource;
 };
 
 #endif	/* BUTTON_H */

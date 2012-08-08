@@ -20,10 +20,7 @@ public:
     void addInventoryButtons();
     virtual ~InventoryButton();
     
-    Ressource* getRessource();
-    void setRessource(Ressource* res);
 private:
-    Ressource* ressource;
 
 };
 

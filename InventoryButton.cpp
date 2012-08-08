@@ -6,31 +6,20 @@
  */
 
 #include "InventoryButton.h"
+#include <iostream>
 
 InventoryButton::InventoryButton(int id, int frame, sf::Texture* tex) {
     this->setId(id);
     this->setImage(tex);
     this->setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
     this->setFrameRect(frame);
-    this->ressource = 0;
+   // this->ressource = 0;
 }
 
 InventoryButton::InventoryButton(const InventoryButton& orig) {
 }
 
 InventoryButton::~InventoryButton() {
-    if(this->ressource != 0){
-        delete ressource;
-    }
 }
 
-Ressource* InventoryButton::getRessource(){
-    return this->ressource;
-}
-
-void InventoryButton::setRessource(Ressource* res){
-    this->ressource = res;
-    
-    this->ressource->getSprite()->setPosition(getSprite()->getPosition().x + 16, getSprite()->getPosition().y + 16);
-}
 

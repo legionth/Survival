@@ -12,6 +12,7 @@
 Button::Button(){
     this->pressed = false;
     this->id = 0;
+    this->ressource = 0;
 }
 
 Button::Button(int frameRect,sf::Texture* tex,std::string buttonName){
@@ -21,6 +22,7 @@ Button::Button(int frameRect,sf::Texture* tex,std::string buttonName){
     setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
     setFrameRect(frameRect);
     this->visible = true;
+    this->ressource = 0;
 }
 
 Button::Button(int frameRect,sf::Texture* tex,std::string buttonName,int sizeX,int sizeY){
@@ -31,6 +33,7 @@ Button::Button(int frameRect,sf::Texture* tex,std::string buttonName,int sizeX,i
     setFrameRect(frameRect);
     this->visible = true;
     this->id = 0;
+    this->ressource = 0;
 }
 
 Button::Button(int frameRect,sf::Texture* tex,int id){
@@ -40,18 +43,23 @@ Button::Button(int frameRect,sf::Texture* tex,int id){
     setFrameRect(frameRect);
     this->visible = true;
     this->id = id;
+    this->ressource = 0;
 }
 
 Button::Button(std::string buttonName){
     this->pressed = false;
     this->name = buttonName;
     this->id = 0;
+    this->ressource = 0;
 }
 
 Button::Button(const Button& orig) {
 }
 
 Button::~Button() {
+      if(this->ressource != 0){
+        delete ressource;
+    }
 }
 
 void Button::press(){
@@ -95,4 +103,15 @@ void Button::setId(int i){
 
 int Button::getId(){
     return this->id;
+}
+
+Ressource* Button::getRessource(){
+    return this->ressource;
+}
+
+void Button::setRessource(Ressource* res){
+    this->ressource = res;
+    std::cout<<"setRes x="<<getSprite()->getPosition().x<<"y="<<getSprite()->getPosition().y<<std::endl;
+    this->ressource->getSprite()->setPosition(getSprite()->getPosition().x, getSprite()->getPosition().y);
+    std::cout<<"rap"<<std::endl;
 }

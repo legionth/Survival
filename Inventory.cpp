@@ -6,6 +6,7 @@
  */
 
 #include "Inventory.h"
+#include <iostream>
 
 Inventory::Inventory() : Menu(0,0,FRAME_WIDTH * 5, FRAME_HEIGHT * 5){
     shown = false;
@@ -62,10 +63,16 @@ InventoryButton* Inventory::getInventoryButton(int i){
 
 void Inventory::addRessource(Ressource* res){
     bool set = false;
-    for(int i = 0; i < buttons.size(); i++){
-        if(buttons[i]->getRessource() == 0 && !set){
-            buttons[i]->setRessource(res);
+    
+    for(int i = 0; i < getButtons().size(); i++){
+        if(getButton(i)->getRessource() == 0 && !set){
+            getButton(i)->setRessource(res);
             set = true;
         }
     }
+    std::cout<<"inventoryadd res"<<std::endl;
+}
+
+void Inventory::addButton(Button* button){
+    Menu::addButton(button);
 }
