@@ -24,6 +24,12 @@ Game::Game() {
     getTileMap(0,0)->getTile(0,1)->setRessource(res);
     Ressource* res2 = new Ressource(RES_WOOD,images["ressources"]);
     getTileMap(0,0)->getTile(1,1)->setRessource(res2);
+    
+    res2 = new Ressource(RES_STONE,images["ressources"]);
+    getTileMap(0,0)->getTile(2,2)->setRessource(res2);
+    
+    res2 = new Ressource(RES_STONE,images["ressources"]);
+    getTileMap(0,0)->getTile(3,2)->setRessource(res2);
   //  this->spawnEnemy();
     enemies.push_back(new Enemy(world->getTileMap(0,0),0,0,images["enemyPig"],9,0,images["ressources"]));
     pressedW = false;
@@ -150,15 +156,16 @@ void Game::run(){
                         Tile* tile = player->getTileMap()->getTile(player->getXPos(),player->getYPos());
                         int id = tile->getRessource()->getIdentifier();
                         
-                        if(tile->getRessource()->isStatusRessource()){
-                                player->pickup(tile);
-                                itemMenu->getButtonById(id)->updateCount(player->getRessourceCountById(id));
-                                itemMenu->getButtonById(id)->setVisible(true);
-                        }else{
+            //            if(tile->getRessource()->isStatusRessource()){
+             //                   player->pickup(tile);
+              //                  itemMenu->getButtonById(id)->updateCount(player->getRessourceCountById(id));
+               //                 itemMenu->getButtonById(id)->setVisible(true);
+                 //       }else{
                             //player->pickup(tile);
+                            player->pickup(tile,false);
                             inventory->addRessource(tile->getRessource());
                             tile->setRessource(0,false);
-                        }
+                   //     }
                     }
                 }
                 
@@ -207,6 +214,7 @@ void Game::run(){
                         if(buildMenu->getButton(i)->isPressed()){
                             Building *building = buildMenu->getButton(i)->getBuilding();
                             int currentDirection = player->getCurrentDirection();
+                            
                             int posX = player->getXPos();
                             int posY = player->getYPos();
                             TileMap* map = player->getTileMap();
@@ -252,6 +260,7 @@ void Game::run(){
                                 
                                 player->decreaseRessources(ressourcesBuilding);
                                 ressourcesPlayer = player->getRessources();
+                                inventory->decrease(ressourcesBuilding);
                                 
                                 for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
                                         ItemButton* itemButton = itemMenu->getButton(i);

@@ -115,3 +115,11 @@ void Button::setRessource(Ressource* res){
     this->ressource->getSprite()->setPosition(getSprite()->getPosition().x, getSprite()->getPosition().y);
     std::cout<<"rap"<<std::endl;
 }
+
+ void Button::setRessource(Ressource* res,bool setSprite){
+    this->ressource = res;
+    
+    if(setSprite){
+        this->ressource->getSprite()->setPosition(getSprite()->getPosition().x, getSprite()->getPosition().y);
+    }
+ }

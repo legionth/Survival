@@ -31,6 +31,7 @@ public:
     void setId(int i);
     
     void setRessource(Ressource* res);
+    void setRessource(Ressource* res,bool setSprite);
     Ressource* getRessource();
 private:
     std::string name;

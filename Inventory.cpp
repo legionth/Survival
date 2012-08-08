@@ -76,3 +76,23 @@ void Inventory::addRessource(Ressource* res){
 void Inventory::addButton(Button* button){
     Menu::addButton(button);
 }
+
+void Inventory::removeRessource(Button* button){
+    Ressource* res = button->getRessource();
+    delete res;
+    button->setRessource(0,false);
+}
+
+ void Inventory::decrease(std::map<int,int> decreaseRes){
+     int size = decreaseRes.size();
+     
+     for(int i = 0; i < size; i++){
+         for(int j = 0; j < decreaseRes[i]; j++ ){
+             for(int button = 0; button < getButtons().size(); button++){
+                 if(getButtons()[button]->getRessource() != 0 && getButtons()[button]->getRessource()->getIdentifier() == i){
+                     removeRessource(getButtons()[button]);
+                 }
+             }
+         }
+     }
+ }

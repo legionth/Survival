@@ -42,6 +42,14 @@ void Player::pickup(Tile* tile){
     tile->removeRessource();
 }
 
+void Player::pickup(Tile* tile, bool remove){
+    ressources[tile->getRessource()->getIdentifier()]++;
+    
+    if(remove){
+        tile->removeRessource();
+    }
+}
+
 int Player::getRessourceCountById(int id){
     return ressources[id];
 }

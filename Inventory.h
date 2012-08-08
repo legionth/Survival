@@ -25,6 +25,8 @@ public:
     void setCurrentPressed(InventoryButton* cur);
     void addRessource(Ressource* res);
     void addButton(Button* button);
+    void decrease(std::map<int,int> decreaseRes);
+    void removeRessource(Button* button);
 private:
     bool shown;
     std::vector<InventoryButton*> buttons;

@@ -24,6 +24,7 @@ public:
     void setHunger(int i);
     int getHunger();
     void pickup(Tile* tile);
+    void pickup(Tile* tile,bool remove);
     int getRessourceCountById(int id);
     std::map<int,int> getRessources();
     void decreaseRessources(std::map<int,int> decreaseRes);
