@@ -12,6 +12,7 @@ InventoryButton::InventoryButton(int id, int frame, sf::Texture* tex) {
     this->setImage(tex);
     this->setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
     this->setFrameRect(frame);
+    this->ressource = 0;
 }
 
 InventoryButton::InventoryButton(const InventoryButton& orig) {

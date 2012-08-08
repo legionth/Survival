@@ -59,3 +59,13 @@ std::vector<InventoryButton*> Inventory::getInventoryButtons(){
 InventoryButton* Inventory::getInventoryButton(int i){
     return this->buttons[i];
 }
+
+void Inventory::addRessource(Ressource* res){
+    bool set = false;
+    for(int i = 0; i < buttons.size(); i++){
+        if(buttons[i]->getRessource() == 0 && !set){
+            buttons[i]->setRessource(res);
+            set = true;
+        }
+    }
+}

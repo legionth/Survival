@@ -9,6 +9,8 @@
 
 CookingRessource::CookingRessource(int id, sf::Texture* tex) : Ressource(id,tex){
     this->setCookingRessource(true);
+    this->setStatusRessource(false);
+
 }
 
 CookingRessource::CookingRessource(const CookingRessource& orig) {

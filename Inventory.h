@@ -23,6 +23,7 @@ public:
     InventoryButton* getInventoryButtonById(int id);
     InventoryButton* getCurrentPressed();
     void setCurrentPressed(InventoryButton* cur);
+    void addRessource(Ressource* res);
 private:
     bool shown;
     std::vector<InventoryButton*> buttons;

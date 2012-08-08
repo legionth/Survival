@@ -9,6 +9,8 @@
 
 CraftingRessource::CraftingRessource(int id, sf::Texture* tex) : Ressource(id,tex){
     this->setCraftingRessource(true);
+    this->setStatusRessource(false);
+
 }
 
 CraftingRessource::CraftingRessource(const CraftingRessource& orig) {

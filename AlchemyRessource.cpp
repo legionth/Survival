@@ -9,6 +9,7 @@
 
 AlchemyRessource::AlchemyRessource(int id, sf::Texture* tex) : Ressource(id,tex) {
     this->setAlchemyRessource(true);
+    this->setStatusRessource(false);
     this->setIdentifier(id);
 }
 
