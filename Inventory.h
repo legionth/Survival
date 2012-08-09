@@ -25,15 +25,16 @@ public:
     void setCurrentPressed(InventoryButton* cur);
     void addRessource(Ressource* res);                                          // Add ressource to next free button
     void addButton(Button* button);
-    
+    int getMaxItems();
     void decrease(std::map<int,int> decreaseRes);                               // decrease Ressource to given container
+    int countItems();
     void removeRessource(Button* button);                                       
     bool checkRessources(std::map<int,int> checkRes);
 private:
     bool shown;
     std::vector<InventoryButton*> buttons;
     InventoryButton* currentPressed;
-
+    int maxItems;
     
 };
 

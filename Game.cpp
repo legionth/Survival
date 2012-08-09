@@ -162,9 +162,11 @@ void Game::run(){
                //                 itemMenu->getButtonById(id)->setVisible(true);
                  //       }else{
                             //player->pickup(tile);
-                            player->pickup(tile,false);
-                            inventory->addRessource(tile->getRessource());
-                            tile->setRessource(0,false);
+                        if(inventory->countItems() < inventory->getMaxItems()){
+                                player->pickup(tile,false);
+                                inventory->addRessource(tile->getRessource());
+                                tile->setRessource(0,false);
+                        }
                    //     }
                     }
                 }
@@ -661,7 +663,7 @@ void Game::initInventory(){
     inventory->addInventoryButton(invButton);
     
     // Empty Buttons
-    for(int i = 0; i < 63; i++){
+    for(int i = 0; i < inventory->getMaxItems(); i++){
         Button* button = new Button(RECT_INVENTORY_EMPTY,images["buttonInventory"],INVENTORY_EMPTY);
         inventory->addButton(button);
     }

@@ -11,6 +11,7 @@
 Inventory::Inventory() : Menu(0,0,FRAME_WIDTH * 5, FRAME_HEIGHT * 5){
     shown = false;
     setMaxLineButtons(7);
+    this->maxItems = 63;
 }
 
 Inventory::~Inventory() {
@@ -121,3 +122,19 @@ void Inventory::removeRessource(Button* button){
      
      return ret;
  }
+ 
+int Inventory::countItems(){
+    int ret = 0;
+    
+    for(int i = 0; i < getButtons().size(); i++){
+        if(getButtons()[i]->getRessource() != 0){
+            ret++;
+        }
+    }
+    
+    return ret;
+}
+
+int Inventory::getMaxItems(){
+    return this->maxItems;
+}
