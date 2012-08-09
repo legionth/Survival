@@ -268,7 +268,7 @@ void Game::run(){
                             }
                         }
                     }
-                }
+                }         
             }
             else if(event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::W ||
                                                              event.key.code == sf::Keyboard::D ||
@@ -276,6 +276,36 @@ void Game::run(){
                                                              event.key.code == sf::Keyboard::A)
                    ){
                 player->stopAnimation();
+            }
+            else if(event.type == sf::Event::MouseButtonPressed){
+                if(event.mouseButton.button == sf::Mouse::Left){
+                    if(inventory->isShown()){
+                        std::cout<<"mousePos.x"<<event.mouseButton.x<<std::endl;
+                        std::cout<<"mousePos.y"<<event.mouseButton.y<<std::endl;
+                        for(int i = 0; i < inventory->getInventoryButtons().size(); i++){
+                            Button* button = inventory->getInventoryButtons()[i];
+                            int xMouse = event.mouseButton.x;
+                            int yMouse = event.mouseButton.y;
+                            int xSprite = button->getSprite()->getPosition().x;
+                            int ySprite = button->getSprite()->getPosition().y;
+                            
+                            std::cout<<"sprite.x"<<xSprite<<std::endl;
+                           // std::cout<<"sprite.x + w"<<button->getFrameWidth()<<std::endl;
+                            std::cout<<"sprite.y"<<ySprite<<std::endl;
+                            //std::cout<<"sprite.y + h"<<button->getFrameHeiight()<<std::endl;
+                            
+                            if(xSprite <= xMouse && 
+                               xSprite + button->getFrameWidth() >= xMouse &&
+                               ySprite <= yMouse && 
+                               ySprite + button->getFrameHeight() >= yMouse
+                               ){
+                                
+                                button->press();
+                                std::cout<<"press"<<std::endl;
+                            }
+                        }
+                    }
+                }   
             }
         }
         
