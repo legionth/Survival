@@ -23,10 +23,12 @@ public:
     InventoryButton* getInventoryButtonById(int id);
     InventoryButton* getCurrentPressed();
     void setCurrentPressed(InventoryButton* cur);
-    void addRessource(Ressource* res);
+    void addRessource(Ressource* res);                                          // Add ressource to next free button
     void addButton(Button* button);
-    void decrease(std::map<int,int> decreaseRes);
-    void removeRessource(Button* button);
+    
+    void decrease(std::map<int,int> decreaseRes);                               // decrease Ressource to given container
+    void removeRessource(Button* button);                                       
+    bool checkRessources(std::map<int,int> checkRes);
 private:
     bool shown;
     std::vector<InventoryButton*> buttons;

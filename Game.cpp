@@ -219,17 +219,12 @@ void Game::run(){
                             int posY = player->getYPos();
                             TileMap* map = player->getTileMap();
                             
-                            // Check if can be build
-                            bool canBuild = true;
-                            std::map<int,int> ressourcesPlayer = player->getRessources();
+
+                          //  std::map<int,int> ressourcesPlayer = player->getRessources();
                             std::map<int,int> ressourcesBuilding = building->getRessources();
-                            int size = ressourcesPlayer.size();
+                        //    int size = ressourcesPlayer.size();
                             
-                            for(int i = 0; i < size;i++){
-                                if(ressourcesPlayer[i] < ressourcesBuilding[i]){
-                                    canBuild = false;
-                                }
-                            }
+                            bool canBuild = inventory->checkRessources(ressourcesBuilding);
                             
                             if(canBuild){
                                 switch(currentDirection){
@@ -258,15 +253,16 @@ void Game::run(){
                                         break;    
                                 }
                                 
-                                player->decreaseRessources(ressourcesBuilding);
-                                ressourcesPlayer = player->getRessources();
+                         //       player->decreaseRessources(ressourcesBuilding);
+                         //       ressourcesPlayer = player->getRessources();
                                 inventory->decrease(ressourcesBuilding);
                                 
-                                for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
+                         /*       for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
                                         ItemButton* itemButton = itemMenu->getButton(i);
                                         itemButton->setCount(ressourcesPlayer[itemButton->getId()]);
                                 //        std::cout<<"id"<<itemButton->getId()<<"="<<ressourcesPlayer[itemButton->getId()]<<std::endl;
                                 }
+                        */
                             }
                         }
                     }
@@ -358,6 +354,7 @@ void Game::run(){
                 } 
             }
         }
+        
         window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
         window->draw(*statusMenu->getSprite());

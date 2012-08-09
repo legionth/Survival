@@ -70,7 +70,6 @@ void Inventory::addRessource(Ressource* res){
             set = true;
         }
     }
-    std::cout<<"inventoryadd res"<<std::endl;
 }
 
 void Inventory::addButton(Button* button){
@@ -89,10 +88,36 @@ void Inventory::removeRessource(Button* button){
      for(int i = 0; i < size; i++){
          for(int j = 0; j < decreaseRes[i]; j++ ){
              for(int button = 0; button < getButtons().size(); button++){
-                 if(getButtons()[button]->getRessource() != 0 && getButtons()[button]->getRessource()->getIdentifier() == i){
+               //  std::cout<<"decreaseRes"<<decreaseRes[i]<<std::endl;
+                 if(decreaseRes[i] > 0 && getButtons()[button]->getRessource() != 0 && getButtons()[button]->getRessource()->getIdentifier() == i){
                      removeRessource(getButtons()[button]);
+                     decreaseRes[i] -= 1;
                  }
              }
          }
      }
+ }
+ 
+ bool Inventory::checkRessources(std::map<int,int> checkRes){
+     int size = checkRes.size();
+     bool ret = false;
+     
+     for(int i = 0; i < size; i++){
+         for(int j = 0; j < checkRes[i]; j++ ){
+             for(int button = 0; button < getButtons().size(); button++){
+                 if(checkRes[i] > 0 && getButtons()[button]->getRessource() != 0 && getButtons()[button]->getRessource()->getIdentifier() == i){
+                     checkRes[i] -= 1;
+                 }
+             }
+              
+             if(checkRes[i] <= 0){
+                 ret = true;
+             }else{
+                 ret = false;
+             }
+         }
+     }
+     
+     
+     return ret;
  }
