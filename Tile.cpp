@@ -51,10 +51,12 @@ void Tile::setIdentifier(char id){
     if(id == TILE_GRASS){
         this->setFrameRect(0);
         setWalkAble(true);
+        setDestroyAble(false);
     }
     else if(id == TILE_EARTH){
         this->setFrameRect(1);
         setWalkAble(true);
+        setDestroyAble(false);
     }
     else if(id == TILE_TREE){
         this->setFrameRect(2);
@@ -66,22 +68,27 @@ void Tile::setIdentifier(char id){
     else if(id == TILE_GRASS_EARTH){
         this->setFrameRect(3);
         setWalkAble(true);
+        setDestroyAble(false);
     }
     else if(id == TILE_EARTH_DOWN){
         this->setFrameRect(7);
         setWalkAble(true);
+        setDestroyAble(false);
     }
     else if(id == TILE_EARTH_RIGHT){
         this->setFrameRect(4);
         setWalkAble(true);
+        setDestroyAble(false);
     }
     else if(id == TILE_EARTH_TOP){
         this->setFrameRect(6);
         setWalkAble(true);
+        setDestroyAble(false);
     }
     else if(id == TILE_EARTH_LEFT){
         this->setFrameRect(5);
         setWalkAble(true);
+        setDestroyAble(false);
     }
     else{
         this->setFrameRect(6);
@@ -173,4 +180,8 @@ void Tile::drop(Tile* tile){
 
  void Tile::setRessourceTexture(sf::Texture* tex){
      this->ressourceTex = tex;
+ }
+ 
+ void Tile::clearDropList(){
+     dropList.clear();
  }

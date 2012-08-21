@@ -6,6 +6,7 @@
  */
 #include <SFML/Graphics.hpp>
 #include "consts.h"
+#include <iostream>
 #ifndef GAMEOBJECT_H
 #define	GAMEOBJECT_H
 

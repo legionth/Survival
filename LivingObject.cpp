@@ -15,6 +15,7 @@ LivingObject::LivingObject() {
     toAttack = false;
     attackPower = 1;
     agility = 1;
+    this->walkIterator = 0;
     
 }
 
@@ -31,7 +32,7 @@ LivingObject::~LivingObject() {
 void LivingObject::move(int direction,World *world){
     sf::Sprite *sprite = this->getSprite();
     bool changedMap = false;
-    
+   // std::cout<<"move"<<std::endl;
     if(moveClock.getElapsedTime().asSeconds() > 0.15f && !haveToAttack()){
         if(direction == MOVE_UP && (this->getYPos() - 1 >= 0 || this->getTileMap()->getYPos() - 1 >= 0)){
             
@@ -170,10 +171,12 @@ void LivingObject::move(int direction,World *world){
                     this->setCurrentDirection(MOVE_LEFT);
             }        
         }
-        
+        std::cout<<"walkit"<<getWalkIterator()<<std::endl;
         if(getWalkIterator() >= FRAME_WIDTH || changedMap){                                   //@TODO: Iterate everytime. Stop this !
             resetWalkIterator();
             stopAnimation();
+            std::cout<<"no more walking"<<std::endl;
+            //setToWalk(false);
         }else{
             setWalkIterator(getWalkIterator() + WALK_ITERATOR);
             setToWalk(true);

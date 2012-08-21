@@ -71,7 +71,9 @@ const int BUTTON_BUILDING_RECT_TENT        = 0;
 const int BUTTON_BUILDING_RECT_FIREPLACE   = 2;
 const int BUTTON_BUILDING_RECT_ANVIL       = 4;
 const int BUTTON_BUILDING_RECT_HUT         = 5;
-
+// Alchemy button rect
+const int BUTTON_ALCHEMY_RECT_HEAL_POTION        = 0;
+const int BUTTON_ALCHEMY_RECT_POISON_POTION      = 2;
 //id's for the tiles
 const char TILE_GRASS			= ',';
 const char TILE_EARTH			= '.';
@@ -104,18 +106,34 @@ enum RECT_ATTACK{
 };
 
 enum RECT_INVENTORY{
-    RECT_INVENTORY_EMPTY        = 0,
-    RECT_INVENTORY_ALCHEMY      = 1,
-    RECT_INVENTORY_CRAFT        = 2,
-    RECT_INVENTORY_COOK         = 3
+    RECT_INVENTORY_EMPTY         = 0,
+    RECT_INVENTORY_ALCHEMY       = 2,
+    RECT_INVENTORY_CRAFT         = 4,
+    RECT_INVENTORY_COOK          = 6,
+    RECT_INVENTORY_BUILD         = 8
 };
+
 
 // id of inveotr buttons
 enum IVENTORY_BUTTONS{
     INVENTORY_EMPTY        = 0,
     INVENTORY_ALCHEMY      = 1,
     INVENTORY_CRAFT        = 2,
-    INVENTORY_COOK         = 3
+    INVENTORY_COOK         = 3,
+    INVENTORY_BUILD        = 4
+
+};
+
+enum ALCHEMY_RESSOURCES{
+    RES_SNAKE_HEAD = 50,
+    RES_EVER_GREEN = 51,
+    RES_BLADE_LEAF = 52,
+    RES_WASP_DEATH = 53
+};
+
+enum POTIONS{
+    POTION_HEAL         = 0,
+    POTION_POISON       = 1
 };
 #endif	/* CONSTS_H */
 

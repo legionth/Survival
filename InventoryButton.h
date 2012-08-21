@@ -21,7 +21,6 @@ public:
     virtual ~InventoryButton();
     
 private:
-
 };
 
 #endif	/* INVENTORYBUTTON_H */

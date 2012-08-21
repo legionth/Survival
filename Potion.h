@@ -13,11 +13,13 @@
 
 class Potion : public Ressource{
 public:
-    Potion(int health,int heal,int atk,int def, float max);
+    Potion(int health,int heal,int atk,int def, float max, int id);
+    Potion(int id);
     Potion(const Potion& orig);
     void use(LivingObject* livingObject);
     float getMaxTime();
     float getCurrentTime();
+    std::map<int,int> getRessources();
     virtual ~Potion();
 private:
     int health;         // increase or decrease healthMAX over time
@@ -27,6 +29,7 @@ private:
     
     float maxTime;
     sf::Clock timer;
+    std::map<int,int> ressources;
 };
 
 #endif	/* POTION_H */

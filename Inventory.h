@@ -26,10 +26,12 @@ public:
     void addRessource(Ressource* res);                                          // Add ressource to next free button
     void addButton(Button* button);
     int getMaxItems();
-    void decrease(std::map<int,int> decreaseRes);                               // decrease Ressource to given container
+    void decreaseBuildingRessources(std::map<int,int> decreaseRes);                               // decrease Ressource to given container
+    void decreaseAlchemyRessources(std::map<int,int> decreaseRes);
     int countItems();
     void removeRessource(Button* button);                                       
-    bool checkRessources(std::map<int,int> checkRes);
+    bool checkRessourcesBuilding(std::map<int,int> checkRes);
+    bool checkRessourcesAlchemy(std::map<int,int> checkRes);
 private:
     bool shown;
     std::vector<InventoryButton*> buttons;

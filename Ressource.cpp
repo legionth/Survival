@@ -33,7 +33,21 @@ Ressource::Ressource(int id,sf::Texture *texture){
 //    this->setPos(x*64,y*64);
 }
 
+Ressource::Ressource(int id,sf::Texture *texture,bool setTex){
+    setFrameSize(64,64);
+    setImage(texture);
+    
+    setStatusRessource(true);
+    setAlchemyRessource(false);
+    setCookingRessource(false);
+    setCraftingRessource(false);
+    
+    setIdentifier(id,false);
+//    this->setPos(x*64,y*64);
+}
+
 void Ressource::setIdentifier(int id){
+    //std::cout<<"this too?"<<std::endl;
     if(id == RES_WOOD){
         this->setFrameRect(0);
     }
@@ -55,8 +69,38 @@ void Ressource::setIdentifier(int id){
         setCraftingRessource(true);
     }
     else{
-        this->setFrameRect(0);
-       std::cout<<"No id found for RESSOURCE"<<std::endl;
+       this->setFrameRect(0);
+       std::cout<<"No id found for RESSOURCE"<<id<<std::endl;
+    }
+    this->identifier = id;
+}
+
+void Ressource::setIdentifier(int id, bool setTex){
+    if(setTex){
+        if(id == RES_WOOD){
+            this->setFrameRect(0);
+        }
+        else if(id == RES_GOLD_ORE){
+            this->setFrameRect(4);
+        }
+        else if(id == RES_IRON_ORE){
+            this->setFrameRect(3);
+        }
+        else if(id == RES_SILVER_ORE){
+            this->setFrameRect(5);
+        }
+        else if(id == RES_STONE){
+            this->setFrameRect(1);
+        }
+        else if(id == RES_LEATHER){
+            this->setFrameRect(2);
+            setStatusRessource(false);
+            setCraftingRessource(true);
+        }
+        else{
+            this->setFrameRect(0);
+           std::cout<<"No id found for RESSOURCE"<<id<<std::endl;
+        }
     }
     this->identifier = id;
 }

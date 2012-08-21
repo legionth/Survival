@@ -83,7 +83,7 @@ void Inventory::removeRessource(Button* button){
     button->setRessource(0,false);
 }
 
- void Inventory::decrease(std::map<int,int> decreaseRes){
+ void Inventory::decreaseBuildingRessources(std::map<int,int> decreaseRes){
      int size = decreaseRes.size();
      
      for(int i = 0; i < size; i++){
@@ -99,9 +99,25 @@ void Inventory::removeRessource(Button* button){
      }
  }
  
- bool Inventory::checkRessources(std::map<int,int> checkRes){
+  void Inventory::decreaseAlchemyRessources(std::map<int,int> decreaseRes){
+     int size = decreaseRes.size();
+     
+     for(int i = 0; i < size; i++){
+         for(int j = 0; j < decreaseRes[i + 50]; j++ ){
+             for(int button = 0; button < getButtons().size(); button++){
+               //  std::cout<<"decreaseRes"<<decreaseRes[i]<<std::endl;
+                 if(decreaseRes[i + 50] > 0 && getButtons()[button]->getRessource() != 0 && getButtons()[button]->getRessource()->getIdentifier() == i + 50){
+                     removeRessource(getButtons()[button]);
+                     decreaseRes[i + 50] -= 1;
+                 }
+             }
+         }
+     }
+ }
+ 
+bool Inventory::checkRessourcesBuilding(std::map<int,int> checkRes){
      int size = checkRes.size();
-     bool ret = false;
+     bool ret = true;
      
      for(int i = 0; i < size; i++){
          for(int j = 0; j < checkRes[i]; j++ ){
@@ -111,9 +127,7 @@ void Inventory::removeRessource(Button* button){
                  }
              }
               
-             if(checkRes[i] <= 0){
-                 ret = true;
-             }else{
+             if(checkRes[i] > 0){
                  ret = false;
              }
          }
@@ -121,7 +135,30 @@ void Inventory::removeRessource(Button* button){
      
      
      return ret;
- }
+}
+
+bool Inventory::checkRessourcesAlchemy(std::map<int,int> checkRes){
+     int size = checkRes.size();
+     bool ret = true;
+     
+     for(int i = 0; i < size; i++){
+         for(int j = 0; j < checkRes[i + 50]; j++ ){
+             for(int button = 0; button < getButtons().size(); button++){
+                 if(checkRes[i + 50] > 0 && getButtons()[button]->getRessource() != 0 && getButtons()[button]->getRessource()->getIdentifier() == i + 50){
+                     checkRes[i + 50] -= 1;
+                 }
+             }
+              
+             if(checkRes[i + 50 ] > 0){
+                 ret = false;
+             }
+         }
+     }
+     
+     
+     return ret;
+}
+ 
  
 int Inventory::countItems(){
     int ret = 0;

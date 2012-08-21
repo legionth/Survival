@@ -9,13 +9,14 @@
 #include "Menu.h"
 #include "BuildingButton.h"
 #include "BuildingMenu.h"
+#include "AlchemyRessource.h"
 
 Game::Game() {
     window = new sf::RenderWindow(sf::VideoMode((5*FRAME_WIDTH)+(2*FRAME_WIDTH), (5*FRAME_HEIGHT)+(2*FRAME_HEIGHT)), "Survival Game");
     
     initImages();
     initWorld();
-    initBuildMenu();
+    initCraftingMenus();
     initItemMenu();
     initStatusMenu();
     initInventory();
@@ -30,6 +31,9 @@ Game::Game() {
     
     res2 = new Ressource(RES_STONE,images["ressources"]);
     getTileMap(0,0)->getTile(3,2)->setRessource(res2);
+    
+    AlchemyRessource* res3 = new AlchemyRessource(RES_SNAKE_HEAD,images["alchemyRessources"]);
+    getTileMap(0,0)->getTile(3,3)->setRessource(res3);
   //  this->spawnEnemy();
     enemies.push_back(new Enemy(world->getTileMap(0,0),0,0,images["enemyPig"],9,0,images["ressources"]));
     pressedW = false;
@@ -106,7 +110,7 @@ void Game::run(){
                         disableTypedKey();
                     }
                 }
-                else if(event.key.code == sf::Keyboard::I){
+                else if(event.key.code == sf::Keyboard::I || event.key.code == sf::Keyboard::Tab){
                     inventory->show();
                 }
                 else if(event.key.code == sf::Keyboard::E && !player->haveToWalk()){
@@ -173,102 +177,119 @@ void Game::run(){
                 
                 
                 // Toggle throug button Menu
-                if(event.key.code == sf::Keyboard::Right){
-                    BuildingButton* selectedButton = 0;
-                    int number = 0;
-                    int count = buildMenu->getButtons().size();
+                if(event.key.code == sf::Keyboard::Right || event.key.code == sf::Keyboard::Left){
+                    int pressDirection = 0;
                     
-                    for(int i = 0; i < count; i++){
-                        if(buildMenu->getButton(i)->isPressed()){
-                            selectedButton = buildMenu->getButton(i);
-                            number = i;
-                        }
+                    if(event.key.code == sf::Keyboard::Right){
+                        pressDirection = 1;
+                    }else{
+                        pressDirection = -1;
                     }
                     
-                    if(number + 1 < count){
-                        selectedButton->press();
-                        buildMenu->getButton(number + 1)->press();
+                    if(currentMenu == buildMenu){
+                        BuildingButton* selectedButton = 0;
+                        int number = 0;
+                        int count = buildMenu->getButtons().size();
+
+                        for(int i = 0; i < count; i++){
+                            if(buildMenu->getButton(i)->isPressed()){
+                                selectedButton = buildMenu->getButton(i);
+                                number = i;
+                            }
+                        }
+
+                        if(number + pressDirection < count && number + pressDirection >= 0){
+                            selectedButton->press();
+                            buildMenu->getButton(number + pressDirection)->press();
+                        }
+                    }
+                    else if(currentMenu == alchemyMenu){
+                        AlchemyButton* selectedButton = 0;
+                        int number = 0;
+                        int count = alchemyMenu->getButtons().size();
+
+                        for(int i = 0; i < count; i++){
+                            if(alchemyMenu->getButton(i)->isPressed()){
+                                selectedButton = alchemyMenu->getButton(i);
+                                number = i;
+                            }
+                        }
+
+                        if(number + pressDirection < count && number + pressDirection >= 0){
+                            selectedButton->press();
+                            alchemyMenu->getButton(number + pressDirection)->press();
+                        }
                     }
                  }
                 
-                if(event.key.code == sf::Keyboard::Left){
-                    BuildingButton* selectedButton = 0;
-                    int number = 0;
-                    int count = buildMenu->getButtons().size();
-                    
-                    for(int i = 0; i < count; i++){
-                        if(buildMenu->getButton(i)->isPressed()){
-                            selectedButton = buildMenu->getButton(i);
-                            number = i;
-                        }
-                    }
-                    
-                    if(number - 1 >= 0){
-                        selectedButton->press();
-                        buildMenu->getButton(number - 1)->press();
-                    }
-                 }
+              
                 
                 // Build a Building :P
-                if(event.key.code == sf::Keyboard::Return){
-                    
-                    for(int i = 0; i < buildMenu->getButtons().size(); i++){
-                        if(buildMenu->getButton(i)->isPressed()){
-                            Building *building = buildMenu->getButton(i)->getBuilding();
-                            int currentDirection = player->getCurrentDirection();
-                            
-                            int posX = player->getXPos();
-                            int posY = player->getYPos();
-                            TileMap* map = player->getTileMap();
-                            
+                else if(event.key.code == sf::Keyboard::Return){
+                    if(currentMenu == buildMenu){
+                        for(int i = 0; i < buildMenu->getButtons().size(); i++){
+                            if(buildMenu->getButton(i)->isPressed()){
+                                Building *building = buildMenu->getButton(i)->getBuilding();
+                                int currentDirection = player->getCurrentDirection();
 
-                          //  std::map<int,int> ressourcesPlayer = player->getRessources();
-                            std::map<int,int> ressourcesBuilding = building->getRessources();
-                        //    int size = ressourcesPlayer.size();
-                            
-                            bool canBuild = inventory->checkRessources(ressourcesBuilding);
-                            
-                            if(canBuild){
-                                switch(currentDirection){
-                                    case MOVE_UP:
-                                        if(posY - 1 > 0){
-                                            map->getTile(posX,posY - 1)->setBuilding(building);
-                                        }
-                                        break;
-                                    case MOVE_DOWN:
-                                        if(posY + 1 < 4){
-                                            map->getTile(posX,posY + 1)->setBuilding(building);
-                                        }
-                                        break;
-                                    case MOVE_RIGHT:
-                                        if(posX + 1 < 4){
-                                            map->getTile(posX + 1,posY)->setBuilding(building);
-                                        }
-                                        break;
-                                    case MOVE_LEFT:
-                                        if(posX - 1 > 0){
-                                            map->getTile(posX - 1,posY)->setBuilding(building);
-                                        }
-                                        break;
-                                    default:
-                                        std::cout<<"break up building"<<std::endl;
-                                        break;    
+                                int posX = player->getXPos();
+                                int posY = player->getYPos();
+                                TileMap* map = player->getTileMap();
+
+
+                              //  std::map<int,int> ressourcesPlayer = player->getRessources();
+                                std::map<int,int> ressourcesBuilding = building->getRessources();
+                            //    int size = ressourcesPlayer.size();
+
+                                bool canBuild = inventory->checkRessourcesBuilding(ressourcesBuilding);
+
+                                if(canBuild){
+                                    switch(currentDirection){
+                                        case MOVE_UP:
+                                            if(posY - 1 > 0){
+                                                map->getTile(posX,posY - 1)->setBuilding(building);
+                                            }
+                                            break;
+                                        case MOVE_DOWN:
+                                            if(posY + 1 < 4){
+                                                map->getTile(posX,posY + 1)->setBuilding(building);
+                                            }
+                                            break;
+                                        case MOVE_RIGHT:
+                                            if(posX + 1 < 4){
+                                                map->getTile(posX + 1,posY)->setBuilding(building);
+                                            }
+                                            break;
+                                        case MOVE_LEFT:
+                                            if(posX - 1 > 0){
+                                                map->getTile(posX - 1,posY)->setBuilding(building);
+                                            }
+                                            break;
+                                        default:
+                                            std::cout<<"break up building"<<std::endl;
+                                            break;    
+                                    }
+                                    //inventory->decreaseBuildingRessources(ressourcesBuilding);
                                 }
-                                
-                         //       player->decreaseRessources(ressourcesBuilding);
-                         //       ressourcesPlayer = player->getRessources();
-                                inventory->decrease(ressourcesBuilding);
-                                
-                         /*       for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
-                                        ItemButton* itemButton = itemMenu->getButton(i);
-                                        itemButton->setCount(ressourcesPlayer[itemButton->getId()]);
-                                //        std::cout<<"id"<<itemButton->getId()<<"="<<ressourcesPlayer[itemButton->getId()]<<std::endl;
-                                }
-                        */
                             }
                         }
                     }
-                }         
+                    else if (currentMenu == alchemyMenu){
+                        for(int i = 0; i < alchemyMenu->getButtons().size(); i++){
+                            if(alchemyMenu->getButton(i)->isPressed()){
+                                Potion* potion = alchemyMenu->getButton(i)->getPotion();
+                                potion->setImage(images["potions"]);
+                                std::map<int,int> ressourcesPotion = potion->getRessources();
+                                bool canProduce = inventory->checkRessourcesAlchemy(ressourcesPotion);
+                                std::cout<<"canProduce"<<canProduce<<std::endl;
+                                if(canProduce){
+                                    inventory->decreaseAlchemyRessources(ressourcesPotion);
+                                    inventory->addRessource(potion);
+                                }
+                            }
+                        }
+                    }
+                }
             }
             else if(event.type == sf::Event::KeyReleased && (event.key.code == sf::Keyboard::W ||
                                                              event.key.code == sf::Keyboard::D ||
@@ -280,20 +301,13 @@ void Game::run(){
             else if(event.type == sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button == sf::Mouse::Left){
                     if(inventory->isShown()){
-                        std::cout<<"mousePos.x"<<event.mouseButton.x<<std::endl;
-                        std::cout<<"mousePos.y"<<event.mouseButton.y<<std::endl;
                         for(int i = 0; i < inventory->getInventoryButtons().size(); i++){
                             Button* button = inventory->getInventoryButtons()[i];
                             int xMouse = event.mouseButton.x;
                             int yMouse = event.mouseButton.y;
                             int xSprite = button->getSprite()->getPosition().x;
                             int ySprite = button->getSprite()->getPosition().y;
-                            
-                            std::cout<<"sprite.x"<<xSprite<<std::endl;
-                           // std::cout<<"sprite.x + w"<<button->getFrameWidth()<<std::endl;
-                            std::cout<<"sprite.y"<<ySprite<<std::endl;
-                            //std::cout<<"sprite.y + h"<<button->getFrameHeiight()<<std::endl;
-                            
+                                                      
                             if(xSprite <= xMouse && 
                                xSprite + button->getFrameWidth() >= xMouse &&
                                ySprite <= yMouse && 
@@ -301,7 +315,20 @@ void Game::run(){
                                ){
                                 
                                 button->press();
-                                std::cout<<"press"<<std::endl;
+                                
+                                if(button->getId() == INVENTORY_BUILD){
+                                    currentMenu = buildMenu;
+                                }
+                                else if(button->getId() == INVENTORY_ALCHEMY){
+                                    currentMenu = alchemyMenu;
+
+                                }
+                                // Unselect other buttons
+                                for(int j = 0; j < inventory->getInventoryButtons().size(); j++){
+                                    if(inventory->getInventoryButton(j)->isPressed() && button != inventory->getInventoryButton(j)){
+                                        inventory->getInventoryButton(j)->press();
+                                    }
+                                }
                             }
                         }
                     }
@@ -318,10 +345,11 @@ void Game::run(){
         }
         
         generateRessoruces();
+        generateAlchemyRessources();
         spawnEnemy();
         
         if(player->haveToAttack()){
-                player->stopAttackAnimation();
+            player->stopAttackAnimation();
         }
         
         
@@ -387,7 +415,6 @@ void Game::run(){
             }
         }
         
-        window->draw(*buildMenu->getSprite());
         window->draw(*itemMenu->getSprite());
         window->draw(*statusMenu->getSprite());
         
@@ -407,8 +434,23 @@ void Game::run(){
             window->draw(*statusMenu->getToolSlot()->getTool()->getSprite());
         }
         // Menu drawing
-        for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
-            window->draw(*buildMenu->getButton(i)->getSprite());
+        for(int i = 0; i < inventory->getInventoryButtons().size(); i++){
+          //  std::cout<<"id="<<inventory->getInventoryButton(i)->getId()<<std::endl;    
+            if(inventory->getInventoryButton(i)->getId() == INVENTORY_BUILD && inventory->getInventoryButton(i)->isPressed()){
+                window->draw(*buildMenu->getSprite());
+                
+                for(int i = 0 ; i < buildMenu->getButtons().size(); i++){
+                    window->draw(*buildMenu->getButton(i)->getSprite());
+                }
+            }
+            
+            if(inventory->getInventoryButton(i)->getId() == INVENTORY_ALCHEMY && inventory->getInventoryButton(i)->isPressed()){
+                window->draw(*alchemyMenu->getSprite());
+                
+                for(int i = 0 ; i < alchemyMenu->getButtons().size(); i++){
+                        window->draw(*alchemyMenu->getButton(i)->getSprite());
+                }
+            }
         }
         
         for(int i = 0 ; i < itemMenu->getButtons().size(); i++){
@@ -474,6 +516,26 @@ void Game::generateRessoruces(){
     }
 }
 
+void Game::generateAlchemyRessources(){
+    if(ressourceAlchemyClock.getElapsedTime().asSeconds() > 10){
+        int randomXTileMap = rand() % 5;
+        int randomYTileMap = rand() % 5;
+        int randomXTile = rand() % 5;
+        int randomYTile = rand() % 5;
+        
+        Tile* tile = world->getTileMap(randomXTileMap,randomYTileMap)->getTile(randomXTile,randomYTile);
+        
+        if(tile->isWalkAble() && tile->getRessource() == 0){
+            int res = (rand() % 4) + 50;
+            AlchemyRessource* ressource = new AlchemyRessource(res,images["alchemyRessources"]);
+            
+            tile->setRessource(ressource);
+            ressourceAlchemyClock.restart();
+           // std::cout<<"generate ACLHEMYRssource id"<<res<<" mapx="<<randomXTileMap<<"map y"<<randomYTileMap<<" x="<<randomXTile<<"y="<<randomYTile<<std::endl;
+        }
+    }
+}
+
 
 BuildingButton* Game::getSelectedBuildingButton(){
     return this->selectedButton;
@@ -502,7 +564,6 @@ void Game::spawnEnemy(){
         }
         
         if(tex != 0){
-            
             if(getTileMap(randomXTileMap,randomXTile)->getTile(randomXTile,randomYTile)->isWalkAble()){
                 enemies.push_back(new Enemy(world->getTileMap(randomXTileMap,randomYTileMap),randomXTile,randomYTile,tex,9,0,images["ressources"]));
             }
@@ -566,6 +627,10 @@ void Game::initImages(){
     images["buttonStatus"]      = this->loadImage("button_status.png");
     images["inventory"]         = this->loadImage("inventory.png");
     images["slot"]              = this->loadImage("slot.png");
+    images["alchemyRessources"] = this->loadImage("alchemy_ressources.png");
+    images["menuAlchemy"]       = this->loadImage("menu_alchemy.png");
+    images["buttonAlchemy"]     = this->loadImage("button_alchemy.png");
+    images["potions"]           = this->loadImage("potion.png");
 }
 
 void Game::initWorld(){
@@ -602,7 +667,7 @@ void Game::initWorld(){
     getTileMap(4,4)->loadTileMap("map4_4.map");
 }
 
-void Game::initBuildMenu(){
+void Game::initCraftingMenus(){
     buildMenu = new BuildingMenu(FRAME_WIDTH * 5,0,128,512);
     buildMenu->setImage(images["menuBuilding"]);
     
@@ -615,6 +680,18 @@ void Game::initBuildMenu(){
     
     button = new BuildingButton(BUTTON_BUILDING_RECT_ANVIL,images["buttonBuilding"],BUILDING_RECT_ANVIL,images["buildings"],"fireplace",BUILDING_FIREPLACE);
     buildMenu->addButton(button);
+    
+    alchemyMenu = new AlchemyMenu(FRAME_WIDTH * 5,0,128,512);
+    alchemyMenu->setImage(images["menuAlchemy"]);
+    
+    AlchemyButton *alcButton = new AlchemyButton(BUTTON_ALCHEMY_RECT_HEAL_POTION,images["buttonAlchemy"],POTION_HEAL);
+    alchemyMenu->addButton(alcButton);
+    alcButton->press();
+    
+    alcButton = new AlchemyButton(BUTTON_ALCHEMY_RECT_POISON_POTION,images["buttonAlchemy"],POTION_POISON);
+    alchemyMenu->addButton(alcButton);
+    
+    currentMenu = buildMenu;
 }
 
 void Game::initItemMenu(){
@@ -691,6 +768,10 @@ void Game::initInventory(){
     
     invButton = new InventoryButton(INVENTORY_COOK,RECT_INVENTORY_COOK,images["buttonInventory"]);
     inventory->addInventoryButton(invButton);
+    
+    invButton = new InventoryButton(INVENTORY_BUILD,RECT_INVENTORY_BUILD,images["buttonInventory"]);
+    inventory->addInventoryButton(invButton);
+    invButton->press();
     
     // Empty Buttons
     for(int i = 0; i < inventory->getMaxItems(); i++){

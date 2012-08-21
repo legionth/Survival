@@ -13,10 +13,13 @@ class Ressource : public GameObject{
 public:
     Ressource();
     Ressource(int id,sf::Texture* texture);
+     Ressource(int id,sf::Texture* texture,bool setTex);
     Ressource(const Ressource& orig);
     virtual ~Ressource();
     
     void setIdentifier(int id);
+    void setIdentifier(int id, bool setTex);
+
     int getIdentifier();
     
     bool isStatusRessource();

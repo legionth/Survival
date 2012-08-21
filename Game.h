@@ -16,6 +16,8 @@
 #include "StatusMenu.h"
 #include "Enemy.h"
 #include "Inventory.h"
+#include "CraftingMenu.h"
+#include "AlchemyMenu.h"
 
 #ifndef GAME_H 
 #define	GAME_H
@@ -27,7 +29,6 @@ public:
     virtual ~Game();
     
     void run();
-    void generateRessoruces();
     Player* getPlayer();
     TileMap* getCurrentTileMap();
     TileMap* getTileMap(int x, int y);
@@ -37,11 +38,12 @@ public:
     BuildingButton* getSelectedBuildingButton();
     void setSelectedBuildingButton(BuildingButton* button);
     void spawnEnemy();
-    
+    void generateRessoruces();
+    void generateAlchemyRessources();
     // init functions
     void initImages();          // should be called first
     void initWorld();
-    void initBuildMenu();
+    void initCraftingMenus();
     void initItemMenu();
     void initStatusMenu();
     void initInventory();
@@ -51,7 +53,10 @@ private:
     Player* player;
     std::map<std::string,sf::Texture*> images;
     sf::Clock ressourceClock;
+    sf::Clock ressourceAlchemyClock;
+    
     BuildingMenu* buildMenu;
+    AlchemyMenu* alchemyMenu;
     StatusMenu* statusMenu;
     ItemMenu* itemMenu;
     Inventory* inventory;
@@ -67,7 +72,8 @@ private:
     bool pressedD;
     
     void disableTypedKey();
-    void disableTypedKey(char key);             
+    void disableTypedKey(char key);
+    Menu* currentMenu;
 
 };
 
