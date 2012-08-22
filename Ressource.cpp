@@ -12,6 +12,13 @@
 Ressource::Ressource() {
     identifier = 0; 
     setFrameSize(64,64);
+    
+    setStatusRessource(true);
+    setAlchemyRessource(false);
+    setCookingRessource(false);
+    setCraftingRessource(false);
+    setPotion(false);
+    setUsable(false);
 }
 
 Ressource::Ressource(const Ressource& orig) {
@@ -28,6 +35,8 @@ Ressource::Ressource(int id,sf::Texture *texture){
     setAlchemyRessource(false);
     setCookingRessource(false);
     setCraftingRessource(false);
+    setPotion(false);
+    setUsable(false);
     
     setIdentifier(id);
 //    this->setPos(x*64,y*64);
@@ -41,6 +50,8 @@ Ressource::Ressource(int id,sf::Texture *texture,bool setTex){
     setAlchemyRessource(false);
     setCookingRessource(false);
     setCraftingRessource(false);
+    setPotion(false);
+    setUsable(false);
     
     setIdentifier(id,false);
 //    this->setPos(x*64,y*64);
@@ -125,6 +136,10 @@ bool Ressource::isStatusRessource(){
     return this->statusRessource;
 }
 
+bool Ressource::isPotion(){
+    return this->potion;
+}
+
 void Ressource::setAlchemyRessource(bool b){
     this->alchemyRessource = b;
 }
@@ -141,4 +156,20 @@ void Ressource::setStatusRessource(bool b){
     this->statusRessource = b;
 }
 
+void Ressource::setPotion(bool b){
+    this->potion = b;
+}
+
+bool Ressource::use(LivingObject* player){
+    std::cout<<"res use"<<std::endl;
+    return false;
+}
+
+void Ressource::setUsable(bool b){
+    this->usable = b;
+}
+
+bool Ressource::isUsable(){
+    return this->usable;
+}
 

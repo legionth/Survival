@@ -8,7 +8,9 @@
 #ifndef RESSOURCE_H
 #define	RESSOURCE_H
 #include "GameObject.h"
+//#include "LivingObject.h"
 
+class LivingObject;
 class Ressource : public GameObject{
 public:
     Ressource();
@@ -26,11 +28,17 @@ public:
     bool isAlchemyRessource();
     bool isCraftingRessource();
     bool isCookingRessource();
+    bool isPotion();
+    bool isUsable();
     
     void setStatusRessource(bool b);
     void setAlchemyRessource(bool b);
     void setCraftingRessource(bool b);
     void setCookingRessource(bool b);
+    void setPotion(bool b);
+    void setUsable(bool b);
+    
+    bool use(LivingObject* player);
 private:
     int identifier;
     
@@ -38,7 +46,9 @@ private:
     bool alchemyRessource;
     bool craftingRessource;
     bool cookingRessource;
-
+    bool potion;
+    
+    bool usable;
 };
 
 #endif	/* RESSOURCE_H */

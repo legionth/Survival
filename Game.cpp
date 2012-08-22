@@ -281,10 +281,12 @@ void Game::run(){
                                 potion->setImage(images["potions"]);
                                 std::map<int,int> ressourcesPotion = potion->getRessources();
                                 bool canProduce = inventory->checkRessourcesAlchemy(ressourcesPotion);
-                                std::cout<<"canProduce"<<canProduce<<std::endl;
+                                 //std::cout<<"canProduce"<<canProduce<<std::endl;
                                 if(canProduce){
                                     inventory->decreaseAlchemyRessources(ressourcesPotion);
                                     inventory->addRessource(potion);
+                                 //   potion->use(player);
+                                    bool b = inventory->getButton(0)->(Potion)getRessource()->use(player);
                                 }
                             }
                         }
@@ -331,6 +333,32 @@ void Game::run(){
                                 }
                             }
                         }
+                                                // Ressources
+                        std::cout<<"through buttons"<<std::endl;
+                         for(int i = 0; i < inventory->getButtons().size(); i++){
+                            Button* button = inventory->getButtons()[i];
+                            int xMouse = event.mouseButton.x;
+                            int yMouse = event.mouseButton.y;
+                            int xSprite = button->getSprite()->getPosition().x;
+                            int ySprite = button->getSprite()->getPosition().y;
+                             
+                            if(xSprite <= xMouse && 
+                               xSprite + button->getFrameWidth() >= xMouse &&
+                               ySprite <= yMouse && 
+                               ySprite + button->getFrameHeight() >= yMouse
+                               ){
+                                Ressource* res = button->getRessource();
+                                
+                                if(res != 0){
+                                    bool used = res->use(this->player);
+                                    std::cout<<"item"<<i<<"used"<<used<<std::endl;
+                                    std::cout<<"is pot"<<res->isPotion()<<std::cout;
+                                    if(used){
+                                        inventory->removeRessource(button);
+                                    }
+                                }
+                            }
+                         }
                     }
                 }   
             }

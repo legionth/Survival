@@ -15,7 +15,7 @@ public:
     AlchemyRessource(const AlchemyRessource& orig);
     virtual ~AlchemyRessource();
     
-    void setIdentifier(int id);
+    void setIdentifier(int id); 
 private:
     
 };

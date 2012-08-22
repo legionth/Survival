@@ -10,7 +10,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
 #include "Game.h"
-
 /*
  * 
  */

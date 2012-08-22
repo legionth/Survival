@@ -171,11 +171,11 @@ void LivingObject::move(int direction,World *world){
                     this->setCurrentDirection(MOVE_LEFT);
             }        
         }
-        std::cout<<"walkit"<<getWalkIterator()<<std::endl;
+       // std::cout<<"walkit"<<getWalkIterator()<<std::endl;
         if(getWalkIterator() >= FRAME_WIDTH || changedMap){                                   //@TODO: Iterate everytime. Stop this !
             resetWalkIterator();
             stopAnimation();
-            std::cout<<"no more walking"<<std::endl;
+          //  std::cout<<"no more walking"<<std::endl;
             //setToWalk(false);
         }else{
             setWalkIterator(getWalkIterator() + WALK_ITERATOR);
