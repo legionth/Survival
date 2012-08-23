@@ -9,6 +9,7 @@
 #define	BUTTON_H
 #include "GameObject.h"
 #include "Ressource.h"
+#include "Potion.h"
 
 class Button : public GameObject {
 public:
@@ -31,6 +32,7 @@ public:
     void setId(int i);
     
     void setRessource(Ressource* res);
+    void setRessource(Potion* res);
     void setRessource(Ressource* res,bool setSprite);
     Ressource* getRessource();
 private:

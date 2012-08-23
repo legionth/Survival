@@ -73,6 +73,16 @@ void Inventory::addRessource(Ressource* res){
     }
 }
 
+void Inventory::addRessource(Potion* res){
+    bool set = false;
+    
+    for(int i = 0; i < getButtons().size(); i++){
+        if(getButton(i)->getRessource() == 0 && !set){
+            getButton(i)->setRessource(res);
+            set = true;
+        }
+    }
+}
 void Inventory::addButton(Button* button){
     Menu::addButton(button);
 }

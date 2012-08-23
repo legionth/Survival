@@ -5,6 +5,7 @@
  * Created on 30. April 2012, 10:44
  */
 
+#include <typeinfo>
 #include "Game.h"
 #include "Menu.h"
 #include "BuildingButton.h"
@@ -285,8 +286,7 @@ void Game::run(){
                                 if(canProduce){
                                     inventory->decreaseAlchemyRessources(ressourcesPotion);
                                     inventory->addRessource(potion);
-                                 //   potion->use(player);
-                                    bool b = inventory->getButton(0)->(Potion)getRessource()->use(player);
+//                                    bool b = inventory->getButton(0)->(Potion)getRessource()->use(player);
                                 }
                             }
                         }
@@ -350,9 +350,16 @@ void Game::run(){
                                 Ressource* res = button->getRessource();
                                 
                                 if(res != 0){
-                                    bool used = res->use(this->player);
-                                    std::cout<<"item"<<i<<"used"<<used<<std::endl;
-                                    std::cout<<"is pot"<<res->isPotion()<<std::cout;
+                                    bool used = false;
+                                    
+                                    if(res->isPotion()){
+                                        Potion* ressource = reinterpret_cast<Potion*>(res);
+                                        used = ressource->use(this->player);
+                                    }else{
+                                        Ressource* ressource = res;
+                                        used = ressource->use(this->player);
+                                    }
+                                    
                                     if(used){
                                         inventory->removeRessource(button);
                                     }

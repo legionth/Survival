@@ -10,7 +10,7 @@
 
 #include "Menu.h"
 #include "InventoryButton.h"
-
+#include "Potion.h"
 class Inventory : public Menu {
 public:
     Inventory();
@@ -24,6 +24,7 @@ public:
     InventoryButton* getCurrentPressed();
     void setCurrentPressed(InventoryButton* cur);
     void addRessource(Ressource* res);                                          // Add ressource to next free button
+    void addRessource(Potion* res);
     void addButton(Button* button);
     int getMaxItems();
     void decreaseBuildingRessources(std::map<int,int> decreaseRes);                               // decrease Ressource to given container

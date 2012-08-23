@@ -13,12 +13,10 @@ Potion::Potion(int health,int heal,int atk,int def, float max,int id) {
     this->attackPower = atk;
     this->defense = def;
     this->maxTime = max;
+    this->onTimePotion = true;
     setPotion(true);
     setUsable(true);
-    
-    switch(id){
-        
-    }
+
 }
 
 Potion::Potion(int id){
@@ -37,6 +35,7 @@ Potion::Potion(int id){
             ressources[RES_WASP_DEATH]        = 0;
             ressources[RES_BLADE_LEAF]        = 0;
             this->heal = 2;
+            this->onTimePotion = false;
         break;
         case POTION_POISON:
             ressources[RES_SNAKE_HEAD]        = 3;
@@ -54,13 +53,12 @@ Potion::Potion(const Potion& orig) {
 Potion::~Potion() {
 }
 
-bool Potion::use(LivingObject* player){
+bool Potion::use(Player* player){
     player->setAttackPower(player->getAttackPower() + this->attackPower);
     player->setDefense(player->getDefense() + this->defense);
-    player->setLife(getLife() + this->heal);
+    player->setLife(player->getLife() + this->heal);
     player->setMaxLife(player->getMaxLife());
     timer.restart();
-    std::cout<<"used potions"<<std::endl;
     return true;
 }
 
@@ -74,4 +72,8 @@ float Potion::getCurrentTime(){
 
 std::map<int,int> Potion::getRessources(){
     return this->ressources;
+}
+
+bool Potion::isOnTime(){
+    return this->onTimePotion;
 }

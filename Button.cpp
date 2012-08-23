@@ -114,6 +114,11 @@ void Button::setRessource(Ressource* res){
     this->ressource->getSprite()->setPosition(getSprite()->getPosition().x, getSprite()->getPosition().y);
 }
 
+void Button::setRessource(Potion* res){
+    this->ressource = res;
+    this->ressource->getSprite()->setPosition(getSprite()->getPosition().x, getSprite()->getPosition().y);
+}
+
  void Button::setRessource(Ressource* res,bool setSprite){
     this->ressource = res;
     
