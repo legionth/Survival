@@ -25,6 +25,9 @@ Building::Building(char id,sf::Texture *t,int frameRect){
                 ressources[RES_GOLD_ORE]    = 0;
                 ressources[RES_SILVER_ORE]  = 0;
                 ressources[RES_LEATHER]     = 2;
+                ressources[RES_IRON_BAR]    = 0;
+                ressources[RES_SILVER_BAR]  = 0;
+                ressources[RES_GOLD_BAR]    = 0;
             break;
         case BUILDING_FIREPLACE:
                 ressources[RES_WOOD]        = 2;
@@ -33,6 +36,31 @@ Building::Building(char id,sf::Texture *t,int frameRect){
                 ressources[RES_GOLD_ORE]    = 0;
                 ressources[RES_SILVER_ORE]  = 0;
                 ressources[RES_LEATHER]     = 0;
+                ressources[RES_IRON_BAR]    = 0;
+                ressources[RES_SILVER_BAR]  = 0;
+                ressources[RES_GOLD_BAR]    = 0;
+            break;
+        case BUILDING_SMITH:
+                ressources[RES_WOOD]        = 2;
+                ressources[RES_STONE]       = 5;
+                ressources[RES_IRON_ORE]    = 0;
+                ressources[RES_GOLD_ORE]    = 0;
+                ressources[RES_SILVER_ORE]  = 0;
+                ressources[RES_LEATHER]     = 0;
+                ressources[RES_IRON_BAR]    = 0;
+                ressources[RES_SILVER_BAR]  = 0;
+                ressources[RES_GOLD_BAR]    = 0;
+            break;
+       case BUILDING_ANVIL:
+                ressources[RES_WOOD]        = 0;
+                ressources[RES_STONE]       = 0;
+                ressources[RES_IRON_ORE]    = 0;
+                ressources[RES_GOLD_ORE]    = 0;
+                ressources[RES_SILVER_ORE]  = 0;
+                ressources[RES_LEATHER]     = 0;
+                ressources[RES_IRON_BAR]    = 5;
+                ressources[RES_SILVER_BAR]  = 0;
+                ressources[RES_GOLD_BAR]    = 0;
             break;
         default:
                 ressources[RES_WOOD]        = 0;
@@ -41,7 +69,7 @@ Building::Building(char id,sf::Texture *t,int frameRect){
                 ressources[RES_GOLD_ORE]    = 0;
                 ressources[RES_SILVER_ORE]  = 0;
                 ressources[RES_LEATHER]     = 0;
-            break;
+        break;
     }
     this->setImage(t);
     this->setFrameRect(frameRect);

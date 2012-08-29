@@ -57,20 +57,26 @@ enum StatusButtons{
 
 const int RECT_SLOT_EMPTY                 = 0;
 //id's for the buildings
-const char BUILDING_TENT        = '^';
-const char BUILDING_FIREPLACE	= 'f';
-
+enum BUILDINGS{
+        BUILDING_TENT           = '^',
+        BUILDING_FIREPLACE	= 'f',
+        BUILDING_ANVIL          = 'z',
+        BUILDING_SMITH          = 's'
+};
 
 const int BUILDING_RECT_TENT            = 0;
 const int BUILDING_RECT_FIREPLACE       = 1;
 const int BUILDING_RECT_FIREPLACE_END   = 3;
 const int BUILDING_RECT_ANVIL           = 4;
 const int BUILDING_RECT_HUT             = 5;
+const int BUILDING_RECT_SMITH           = 6;
+const int BUILDING_RECT_SMITH_END       = 8;
 // Button rects
 const int BUTTON_BUILDING_RECT_TENT        = 0;
 const int BUTTON_BUILDING_RECT_FIREPLACE   = 2;
 const int BUTTON_BUILDING_RECT_ANVIL       = 4;
-const int BUTTON_BUILDING_RECT_HUT         = 5;
+const int BUTTON_BUILDING_RECT_HUT         = 8;
+const int BUTTON_BUILDING_RECT_SMITH         = 6;
 // Alchemy button rect
 const int BUTTON_ALCHEMY_RECT_HEAL_POTION        = 0;
 const int BUTTON_ALCHEMY_RECT_POISON_POTION      = 2;

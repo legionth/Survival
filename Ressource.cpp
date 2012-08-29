@@ -13,19 +13,12 @@ Ressource::Ressource() {
     identifier = 0; 
     setFrameSize(64,64);
     
-    setStatusRessource(true);
-    setAlchemyRessource(false);
-    setCookingRessource(false);
-    setCraftingRessource(false);
-    setPotion(false);
-    setUsable(false);
-    setWeapon(false);
-    setTool(false);
+    init();
 }
 
 Ressource::Ressource(Ressource* orig) {    
     setFrameSize(64,64);
-    std::cout<<"wat"<<orig->getIdentifier()<<std::endl;
+    //std::cout<<"wat"<<orig->getIdentifier()<<std::endl;
     //this->setIdentifier(orig->getIdentifier());
     getSprite()->setTexture(*orig->getSprite()->getTexture());
     setStatusRessource(orig->isStatusRessource());
@@ -34,25 +27,19 @@ Ressource::Ressource(Ressource* orig) {
     setCraftingRessource(orig->isCraftingRessource());
     setPotion(orig->isPotion());
     setUsable(orig->isUsable());
-    std::cout<<"muh"<<std::endl;
+
     this->setIdentifier(orig->getIdentifier());
 }
 
 Ressource::~Ressource() {
+    ressources.clear();
 }
 
 Ressource::Ressource(int id,sf::Texture *texture){
     setFrameSize(64,64);
     setImage(texture);
-    
-    setStatusRessource(true);
-    setAlchemyRessource(false);
-    setCookingRessource(false);
-    setCraftingRessource(false);
-    setPotion(false);
-    setUsable(false);
-    setWeapon(false);
-    setTool(false);
+
+    init();
     
     setIdentifier(id);
 //    this->setPos(x*64,y*64);
@@ -62,6 +49,13 @@ Ressource::Ressource(int id,sf::Texture *texture,bool setTex){
     setFrameSize(64,64);
     setImage(texture);
     
+    init();
+    
+    setIdentifier(id,false);
+//    this->setPos(x*64,y*64);
+}
+
+void Ressource::init(){
     setStatusRessource(true);
     setAlchemyRessource(false);
     setCookingRessource(false);
@@ -70,9 +64,7 @@ Ressource::Ressource(int id,sf::Texture *texture,bool setTex){
     setUsable(false);
     setWeapon(false);
     setTool(false);
-    
-    setIdentifier(id,false);
-//    this->setPos(x*64,y*64);
+    setSmith(false);
 }
 
 void Ressource::setIdentifier(int id){
@@ -106,32 +98,19 @@ void Ressource::setIdentifier(int id){
         this->setFrameRect(9);
         ressources[RES_WOOD]            = 2;
         ressources[RES_GOLD_ORE]        = 0;
-        ressources[RES_IRON_ORE]        = 0;
-        ressources[RES_SILVER_ORE]      = 0;
-        ressources[RES_STONE]           = 0;
-        ressources[RES_LEATHER]         = 0;
-        ressources[RES_IRON_BAR]        = 2;
-        ressources[RES_SILVER_BAR]      = 0;
-        ressources[RES_GOLD_BAR]        = 0;
-        
-        this->setCraftingRessource(true);
-    }
-    else if(id == RES_GOLD_BAR){
-        this->setFrameRect(7);
-        ressources[RES_WOOD]            = 2;
-        ressources[RES_GOLD_ORE]        = 0;
-        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 2;
         ressources[RES_SILVER_ORE]      = 0;
         ressources[RES_STONE]           = 0;
         ressources[RES_LEATHER]         = 0;
         ressources[RES_IRON_BAR]        = 0;
         ressources[RES_SILVER_BAR]      = 0;
-        ressources[RES_GOLD_BAR]        = 2;
+        ressources[RES_GOLD_BAR]        = 0;
         
         this->setCraftingRessource(true);
+        this->setSmith(true);
     }
-    else if(id == RES_SILVER_BAR){
-        this->setFrameRect(8);
+    else if(id == RES_GOLD_BAR){
+        this->setFrameRect(7);
         ressources[RES_WOOD]            = 2;
         ressources[RES_GOLD_ORE]        = 0;
         ressources[RES_IRON_ORE]        = 0;
@@ -143,6 +122,22 @@ void Ressource::setIdentifier(int id){
         ressources[RES_GOLD_BAR]        = 0;
         
         this->setCraftingRessource(true);
+        this->setSmith(true);
+    }
+    else if(id == RES_SILVER_BAR){
+        this->setFrameRect(8);
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 2;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 0;
+        ressources[RES_SILVER_BAR]      = 0;
+        ressources[RES_GOLD_BAR]        = 0;
+        
+        this->setCraftingRessource(true);
+        this->setSmith(true);
     }
     else{
        this->setFrameRect(0);
@@ -180,20 +175,41 @@ void Ressource::setIdentifier(int id, bool setTex){
         }
         else if(id == RES_IRON_BAR){
             this->setFrameRect(9);
-            ressources[RES_IRON_ORE]    = 2;
-            ressources[RES_WOOD]        = 2;
+            ressources[RES_WOOD]            = 2;
+            ressources[RES_GOLD_ORE]        = 0;
+            ressources[RES_IRON_ORE]        = 2;
+            ressources[RES_SILVER_ORE]      = 0;
+            ressources[RES_STONE]           = 0;
+            ressources[RES_LEATHER]         = 0;
+            ressources[RES_IRON_BAR]        = 0;
+            ressources[RES_SILVER_BAR]      = 0;
+            ressources[RES_GOLD_BAR]        = 0;
             this->setCraftingRessource(true);
         }
         else if(id == RES_GOLD_BAR){
             this->setFrameRect(7);
-            ressources[RES_GOLD_ORE]    = 2;
-            ressources[RES_WOOD]        = 2;
+            ressources[RES_WOOD]            = 2;
+            ressources[RES_GOLD_ORE]        = 0;
+            ressources[RES_IRON_ORE]        = 0;
+            ressources[RES_SILVER_ORE]      = 0;
+            ressources[RES_STONE]           = 0;
+            ressources[RES_LEATHER]         = 0;
+            ressources[RES_IRON_BAR]        = 0;
+            ressources[RES_SILVER_BAR]      = 2;
+            ressources[RES_GOLD_BAR]        = 0;
             this->setCraftingRessource(true);
         }
         else if(id == RES_SILVER_BAR){
             this->setFrameRect(8);
-            ressources[RES_SILVER_ORE]  = 2;
-            ressources[RES_WOOD]        = 2;
+            ressources[RES_WOOD]            = 2;
+            ressources[RES_GOLD_ORE]        = 0;
+            ressources[RES_IRON_ORE]        = 0;
+            ressources[RES_SILVER_ORE]      = 2;
+            ressources[RES_STONE]           = 0;
+            ressources[RES_LEATHER]         = 0;
+            ressources[RES_IRON_BAR]        = 0;
+            ressources[RES_SILVER_BAR]      = 0;
+            ressources[RES_GOLD_BAR]        = 0;
             this->setCraftingRessource(true);
         }
         else{
@@ -265,7 +281,7 @@ void Ressource::setTool(bool b){
 }
 
 bool Ressource::use(LivingObject* player){
-    std::cout<<"res use"<<std::endl;
+    //std::cout<<"res use"<<std::endl;
     return false;
 }
 
@@ -281,3 +297,19 @@ std::map<int,int> Ressource::getRessources(){
     return this->ressources;
 }
 
+
+bool Ressource::needFire(){
+    return this->fire;
+}
+
+bool Ressource::needSmith(){
+    return this->smith;
+}
+
+void Ressource::setSmith(bool b){
+    this->smith = b;
+}
+
+void Ressource::setFire(bool b){
+    this->fire = b;
+}

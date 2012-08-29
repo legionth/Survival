@@ -27,10 +27,10 @@ Game::Game() {
     Ressource* res2 = new Ressource(RES_WOOD,images["ressources"]);
     getTileMap(0,0)->getTile(1,1)->setRessource(res2);
     
-    res2 = new Ressource(RES_STONE,images["ressources"]);
+    res2 = new Ressource(RES_IRON_ORE,images["ressources"]);
     getTileMap(0,0)->getTile(2,2)->setRessource(res2);
     
-    res2 = new Ressource(RES_STONE,images["ressources"]);
+    res2 = new Ressource(RES_IRON_ORE,images["ressources"]);
     getTileMap(0,0)->getTile(3,2)->setRessource(res2);
     
     AlchemyRessource* res3 = new AlchemyRessource(RES_SNAKE_HEAD,images["alchemyRessources"]);
@@ -770,7 +770,10 @@ void Game::initCraftingMenus(){
     button = new BuildingButton(BUTTON_BUILDING_RECT_FIREPLACE,images["buttonBuilding"],BUILDING_RECT_FIREPLACE,images["buildings"],"fireplace",BUILDING_FIREPLACE);
     buildMenu->addButton(button);
     
-    button = new BuildingButton(BUTTON_BUILDING_RECT_ANVIL,images["buttonBuilding"],BUILDING_RECT_ANVIL,images["buildings"],"fireplace",BUILDING_FIREPLACE);
+    button = new BuildingButton(BUTTON_BUILDING_RECT_ANVIL,images["buttonBuilding"],BUILDING_RECT_ANVIL,images["buildings"],"smith",BUILDING_ANVIL);
+    buildMenu->addButton(button);
+    
+    button = new BuildingButton(BUTTON_BUILDING_RECT_SMITH,images["buttonBuilding"],BUILDING_RECT_SMITH,images["buildings"],"fireplace",BUILDING_SMITH);
     buildMenu->addButton(button);
     
     alchemyMenu = new AlchemyMenu(FRAME_WIDTH * 5,0,128,512);

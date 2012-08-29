@@ -160,6 +160,13 @@ void Tile::setBuilding(Building* building){
             setWalkAble(true);
             building->startAnimation(BUILDING_RECT_FIREPLACE,BUILDING_RECT_FIREPLACE_END);
             break;
+        case BUILDING_SMITH:
+            setWalkAble(false);
+            building->startAnimation(BUILDING_RECT_SMITH,BUILDING_RECT_SMITH_END);
+            break;
+        case BUILDING_ANVIL:
+            setWalkAble(false);
+            break;
     }
 }
 

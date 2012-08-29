@@ -30,8 +30,8 @@ Potion::Potion(int id){
     
     switch(id){
         case POTION_HEAL:
-            ressources[RES_SNAKE_HEAD]        = 1;
-            ressources[RES_EVER_GREEN]        = 0;
+            ressources[RES_SNAKE_HEAD]        = 0;
+            ressources[RES_EVER_GREEN]        = 3;
             ressources[RES_WASP_DEATH]        = 0;
             ressources[RES_BLADE_LEAF]        = 0;
             this->heal = 2;

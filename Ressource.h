@@ -19,6 +19,7 @@ public:
     Ressource(Ressource* orig);
     virtual ~Ressource();
     
+    void init();
     void setIdentifier(int id);
     void setIdentifier(int id, bool setTex);
 
@@ -32,6 +33,8 @@ public:
     bool isUsable();
     bool isWeapon();
     bool isTool();
+    bool needSmith();
+    bool needFire();
     
     void setStatusRessource(bool b);
     void setAlchemyRessource(bool b);
@@ -41,6 +44,9 @@ public:
     void setUsable(bool b);
     void setWeapon(bool b);
     void setTool(bool b);
+    
+    void setFire(bool b);
+    void setSmith(bool);
     
     bool use(LivingObject* player);
     
@@ -55,6 +61,9 @@ private:
     bool potion;
     bool weapon;
     bool tool;
+    
+    bool smith;
+    bool fire;
     
     bool usable;
 protected:

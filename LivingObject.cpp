@@ -33,7 +33,7 @@ void LivingObject::move(int direction,World *world){
     sf::Sprite *sprite = this->getSprite();
     bool changedMap = false;
    // std::cout<<"move"<<std::endl;
-    if(moveClock.getElapsedTime().asSeconds() > 0.15f && !haveToAttack()){
+    if(moveClock.getElapsedTime().asSeconds() > 0.1f && !haveToAttack()){
         if(direction == MOVE_UP && (this->getYPos() - 1 >= 0 || this->getTileMap()->getYPos() - 1 >= 0)){
             
             if(this->getYPos() - 1 < 0 || getTileMap()->getTile(getXPos(),getYPos()-1)->isWalkAble() ){
