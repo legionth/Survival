@@ -9,16 +9,25 @@
 #define	WEAPONTOOL_H
 
 #include "Tool.h"
+#include "Player.h"
 
 class WeaponTool : public Tool{
 public:
     WeaponTool(int id, int atk, bool distance, bool melee, bool magic);
+    WeaponTool(sf::Texture* tex,int id);
     virtual ~WeaponTool();
     
     int getAttackPower();
     bool isDistanceWeapon();
     bool isMeleeWeapon();
     bool isMagicWeapon();
+    
+    void setDistanceWeapon(bool b);
+    void setMeleeWeapon(bool b);
+    void setMagicWeapon(bool b);
+    void setAttackPower(int i);
+    
+    bool use(Player* player);
 private:
     int attackPower;
     

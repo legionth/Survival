@@ -15,8 +15,8 @@ class Ressource : public GameObject{
 public:
     Ressource();
     Ressource(int id,sf::Texture* texture);
-     Ressource(int id,sf::Texture* texture,bool setTex);
-    Ressource(const Ressource& orig);
+    Ressource(int id,sf::Texture* texture,bool setTex);
+    Ressource(Ressource* orig);
     virtual ~Ressource();
     
     void setIdentifier(int id);
@@ -30,6 +30,8 @@ public:
     bool isCookingRessource();
     bool isPotion();
     bool isUsable();
+    bool isWeapon();
+    bool isTool();
     
     void setStatusRessource(bool b);
     void setAlchemyRessource(bool b);
@@ -37,8 +39,12 @@ public:
     void setCookingRessource(bool b);
     void setPotion(bool b);
     void setUsable(bool b);
+    void setWeapon(bool b);
+    void setTool(bool b);
     
     bool use(LivingObject* player);
+    
+    std::map<int,int> getRessources();
 private:
     int identifier;
     
@@ -47,8 +53,12 @@ private:
     bool craftingRessource;
     bool cookingRessource;
     bool potion;
+    bool weapon;
+    bool tool;
     
     bool usable;
+    
+    std::map<int,int> ressources;
 };
 
 #endif	/* RESSOURCE_H */

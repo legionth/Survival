@@ -8,17 +8,18 @@
 #ifndef CRAFTINGMENU_H
 #define	CRAFTINGMENU_H
 #include "Menu.h"
+#include "CraftingButton.h"
 
 //template<class T>
 class CraftingMenu  : public Menu{
 public:
     CraftingMenu(int posX, int posY,int sizeX,int sizeY);
     virtual ~CraftingMenu();
-    void addButton(Button* button);
-    Button* getButton(int i);
-    std::vector<Button*> getButtons();
+    void addButton(CraftingButton* button);
+    CraftingButton* getButton(int i);
+    std::vector<CraftingButton*> getButtons();
 private:
-    std::vector<Button*> buttons;
+    std::vector<CraftingButton*> buttons;
 
 };
 

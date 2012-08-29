@@ -107,9 +107,13 @@ void Inventory::removeRessource(Button* button){
              }
          }
      }
- }
+}
+
+void Inventory::decreaseCraftingRessources(std::map<int,int> decreaseRes){
+    this->decreaseBuildingRessources(decreaseRes);
+}
  
-  void Inventory::decreaseAlchemyRessources(std::map<int,int> decreaseRes){
+void Inventory::decreaseAlchemyRessources(std::map<int,int> decreaseRes){
      int size = decreaseRes.size();
      
      for(int i = 0; i < size; i++){
@@ -145,6 +149,10 @@ bool Inventory::checkRessourcesBuilding(std::map<int,int> checkRes){
      
      
      return ret;
+}
+
+bool Inventory::checkRessourcesCrafting(std::map<int,int> checkRes){
+    return this->checkRessourcesBuilding(checkRes);
 }
 
 bool Inventory::checkRessourcesAlchemy(std::map<int,int> checkRes){

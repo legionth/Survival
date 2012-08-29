@@ -74,6 +74,10 @@ const int BUTTON_BUILDING_RECT_HUT         = 5;
 // Alchemy button rect
 const int BUTTON_ALCHEMY_RECT_HEAL_POTION        = 0;
 const int BUTTON_ALCHEMY_RECT_POISON_POTION      = 2;
+
+const int BUTTON_CRAFTING_RECT_GOLD_BAR         = 0;
+const int BUTTON_CRAFTING_RECT_SILVER_BAR       = 2;
+const int BUTTON_CRAFTING_RECT_IRON_BAR         = 4;
 //id's for the tiles
 const char TILE_GRASS			= ',';
 const char TILE_EARTH			= '.';

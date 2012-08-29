@@ -6,9 +6,11 @@
  */
 
 #include "Tool.h"
+#include "Ressource.h"
 
 Tool::Tool(int id) {
     setId(id);
+   // setUsable(true);
 }
 
 Tool::Tool(const Tool& orig) {

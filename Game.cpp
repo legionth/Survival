@@ -53,6 +53,7 @@ Game::~Game() {
     delete window;
     delete buildMenu;
     delete statusMenu;
+    delete craftingMenu;
     images.clear();
     enemies.clear();
 }
@@ -221,6 +222,23 @@ void Game::run(){
                             alchemyMenu->getButton(number + pressDirection)->press();
                         }
                     }
+                    else if(currentMenu == craftingMenu){
+                        CraftingButton* selectedButton = 0;
+                        int number = 0;
+                        int count = craftingMenu->getButtons().size();
+
+                        for(int i = 0; i < count; i++){
+                            if(craftingMenu->getButton(i)->isPressed()){
+                                selectedButton = craftingMenu->getButton(i);
+                                number = i;
+                            }
+                        }
+
+                        if(number + pressDirection < count && number + pressDirection >= 0){
+                            selectedButton->press();
+                            craftingMenu->getButton(number + pressDirection)->press();
+                        }
+                    }
                  }
                 
               
@@ -270,7 +288,8 @@ void Game::run(){
                                             std::cout<<"break up building"<<std::endl;
                                             break;    
                                     }
-                                    //inventory->decreaseBuildingRessources(ressourcesBuilding);
+                                    
+                                    inventory->decreaseBuildingRessources(ressourcesBuilding);
                                 }
                             }
                         }
@@ -288,6 +307,17 @@ void Game::run(){
                                     inventory->addRessource(potion);
 //                                    bool b = inventory->getButton(0)->(Potion)getRessource()->use(player);
                                 }
+                            }
+                        }
+                    }
+                    else if (currentMenu == craftingMenu){
+                        for(int i = 0; i < craftingMenu->getButtons().size(); i++){
+                            if(craftingMenu->getButton(i)->isPressed()){
+                                Ressource* res = craftingMenu->getButton(i)->getRessource();
+                                std::cout<<"here"<<std::endl;  
+                                std::cout<<"res"<<std::endl;
+                                inventory->addRessource(res);
+                                
                             }
                         }
                     }
@@ -323,7 +353,9 @@ void Game::run(){
                                 }
                                 else if(button->getId() == INVENTORY_ALCHEMY){
                                     currentMenu = alchemyMenu;
-
+                                }
+                                else if(button->getId() == INVENTORY_CRAFT){
+                                    currentMenu = craftingMenu;
                                 }
                                 // Unselect other buttons
                                 for(int j = 0; j < inventory->getInventoryButtons().size(); j++){
@@ -334,7 +366,7 @@ void Game::run(){
                             }
                         }
                                                 // Ressources
-                        std::cout<<"through buttons"<<std::endl;
+                        //std::cout<<"through buttons"<<std::endl;
                          for(int i = 0; i < inventory->getButtons().size(); i++){
                             Button* button = inventory->getButtons()[i];
                             int xMouse = event.mouseButton.x;
@@ -355,7 +387,19 @@ void Game::run(){
                                     if(res->isPotion()){
                                         Potion* ressource = reinterpret_cast<Potion*>(res);
                                         used = ressource->use(this->player);
-                                    }else{
+                                    }
+                                    else if(res->isWeapon()){
+                                        WeaponTool* weapon = reinterpret_cast<WeaponTool*>(res);
+                                        WeaponTool* oldWeapon = player->getWeapon();
+                                        
+                                        
+                                        if(oldWeapon != 0){
+                                            inventory->addRessource(oldWeapon);
+                                        }
+                                        
+                                        used = weapon->use(player);
+                                    }
+                                    else{
                                         Ressource* ressource = res;
                                         used = ressource->use(this->player);
                                     }
@@ -484,6 +528,14 @@ void Game::run(){
                 
                 for(int i = 0 ; i < alchemyMenu->getButtons().size(); i++){
                         window->draw(*alchemyMenu->getButton(i)->getSprite());
+                }
+            }
+            
+            if(inventory->getInventoryButton(i)->getId() == INVENTORY_CRAFT && inventory->getInventoryButton(i)->isPressed()){
+                window->draw(*craftingMenu->getSprite());
+                
+                for(int i = 0 ; i < craftingMenu->getButtons().size(); i++){
+                        window->draw(*craftingMenu->getButton(i)->getSprite());
                 }
             }
         }
@@ -665,11 +717,12 @@ void Game::initImages(){
     images["alchemyRessources"] = this->loadImage("alchemy_ressources.png");
     images["menuAlchemy"]       = this->loadImage("menu_alchemy.png");
     images["buttonAlchemy"]     = this->loadImage("button_alchemy.png");
+    images["buttonCrafting"]    = this->loadImage("button_crafting.png");
     images["potions"]           = this->loadImage("potion.png");
 }
 
 void Game::initWorld(){
-        world = new World(images["land"]);
+    world = new World(images["land"]);
     
     player = new Player(images["player"]);
     player->setTileMap(getTileMap(0,0));
@@ -725,6 +778,19 @@ void Game::initCraftingMenus(){
     
     alcButton = new AlchemyButton(BUTTON_ALCHEMY_RECT_POISON_POTION,images["buttonAlchemy"],POTION_POISON);
     alchemyMenu->addButton(alcButton);
+    
+    craftingMenu = new CraftingMenu(FRAME_WIDTH * 5,0,128,512);
+    craftingMenu->setImage(images["menuAlchemy"]);
+    
+    CraftingButton* craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_IRON_BAR,images["buttonCrafting"],RES_IRON_BAR,images["ressources"]);
+    craftingMenu->addButton(craftButton);
+    craftButton->press();
+    
+    craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_SILVER_BAR,images["buttonCrafting"],RES_SILVER_BAR,images["ressources"]);
+    craftingMenu->addButton(craftButton);
+    
+    craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_GOLD_BAR,images["buttonCrafting"],RES_GOLD_BAR,images["ressources"]);
+    craftingMenu->addButton(craftButton);
     
     currentMenu = buildMenu;
 }

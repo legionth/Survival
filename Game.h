@@ -59,6 +59,7 @@ private:
     AlchemyMenu* alchemyMenu;
     StatusMenu* statusMenu;
     ItemMenu* itemMenu;
+    CraftingMenu* craftingMenu;
     Inventory* inventory;
     BuildingButton* selectedButton;
     

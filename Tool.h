@@ -7,9 +7,9 @@
 
 #ifndef TOOL_H
 #define	TOOL_H
-#include "GameObject.h"
+#include "Ressource.h"
 
-class Tool : public GameObject{
+class Tool : public Ressource{
 public:
     Tool(int id);
     Tool(const Tool& orig);
