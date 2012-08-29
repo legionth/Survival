@@ -59,35 +59,40 @@ void Enemy::execute(World* world){
                                     case MOVE_UP:
                                         x = getXPos();
                                         y = getYPos() - 1;
+                                      // startAnimation(RECT_ATTACK_UP_START,RECT_ATTACK_UP_END);
                                       //  toAttack = true;
                                         break;
                                     case MOVE_DOWN:
                                         x = getXPos();
                                         y = getYPos() + 1;
+                                      //  startAnimation(RECT_ATTACK_DOWN_START,RECT_ATTACK_DOWN_END);
                                        // toAttack = true;
                                         break;
                                     case MOVE_RIGHT:
                                         x = getXPos() + 1;
                                         y = getYPos();
+                                      //  startAnimation(RECT_ATTACK_RIGHT_START,RECT_ATTACK_RIGHT_END);
                                        // toAttack = true;
                                         break;
                                     case MOVE_LEFT:
                                         x = getXPos() - 1;
                                         y = getYPos();
+                                      //  startAnimation(RECT_ATTACK_LEFT_START,RECT_ATTACK_LEFT_END);
                                         //toAttack = true;
                                         break;
                                 }
                                 
                                 if((x >= 0 && x < 5) && (y >= 0 && y < 5) && getTileMap()->getTile(x,y)->getLivingObject() != 0){
-                                    attack(getTileMap()->getTile(x,y)->getLivingObject());
                                     setCurrentDirection(direction);
                                     setCurrentFrame(getDirectionRect());
+                                    attack(getTileMap()->getTile(x,y)->getLivingObject());
                                     setToAttack(false);
                                     hadAttack = true;
                                 }
                             }
                             
                             if(!hadAttack){
+                                //stopAnimation();
                                 this->move(rnd,world);
                             }
                         
