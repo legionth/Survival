@@ -104,20 +104,44 @@ void Ressource::setIdentifier(int id){
     }
     else if(id == RES_IRON_BAR){
         this->setFrameRect(9);
-        ressources[RES_IRON_ORE]    = 2;
-        ressources[RES_WOOD]        = 2;
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 0;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 2;
+        ressources[RES_SILVER_BAR]      = 0;
+        ressources[RES_GOLD_BAR]        = 0;
+        
         this->setCraftingRessource(true);
     }
     else if(id == RES_GOLD_BAR){
         this->setFrameRect(7);
-        ressources[RES_GOLD_ORE]    = 2;
-        ressources[RES_WOOD]        = 2;
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 0;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 0;
+        ressources[RES_SILVER_BAR]      = 0;
+        ressources[RES_GOLD_BAR]        = 2;
+        
         this->setCraftingRessource(true);
     }
     else if(id == RES_SILVER_BAR){
         this->setFrameRect(8);
-        ressources[RES_SILVER_ORE]  = 2;
-        ressources[RES_WOOD]        = 2;
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 0;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 0;
+        ressources[RES_SILVER_BAR]      = 2;
+        ressources[RES_GOLD_BAR]        = 0;
+        
         this->setCraftingRessource(true);
     }
     else{

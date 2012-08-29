@@ -57,7 +57,7 @@ private:
     bool tool;
     
     bool usable;
-    
+protected:
     std::map<int,int> ressources;
 };
 

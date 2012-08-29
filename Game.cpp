@@ -314,10 +314,14 @@ void Game::run(){
                         for(int i = 0; i < craftingMenu->getButtons().size(); i++){
                             if(craftingMenu->getButton(i)->isPressed()){
                                 Ressource* res = craftingMenu->getButton(i)->getRessource();
-                                std::cout<<"here"<<std::endl;  
-                                std::cout<<"res"<<std::endl;
-                                inventory->addRessource(res);
                                 
+                                std::map<int,int> needRessources = res->getRessources();
+                                bool canProduce = inventory->checkRessourcesCrafting(needRessources);
+                                
+                                if(canProduce){
+                                    inventory->decreaseCraftingRessources(needRessources);
+                                    inventory->addRessource(res);
+                                }
                             }
                         }
                     }
