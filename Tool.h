@@ -11,7 +11,7 @@
 
 class Tool : public Ressource{
 public:
-    Tool(int id);
+    Tool(int id,sf::Texture* tex);
     Tool(const Tool& orig);
     virtual ~Tool();
     int getId();

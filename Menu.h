@@ -21,6 +21,14 @@ public:
     
     void setMaxLineButtons(int max);
     int getMaxLineButtons();
+    
+    int getButtonCounterLine();
+    void increaseButtonCounterLine();
+    void setButtonCounterLine(int i);
+    
+    int getLine();
+    void setLine(int line);
+    void increaseLine();
 private:
    std::vector<Button*> buttons;
    int sizeX;

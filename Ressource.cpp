@@ -139,11 +139,68 @@ void Ressource::setIdentifier(int id){
         this->setCraftingRessource(true);
         this->setSmith(true);
     }
+    else if(id == WEAPON_SPEAR_WOOD){
+        this->setFrameRect(0);
+
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 0;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 0;
+        ressources[RES_SILVER_BAR]      = 0;
+        ressources[RES_GOLD_BAR]        = 0;
+        this->setWeapon(true);
+    }
+    else if(id == WEAPON_SWORD_IRON){
+        this->setFrameRect(1);
+
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 0;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 0;
+        ressources[RES_SILVER_BAR]      = 0;
+        ressources[RES_GOLD_BAR]        = 0;
+        this->setWeapon(true);
+    }
+    else if(id == WEAPON_SWORD_GOLD){
+        this->setFrameRect(2);
+
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 0;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 0;
+        ressources[RES_SILVER_BAR]      = 0;
+        ressources[RES_GOLD_BAR]        = 0;
+        this->setWeapon(true);
+    }
+    else if(id == WEAPON_SWORD_SILVER){
+        this->setFrameRect(3);
+
+        ressources[RES_WOOD]            = 2;
+        ressources[RES_GOLD_ORE]        = 0;
+        ressources[RES_IRON_ORE]        = 0;
+        ressources[RES_SILVER_ORE]      = 0;
+        ressources[RES_STONE]           = 0;
+        ressources[RES_LEATHER]         = 0;
+        ressources[RES_IRON_BAR]        = 0;
+        ressources[RES_SILVER_BAR]      = 0;
+        ressources[RES_GOLD_BAR]        = 0;
+        this->setWeapon(true);
+    }
     else{
        this->setFrameRect(0);
        std::cout<<"No id found for RESSOURCE"<<id<<std::endl;
     }
     this->identifier = id;
+   // std::cout<<"moo"<<std::endl;
 }
 
 void Ressource::setIdentifier(int id, bool setTex){
@@ -211,6 +268,62 @@ void Ressource::setIdentifier(int id, bool setTex){
             ressources[RES_SILVER_BAR]      = 0;
             ressources[RES_GOLD_BAR]        = 0;
             this->setCraftingRessource(true);
+        }
+        else if(id == WEAPON_SPEAR_WOOD){
+            this->setFrameRect(0);
+            
+            ressources[RES_WOOD]            = 2;
+            ressources[RES_GOLD_ORE]        = 0;
+            ressources[RES_IRON_ORE]        = 0;
+            ressources[RES_SILVER_ORE]      = 0;
+            ressources[RES_STONE]           = 0;
+            ressources[RES_LEATHER]         = 0;
+            ressources[RES_IRON_BAR]        = 0;
+            ressources[RES_SILVER_BAR]      = 0;
+            ressources[RES_GOLD_BAR]        = 0;
+            this->setWeapon(true);
+        }
+        else if(id == WEAPON_SWORD_IRON){
+            this->setFrameRect(1);
+            
+            ressources[RES_WOOD]            = 2;
+            ressources[RES_GOLD_ORE]        = 0;
+            ressources[RES_IRON_ORE]        = 0;
+            ressources[RES_SILVER_ORE]      = 0;
+            ressources[RES_STONE]           = 0;
+            ressources[RES_LEATHER]         = 0;
+            ressources[RES_IRON_BAR]        = 0;
+            ressources[RES_SILVER_BAR]      = 0;
+            ressources[RES_GOLD_BAR]        = 0;
+            this->setWeapon(true);
+        }
+        else if(id == WEAPON_SWORD_GOLD){
+            this->setFrameRect(2);
+            
+            ressources[RES_WOOD]            = 2;
+            ressources[RES_GOLD_ORE]        = 0;
+            ressources[RES_IRON_ORE]        = 0;
+            ressources[RES_SILVER_ORE]      = 0;
+            ressources[RES_STONE]           = 0;
+            ressources[RES_LEATHER]         = 0;
+            ressources[RES_IRON_BAR]        = 0;
+            ressources[RES_SILVER_BAR]      = 0;
+            ressources[RES_GOLD_BAR]        = 0;
+            this->setWeapon(true);
+        }
+        else if(id == WEAPON_SWORD_SILVER){
+            this->setFrameRect(3);
+            
+            ressources[RES_WOOD]            = 2;
+            ressources[RES_GOLD_ORE]        = 0;
+            ressources[RES_IRON_ORE]        = 0;
+            ressources[RES_SILVER_ORE]      = 0;
+            ressources[RES_STONE]           = 0;
+            ressources[RES_LEATHER]         = 0;
+            ressources[RES_IRON_BAR]        = 0;
+            ressources[RES_SILVER_BAR]      = 0;
+            ressources[RES_GOLD_BAR]        = 0;
+            this->setWeapon(true);
         }
         else{
             this->setFrameRect(0);

@@ -6,6 +6,7 @@
  */
 
 #include "SlotButton.h"
+#include <iostream>
 
 SlotButton::SlotButton(Tool* tool,sf::Texture* tex) {
     this->tool = tool;
@@ -22,6 +23,9 @@ SlotButton::~SlotButton() {
 
 void SlotButton::setTool(Tool* tool){
     this->tool = tool;
+    std::cout<<"setTool"<<std::endl;
+    tool->getSprite()->setPosition(this->getSprite()->getPosition().x,this->getSprite()->getPosition().y);
+    std::cout<<"setTool after pos"<<std::endl;
 }
 
 Tool* SlotButton::getTool(){

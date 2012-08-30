@@ -16,6 +16,15 @@ CraftingButton::CraftingButton(int frameRect,sf::Texture* tex,int id,sf::Texture
     //this->potion = new Potion(id);
 }
 
+CraftingButton::CraftingButton(int frameRect,sf::Texture* tex): Button(frameRect,tex){
+    setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+   // setAlchemy(new Potion(id,texAlchemy,rectAlchemy));
+    setVisible(false);
+//    ressource = new Ressource(id,texRes);
+    //ressource->setIdentifier(id);       
+    //this->potion = new Potion(id);
+}
+
 CraftingButton::CraftingButton(const CraftingButton& orig) {
 }
 
@@ -31,3 +40,12 @@ Ressource* CraftingButton::getRessource(){
     return new Ressource(this->ressource);
 }
 
+void CraftingButton::removeRessource(){
+    delete this->ressource;
+    this->ressource = 0;
+}
+
+void CraftingButton::replaceRessource(Ressource* res){
+    removeRessource();
+    this->ressource = res;
+}

@@ -11,7 +11,7 @@
 
 class PickAxeTool : public Tool{
 public:
-    PickAxeTool(int id);
+    PickAxeTool(int id,sf::Texture* tex);
     virtual ~PickAxeTool();
 private:
 

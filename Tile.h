@@ -40,6 +40,7 @@ public:
     void addDrop(int id);
     void setRessourceTexture(sf::Texture* tex);
     void clearDropList();
+    float getTime();
 private:
     int xPos;
     int yPos;
@@ -51,7 +52,8 @@ private:
     bool walkAble;
     
     std::vector<int> dropList;
-    sf::Texture* ressourceTex;  
+    sf::Texture* ressourceTex;
+    sf::Clock despawnTimer;
 };
 
 #endif	/* TILE_H */

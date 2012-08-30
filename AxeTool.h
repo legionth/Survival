@@ -12,7 +12,7 @@
 
 class AxeTool : public Tool{
 public:
-    AxeTool(int id);
+    AxeTool(int id,sf::Texture* tex);
     virtual ~AxeTool();
 private:
 

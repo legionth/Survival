@@ -13,7 +13,7 @@
 
 class WeaponTool : public Tool{
 public:
-    WeaponTool(int id, int atk, bool distance, bool melee, bool magic);
+  //  WeaponTool(int id, int atk, bool distance, bool melee, bool magic);
     WeaponTool(sf::Texture* tex,int id);
     virtual ~WeaponTool();
     
@@ -28,12 +28,14 @@ public:
     void setAttackPower(int i);
     
     bool use(Player* player);
+    void setIdentifier(int id);
 private:
     int attackPower;
     
     bool distanceWeapon;
     bool meleeWeapon;
     bool magicWeapon;
+    std::map<int,int> ressources;
 
 };
 

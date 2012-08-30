@@ -7,7 +7,7 @@
 
 #include "AxeTool.h"
 
-AxeTool::AxeTool(int id) : Tool(id) {
+AxeTool::AxeTool(int id,sf::Texture* tex) : Tool(id,tex) {
 }
 
 AxeTool::~AxeTool() {

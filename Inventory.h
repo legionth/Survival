@@ -31,7 +31,8 @@ public:
     void decreaseAlchemyRessources(std::map<int,int> decreaseRes);
     void decreaseCraftingRessources(std::map<int,int> decreaseRes);
     int countItems();
-    void removeRessource(Button* button);                                       
+    void removeRessource(Button* button);
+    void removeRessource(Button* button, bool del);  
     bool checkRessourcesBuilding(std::map<int,int> checkRes);
     bool checkRessourcesAlchemy(std::map<int,int> checkRes);
     bool checkRessourcesCrafting(std::map<int,int> checkRes);

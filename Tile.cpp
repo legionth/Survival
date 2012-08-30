@@ -126,6 +126,7 @@ void Tile::setRessource(Ressource* ressource){
     // Set ressource int the middle of the tile
     ressource->getSprite()->setPosition((ressource->getXPos() * FRAME_WIDTH) + ressource->getFrameWidth()/2,
                                         (ressource->getYPos() * FRAME_HEIGHT) + ressource->getFrameHeight()/2);
+    despawnTimer.restart();
 }
 
 void Tile::setRessource(Ressource* ressource, bool setPos){
@@ -191,4 +192,8 @@ void Tile::drop(Tile* tile){
  
  void Tile::clearDropList(){
      dropList.clear();
+ }
+ 
+ float Tile::getTime(){
+     return this->despawnTimer.getElapsedTime().asSeconds();
  }

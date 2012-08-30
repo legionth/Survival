@@ -80,7 +80,9 @@ PickAxeTool* Player::getPickAxe(){
     
 void Player::setWeapon(WeaponTool* w){
     this->weapon = w;
-}    
+    setAttackPower(getAttackPower() + w->getAttackPower());
+}
+
 void Player::setAxe(AxeTool* axe){
     this->axe = axe;
 }

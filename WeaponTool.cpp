@@ -11,7 +11,7 @@
 #include "Ressource.h"
 #include "Player.h"
 
-WeaponTool::WeaponTool(int id, int atk, bool melee, bool distance, bool magic) : Tool(id){
+/*WeaponTool::WeaponTool(int id, int atk, bool melee, bool distance, bool magic){
     this->attackPower = atk;
     
     this->meleeWeapon = melee;
@@ -20,13 +20,16 @@ WeaponTool::WeaponTool(int id, int atk, bool melee, bool distance, bool magic) :
     
     setUsable(true);
     setWeapon(true);
+    setIdentifier(id);
 }
-
-WeaponTool::WeaponTool(sf::Texture* tex,int id) : Tool(id){
-    this->setImage(tex);
+*/
+WeaponTool::WeaponTool(sf::Texture* tex,int id) : Tool(id,tex){
+   // this->setImage(tex);
     
     setUsable(true);
     setWeapon(true);
+    
+    setIdentifier(id);
 }
 
 WeaponTool::~WeaponTool() {
@@ -68,3 +71,22 @@ void WeaponTool::setAttackPower(int i){
     this->attackPower = i;
 }
 
+void WeaponTool::setIdentifier(int id){
+    switch(id){
+        case WEAPON_SPEAR_WOOD:
+            setAttackPower(2);
+            break;
+            
+        case WEAPON_SWORD_IRON:
+            setAttackPower(4);
+            break;
+            
+        case WEAPON_SWORD_SILVER:
+            setAttackPower(6);
+            break;
+            
+        case WEAPON_SWORD_GOLD:
+            setAttackPower(8);
+            break;
+    }
+}

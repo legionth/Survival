@@ -37,6 +37,13 @@ enum Ressources{
     RES_GOLD_BAR         = 9
 };
 
+enum WEAPONS{
+    WEAPON_SPEAR_WOOD    = 10,
+    WEAPON_SWORD_IRON    = 11,
+    WEAPON_SWORD_SILVER  = 12,
+    WEAPON_SWORD_GOLD    = 13
+};
+
 enum Behavior{ 
     BEHAV_AGGRESSIVE      = 0, 
     BEHAV_DEFENSIVE       = 1,
@@ -81,9 +88,15 @@ const int BUTTON_BUILDING_RECT_SMITH         = 6;
 const int BUTTON_ALCHEMY_RECT_HEAL_POTION        = 0;
 const int BUTTON_ALCHEMY_RECT_POISON_POTION      = 2;
 
-const int BUTTON_CRAFTING_RECT_GOLD_BAR         = 0;
-const int BUTTON_CRAFTING_RECT_SILVER_BAR       = 2;
-const int BUTTON_CRAFTING_RECT_IRON_BAR         = 4;
+enum CRAFTING_RECTS{
+        BUTTON_CRAFTING_RECT_GOLD_BAR         = 0,
+        BUTTON_CRAFTING_RECT_SILVER_BAR       = 2,
+        BUTTON_CRAFTING_RECT_IRON_BAR         = 4,
+        BUTTON_CRAFTING_RECT_WOOD_SPEAR       = 6,
+        BUTTON_CRAFTING_RECT_IRON_SWORD       = 8,
+        BUTTON_CRAFTING_RECT_SILVER_SWORD     = 10,
+        BUTTON_CRAFTING_RECT_GOLD_SWORD       = 12
+};
 //id's for the tiles
 const char TILE_GRASS			= ',';
 const char TILE_EARTH			= '.';
@@ -103,6 +116,9 @@ const int RECT_UP_START = 4;
 const int RECT_DOWN_START = 0;
 const int RECT_RIGHT_START = 8;
 const int RECT_LEFT_START = 12;
+
+//Despawn timer
+const float DESPAWN_TIMER = 100.0f;
 
 enum RECT_ATTACK{
          RECT_ATTACK_UP_START          = 20,
@@ -145,5 +161,6 @@ enum POTIONS{
     POTION_HEAL         = 0,
     POTION_POISON       = 1
 };
+
 #endif	/* CONSTS_H */
 

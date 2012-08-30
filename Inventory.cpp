@@ -93,6 +93,14 @@ void Inventory::removeRessource(Button* button){
     button->setRessource(0,false);
 }
 
+void Inventory::removeRessource(Button* button, bool del){
+    Ressource* res = button->getRessource();
+    if(del){
+        delete res;
+    }
+    button->setRessource(0,false);
+}
+
  void Inventory::decreaseBuildingRessources(std::map<int,int> decreaseRes){
      int size = decreaseRes.size();
      

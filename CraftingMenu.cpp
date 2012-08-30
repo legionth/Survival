@@ -9,6 +9,7 @@
 #include <iostream>
 
 CraftingMenu::CraftingMenu(int posX, int posY,int sizeX,int sizeY) : Menu (posX,posY,sizeX,sizeY){
+    setMaxLineButtons(4);
 }
 
 CraftingMenu::~CraftingMenu() {
@@ -23,8 +24,15 @@ void CraftingMenu::addButton(CraftingButton* button){
     
     if(count == 1){
         button->getSprite()->setPosition((posX*count),posY);
-    }else{
-        button->getSprite()->setPosition((posX)+ (BUTTON_WIDTH*(count - 1)),posY); //Put in line
+        increaseButtonCounterLine();
+    }else if(getButtonCounterLine() == getMaxLineButtons()){
+        increaseLine();
+        setButtonCounterLine(1);
+        button->getSprite()->setPosition(posX, posY + (getLine() * BUTTON_WIDTH ));
+    }
+    else{
+        button->getSprite()->setPosition(posX + (getButtonCounterLine()*BUTTON_WIDTH), posY + (getLine() * BUTTON_WIDTH ));
+        increaseButtonCounterLine();    
     }
     
 }

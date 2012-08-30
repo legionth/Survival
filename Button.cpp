@@ -46,6 +46,16 @@ Button::Button(int frameRect,sf::Texture* tex,int id){
     this->ressource = 0;
 }
 
+Button::Button(int frameRect,sf::Texture* tex){
+    this->pressed = false;
+    this->setImage(tex);
+    setFrameSize(BUTTON_WIDTH,BUTTON_HEIGHT);
+    setFrameRect(frameRect);
+    this->visible = true;
+    this->id = -1;
+    this->ressource = 0;
+}
+
 Button::Button(std::string buttonName){
     this->pressed = false;
     this->name = buttonName;

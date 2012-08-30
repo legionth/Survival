@@ -64,3 +64,27 @@ void Menu::setMaxLineButtons(int max){
 int Menu::getMaxLineButtons(){
     return this->maxLineButtons;
 }
+
+int Menu::getButtonCounterLine(){
+    return this->buttonCounterLine;
+}
+
+void Menu::increaseButtonCounterLine(){
+    this->buttonCounterLine++;
+}
+
+void Menu::setButtonCounterLine(int i){
+    this->buttonCounterLine = i;
+}
+
+int Menu::getLine(){
+    return this->line;
+}
+
+void Menu::setLine(int line){
+    this->line = line;
+}
+
+void Menu::increaseLine(){
+    this->line++;
+}

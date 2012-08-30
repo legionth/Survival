@@ -235,6 +235,7 @@ void LivingObject::setSpeed(int speed){
 
 void LivingObject::setAttackPower(int atk){
     this->attackPower = atk;
+    std::cout<<"attacKPower"<<this->attackPower<<std::endl;
 }
 
 void LivingObject::setDefense(int def){

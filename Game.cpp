@@ -387,12 +387,13 @@ void Game::run(){
                                 
                                 if(res != 0){
                                     bool used = false;
-                                    
+                                    std::cout<<"RES CLICK"<<res->getIdentifier()<<std::endl;
                                     if(res->isPotion()){
                                         Potion* ressource = reinterpret_cast<Potion*>(res);
                                         used = ressource->use(this->player);
                                     }
                                     else if(res->isWeapon()){
+                                        std::cout<<"is weapon"<<std::endl;
                                         WeaponTool* weapon = reinterpret_cast<WeaponTool*>(res);
                                         WeaponTool* oldWeapon = player->getWeapon();
                                         
@@ -402,6 +403,7 @@ void Game::run(){
                                         }
                                         
                                         used = weapon->use(player);
+                                        statusMenu->getWeaponSlot()->setTool(weapon);
                                     }
                                     else{
                                         Ressource* ressource = res;
@@ -409,7 +411,7 @@ void Game::run(){
                                     }
                                     
                                     if(used){
-                                        inventory->removeRessource(button);
+                                        inventory->removeRessource(button,false);
                                     }
                                 }
                             }
@@ -447,7 +449,10 @@ void Game::run(){
                     Tile* tile = getCurrentTileMap()->getTile(x,y);
                     sf::Sprite *sprite = tile->getSprite();
                     window->draw(*sprite);
-
+                    
+                    if(tile->getTime() >= DESPAWN_TIMER && tile->getRessource() != 0){
+                        tile->removeRessource();
+                    }
                     if(tile->getRessource() != 0){
                         window->draw(*tile->getRessource()->getSprite());
                     }
@@ -460,7 +465,8 @@ void Game::run(){
             }
 
             for(int i = 0; i < enemies.size();i++){
-                if(enemies[i]->getLife() == 0){
+               //  std::cout<<"enemy"<<i<<"life="<<enemies[i]->getLife()<<std::endl;
+                if(enemies[i]->getLife() <= 0){
                     enemies[i]->getTileMap()->getTile(enemies[i]->getXPos(),enemies[i]->getYPos())->setLivingObject(0);
                     enemies[i]->drop(enemies[i]->getTile());
                     enemies.erase(enemies.begin()+i);
@@ -506,11 +512,11 @@ void Game::run(){
         statusMenu->drawHeatButton(window,player->getHeat());
         
         window->draw(*statusMenu->getWeaponSlot()->getSprite());
-        window->draw(*statusMenu->getToolSlot()->getSprite());
         
+        window->draw(*statusMenu->getToolSlot()->getSprite());
         //Drawing the slots
-        if(statusMenu->getWeaponSlot()->getTool() != 0){
-            window->draw(*statusMenu->getWeaponSlot()->getTool()->getSprite());
+        if(statusMenu->getWeaponSlot()->getTool() != 0){    
+            window->draw(* statusMenu->getWeaponSlot()->getTool()->getSprite());
         }
         
         if(statusMenu->getToolSlot()->getTool() != 0){
@@ -723,6 +729,7 @@ void Game::initImages(){
     images["buttonAlchemy"]     = this->loadImage("button_alchemy.png");
     images["buttonCrafting"]    = this->loadImage("button_crafting.png");
     images["potions"]           = this->loadImage("potion.png");
+    images["weapons"]           = this->loadImage("weapons.png");
 }
 
 void Game::initWorld(){
@@ -797,6 +804,22 @@ void Game::initCraftingMenus(){
     craftingMenu->addButton(craftButton);
     
     craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_GOLD_BAR,images["buttonCrafting"],RES_GOLD_BAR,images["ressources"]);
+    craftingMenu->addButton(craftButton);
+    
+    craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_WOOD_SPEAR,images["buttonCrafting"]);
+    craftButton->setRessource(new WeaponTool(images["weapons"],WEAPON_SPEAR_WOOD));
+    craftingMenu->addButton(craftButton);
+    
+    craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_IRON_SWORD,images["buttonCrafting"]);
+    craftButton->setRessource(new WeaponTool(images["weapons"],WEAPON_SWORD_IRON));
+    craftingMenu->addButton(craftButton);
+    
+    craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_SILVER_SWORD,images["buttonCrafting"]);
+    craftButton->setRessource(new WeaponTool(images["weapons"],WEAPON_SWORD_SILVER));
+    craftingMenu->addButton(craftButton);
+    
+    craftButton = new CraftingButton(BUTTON_CRAFTING_RECT_GOLD_SWORD,images["buttonCrafting"]);
+    craftButton->setRessource(new WeaponTool(images["weapons"],WEAPON_SWORD_GOLD));
     craftingMenu->addButton(craftButton);
     
     currentMenu = buildMenu;

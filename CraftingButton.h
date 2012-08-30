@@ -12,11 +12,14 @@
 class CraftingButton : public  Button{
 public:
     CraftingButton(int frameRect,sf::Texture* tex,int id,sf::Texture* texRes);
+    CraftingButton(int frameRect,sf::Texture* tex);
     CraftingButton(const CraftingButton& orig);
     virtual ~CraftingButton();
     Ressource* getRessource();
     
     void setRessource(Ressource* res);
+    void removeRessource();
+    void replaceRessource(Ressource* res);
 private:
     Ressource* ressource;
 };

@@ -7,7 +7,7 @@
 
 #include "PickAxeTool.h"
 
-PickAxeTool::PickAxeTool(int id ) : Tool(id) {
+PickAxeTool::PickAxeTool(int id,sf::Texture* tex) : Tool(id,tex) {
 }
 
 PickAxeTool::~PickAxeTool() {

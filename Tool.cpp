@@ -8,8 +8,12 @@
 #include "Tool.h"
 #include "Ressource.h"
 
-Tool::Tool(int id) {
-    setId(id);
+Tool::Tool(int id,sf::Texture* tex) {
+    //setId(id);
+    this->setImage(tex);
+    setFrameSize(64,64);
+    std::cout<<"wat"<<std::endl;
+    setIdentifier(id);
    // setUsable(true);
 }
 
